@@ -3,12 +3,13 @@ import { View, StyleSheet } from "react-native";
 
 interface Props {
 	children: any;
+	styles?: any;
 }
-export default function Card({ children }: Props) {
-	return <View style={styles.card}>{children}</View>;
+export default function Card({ children, styles }: Props) {
+	return <View style={{ ...localStyles.card, ...styles }}>{children}</View>;
 }
 
-const styles = StyleSheet.create({
+const localStyles = StyleSheet.create({
 	card: {
 		width: "100%",
 		backgroundColor: "white",
