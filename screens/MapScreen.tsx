@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { COLORS } from "../styles/colors";
 
 export default function MapScreen() {
 	return (
@@ -8,6 +9,14 @@ export default function MapScreen() {
 		</View>
 	);
 }
+
+MapScreen.navigationOptions = {
+	title: "Regions",
+	headerStyle: {
+		backgroundColor: COLORS.baseColor,
+	},
+	headerTintColor: COLORS.white,
+};
 
 const styles = StyleSheet.create({
 	screen: {

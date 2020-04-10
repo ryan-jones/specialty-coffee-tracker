@@ -2,16 +2,15 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { COLORS } from "../styles/colors";
 
-export default function UploadCoffeeScreen() {
+export default function RoasterDetailsScreen() {
 	return (
 		<View style={styles.screen}>
-			<Text>Upload Coffee Page</Text>
+			<Text>Roaster Details Screen</Text>
 		</View>
 	);
 }
 
-UploadCoffeeScreen.navigationOptions = {
-	title: "Add a coffee",
+RoasterDetailsScreen.navigationOptions = {
 	headerStyle: {
 		backgroundColor: COLORS.baseColor,
 	},

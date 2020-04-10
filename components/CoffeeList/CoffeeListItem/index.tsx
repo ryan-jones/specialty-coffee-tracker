@@ -3,12 +3,14 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { ICoffee } from "../../../models/interfaces";
 import CustomText from "../../Common/CustomText";
 import Card from "../../Common/Card";
+import TasteDescription from "../../Common/TasteDescription";
 
 interface Props extends ICoffee {
 	onSelect: (coffee: any) => void;
 }
 
 export default function CoffeeListItem(props: Props) {
+	const displayedNotes = props.notes.slice(0, 3);
 	return (
 		<TouchableOpacity onPress={() => props.onSelect(props.name)}>
 			<Card styles={{ marginVertical: 10 }}>
@@ -18,15 +20,17 @@ export default function CoffeeListItem(props: Props) {
 							{props.name}
 						</CustomText>
 						<CustomText styles={styles.secondaryTxt}>
-							{props.roaster}
+							{props.region}, {props.country}
 						</CustomText>
 					</View>
 					<View style={styles.details}>
+						<View style={styles.notes}>
+							{displayedNotes.map((note: string) => (
+								<TasteDescription key={note} text={note} />
+							))}
+						</View>
 						<CustomText styles={styles.secondaryTxt}>
-							Process: {props.process}
-						</CustomText>
-						<CustomText styles={styles.secondaryTxt}>
-							{props.region}, {props.country}
+							{props.roaster}
 						</CustomText>
 					</View>
 				</View>
@@ -43,13 +47,20 @@ const styles = StyleSheet.create({
 	},
 	mainContent: {
 		maxWidth: "50%",
-		justifyContent: "center",
+		justifyContent: "space-between",
 	},
 	details: {
 		maxWidth: "50%",
-		justifyContent: "center",
+		justifyContent: "flex-end",
+		alignItems: "flex-end",
 	},
 	secondaryTxt: {
 		color: "grey",
+	},
+	notes: {
+		flexDirection: "row",
+		flexWrap: "wrap",
+		width: "100%",
+		justifyContent: "flex-end",
 	},
 });

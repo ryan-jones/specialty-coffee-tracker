@@ -1,45 +1,25 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import CoffeeListItem from "./CoffeeListItem";
+import { ICoffee } from "../../models/interfaces";
 
 interface Props {
+	coffees: ICoffee[];
 	onSelect: (coffee: any) => void;
 }
 
 export default function CoffeeList(props: Props) {
-	const coffees = [
-		{
-			name: "Una regla de Dios",
-			region: "San Juan Region",
-			country: "Guatemala",
-			process: "washed",
-			roaster: "Right Side",
-		},
-		{
-			name: `Helen's Secret`,
-			region: "Sidamo",
-			country: "Ethiopia",
-			process: "dry",
-			roaster: "Morrow Coffee",
-		},
-		{
-			name: `Sandy's Favorite`,
-			region: "Yirgacheffe",
-			country: "Ethiopia",
-			process: "honey",
-			roaster: "Cafe Red",
-		},
-	];
-
 	return (
 		<View style={styles.listContainer}>
-			{coffees.map((coffee) => (
-				<CoffeeListItem
-					key={coffee.name}
-					{...coffee}
-					onSelect={props.onSelect}
-				/>
-			))}
+			<ScrollView style={styles.scroll}>
+				{props.coffees.map((coffee) => (
+					<CoffeeListItem
+						key={coffee.name}
+						{...coffee}
+						onSelect={props.onSelect}
+					/>
+				))}
+			</ScrollView>
 		</View>
 	);
 }
@@ -47,6 +27,8 @@ export default function CoffeeList(props: Props) {
 const styles = StyleSheet.create({
 	listContainer: {
 		width: "100%",
-		padding: 15,
+	},
+	scroll: {
+		padding: 5,
 	},
 });

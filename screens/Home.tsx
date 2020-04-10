@@ -3,6 +3,7 @@ import { View, StyleSheet, Button } from "react-native";
 import CustomText from "../components/Common/CustomText";
 import TextInput from "../components/Common/TextInput";
 import Card from "../components/Common/Card";
+import { COLORS } from "../styles/colors";
 
 interface Props {
 	navigation: any;
@@ -37,7 +38,7 @@ export default function HomeScreen(props: Props) {
 						<Button
 							title="Login"
 							onPress={() => {
-								props.navigation.navigate({ routeName: "Coffees" });
+								props.navigation.replace({ routeName: "Profile" });
 							}}
 						/>
 						<Button
@@ -52,6 +53,14 @@ export default function HomeScreen(props: Props) {
 		</View>
 	);
 }
+
+HomeScreen.navigationOptions = {
+	title: "Coffee Select",
+	headerStyle: {
+		backgroundColor: COLORS.baseColor,
+	},
+	headerTintColor: COLORS.white,
+};
 
 const styles = StyleSheet.create({
 	screen: {

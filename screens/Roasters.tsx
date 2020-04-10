@@ -10,19 +10,19 @@ interface Props {
 }
 
 const CoffeesScreen = (props: Props) => {
-	const onSelectCoffee = (coffee: any) => {
-		props.navigation.navigate({ routeName: "CoffeeDetails" });
+	const onSelectRoaster = (roaster: any) => {
+		props.navigation.navigate({ routeName: "RoasterDetails" });
 	};
 	return (
 		<View style={styles.screen}>
 			<CustomText>Coffees Page</CustomText>
-			<CoffeeList coffees={COFFEES} onSelect={onSelectCoffee} />
+			<CoffeeList coffees={COFFEES} onSelect={onSelectRoaster} />
 		</View>
 	);
 };
 
 CoffeesScreen.navigationOptions = {
-	title: "Saved Coffees",
+	title: "Saved Roasters",
 	headerStyle: {
 		backgroundColor: COLORS.baseColor,
 	},

@@ -1,18 +1,45 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { COLORS } from "../styles/colors";
+import Card from "../components/Common/Card";
+import CustomText from "../components/Common/CustomText";
+import CoffeeList from "../components/CoffeeList/CoffeeList";
+import { COFFEES } from "../data";
 
-export default function ProfileScreen() {
+interface Props {
+	navigation: any;
+}
+
+export default function ProfileScreen(props: Props) {
+	const coffees = COFFEES.slice(0, 3);
 	return (
 		<View style={styles.screen}>
-			<Text>Profile Page</Text>
+			<Card>
+				<View>
+					<CustomText>Welcome back!</CustomText>
+					<CustomText>Favorite Coffees</CustomText>
+					<CoffeeList
+						coffees={coffees}
+						onSelect={() => props.navigation.navigate("CoffeeDetails")}
+					/>
+				</View>
+			</Card>
 		</View>
 	);
 }
 
+ProfileScreen.navigationOptions = {
+	title: "Welcome!",
+	headerStyle: {
+		backgroundColor: COLORS.baseColor,
+	},
+	headerTintColor: COLORS.white,
+};
+
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
-		justifyContent: "center",
 		alignItems: "center",
+		padding: 15,
 	},
 });

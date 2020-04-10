@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { COLORS } from "../styles/colors";
 
 export default function CoffeeDetailsScreen() {
 	return (
@@ -8,6 +9,13 @@ export default function CoffeeDetailsScreen() {
 		</View>
 	);
 }
+
+CoffeeDetailsScreen.navigationOptions = {
+	headerStyle: {
+		backgroundColor: COLORS.baseColor,
+	},
+	headerTintColor: COLORS.white,
+};
 
 const styles = StyleSheet.create({
 	screen: {
