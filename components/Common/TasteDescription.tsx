@@ -18,12 +18,12 @@ export default function TasteDescription({ text }: Props) {
 const styles = StyleSheet.create({
 	container: {
 		width: "auto",
-		minWidth: 25,
+		minWidth: 35,
 		backgroundColor: COLORS.baseColor,
 		borderRadius: 25,
 		alignItems: "center",
 		justifyContent: "center",
-		padding: 3,
+		padding: 5,
 		margin: 3,
 	},
 	text: {

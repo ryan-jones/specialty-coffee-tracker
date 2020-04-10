@@ -7,6 +7,7 @@ export interface ICoffee {
 	notes: string[];
 	rating: string;
 	description?: string;
+	coordinates?: any;
 }
 
 export interface IRoaster {

@@ -18,7 +18,6 @@ export default function ProfileScreen(props: Props) {
 			<Card>
 				<View>
 					<CustomText>Welcome back!</CustomText>
-					<CustomText>Favorite Coffees</CustomText>
 					<CoffeeList
 						coffees={coffees}
 						onSelect={(coffee: ICoffee) =>
@@ -35,11 +34,7 @@ export default function ProfileScreen(props: Props) {
 }
 
 ProfileScreen.navigationOptions = {
-	title: "Welcome!",
-	headerStyle: {
-		backgroundColor: COLORS.baseColor,
-	},
-	headerTintColor: COLORS.white,
+	title: "Profile",
 };
 
 const styles = StyleSheet.create({

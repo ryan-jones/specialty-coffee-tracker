@@ -56,10 +56,6 @@ export default function HomeScreen(props: Props) {
 
 HomeScreen.navigationOptions = {
 	title: "Coffee Select",
-	headerStyle: {
-		backgroundColor: COLORS.baseColor,
-	},
-	headerTintColor: COLORS.white,
 };
 
 const styles = StyleSheet.create({

@@ -12,10 +12,6 @@ export default function UploadCoffeeScreen() {
 
 UploadCoffeeScreen.navigationOptions = {
 	title: "Add a coffee",
-	headerStyle: {
-		backgroundColor: COLORS.baseColor,
-	},
-	headerTintColor: COLORS.white,
 };
 
 const styles = StyleSheet.create({

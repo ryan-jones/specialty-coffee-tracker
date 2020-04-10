@@ -12,10 +12,6 @@ export default function MapScreen() {
 
 MapScreen.navigationOptions = {
 	title: "Regions",
-	headerStyle: {
-		backgroundColor: COLORS.baseColor,
-	},
-	headerTintColor: COLORS.white,
 };
 
 const styles = StyleSheet.create({

@@ -1,4 +1,4 @@
 export const COLORS = {
-	baseColor: "brown",
+	baseColor: "#ff6600",
 	white: "#fff",
 };

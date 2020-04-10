@@ -23,10 +23,6 @@ const CoffeesScreen = (props: Props) => {
 
 CoffeesScreen.navigationOptions = {
 	title: "Saved Roasters",
-	headerStyle: {
-		backgroundColor: COLORS.baseColor,
-	},
-	headerTintColor: COLORS.white,
 };
 
 const styles = StyleSheet.create({

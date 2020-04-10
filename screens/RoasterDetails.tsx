@@ -10,12 +10,7 @@ export default function RoasterDetailsScreen() {
 	);
 }
 
-RoasterDetailsScreen.navigationOptions = {
-	headerStyle: {
-		backgroundColor: COLORS.baseColor,
-	},
-	headerTintColor: COLORS.white,
-};
+RoasterDetailsScreen.navigationOptions = {};
 
 const styles = StyleSheet.create({
 	screen: {
