@@ -5,6 +5,7 @@ import Card from "../components/Common/Card";
 import CustomText from "../components/Common/CustomText";
 import CoffeeList from "../components/CoffeeList/CoffeeList";
 import { COFFEES } from "../data";
+import { ICoffee } from "../models/interfaces";
 
 interface Props {
 	navigation: any;
@@ -20,7 +21,12 @@ export default function ProfileScreen(props: Props) {
 					<CustomText>Favorite Coffees</CustomText>
 					<CoffeeList
 						coffees={coffees}
-						onSelect={() => props.navigation.navigate("CoffeeDetails")}
+						onSelect={(coffee: ICoffee) =>
+							props.navigation.navigate({
+								routeName: "CoffeeDetails",
+								params: { coffee },
+							})
+						}
 					/>
 				</View>
 			</Card>

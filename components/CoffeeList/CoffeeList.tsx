@@ -16,7 +16,7 @@ export default function CoffeeList(props: Props) {
 					<CoffeeListItem
 						key={coffee.name}
 						{...coffee}
-						onSelect={props.onSelect}
+						onSelect={() => props.onSelect(coffee)}
 					/>
 				))}
 			</ScrollView>
@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
 		width: "100%",
 	},
 	scroll: {
-		padding: 5,
+		paddingHorizontal: 5,
 	},
 });

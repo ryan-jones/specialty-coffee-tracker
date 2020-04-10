@@ -5,6 +5,7 @@ export interface ICoffee {
 	process: string;
 	roaster: string;
 	notes: string[];
+	rating: string;
 	description?: string;
 }
 
