@@ -1,9 +1,9 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { ICoffee } from "../../../models/interfaces";
-import CustomText from "../../Common/CustomText";
-import Card from "../../Common/Card";
-import TasteDescription from "../../Common/TasteDescription";
+import { ICoffee } from "../../models/interfaces";
+import CustomText from "../Common/CustomText";
+import Card from "../Common/Card";
+import CoffeeNotes from "../CoffeeNotes";
 
 interface Props extends ICoffee {
 	onSelect: (coffee: any) => void;
@@ -16,22 +16,17 @@ export default function CoffeeListItem(props: Props) {
 			<Card styles={{ marginVertical: 10 }}>
 				<View style={styles.item}>
 					<View style={styles.mainContent}>
-						<CustomText styles={{ fontWeight: "bold", fontSize: 18 }}>
-							{props.name}
-						</CustomText>
-						<CustomText styles={styles.secondaryTxt}>
+						<CustomText styles={styles.name}>{props.name}</CustomText>
+						<CustomText styles={styles.text}>
 							{props.region}, {props.country}
 						</CustomText>
 					</View>
 					<View style={styles.details}>
-						<View style={styles.notes}>
-							{displayedNotes.map((note: string) => (
-								<TasteDescription key={note} text={note} />
-							))}
-						</View>
-						<CustomText styles={styles.secondaryTxt}>
-							{props.roaster}
-						</CustomText>
+						<CoffeeNotes
+							notes={displayedNotes}
+							containerStyles={styles.notes}
+						/>
+						<CustomText styles={styles.text}>{props.roaster}</CustomText>
 					</View>
 				</View>
 			</Card>
@@ -49,18 +44,20 @@ const styles = StyleSheet.create({
 		maxWidth: "50%",
 		justifyContent: "space-between",
 	},
+	name: {
+		fontWeight: "bold",
+		fontSize: 18,
+	},
 	details: {
 		maxWidth: "50%",
 		justifyContent: "flex-end",
 		alignItems: "flex-end",
 	},
-	secondaryTxt: {
+	text: {
 		color: "grey",
 	},
 	notes: {
-		flexDirection: "row",
 		flexWrap: "wrap",
-		width: "100%",
 		justifyContent: "flex-end",
 	},
 });

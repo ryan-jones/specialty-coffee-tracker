@@ -1,33 +1,28 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import CustomText from "./CustomText";
+import { StyleSheet } from "react-native";
 import { COLORS } from "../../styles/colors";
+import TextEllipsis from "./TextEllipsis";
 
 interface Props {
 	text: string;
+	textStyles?: any;
+	containerStyles?: any;
 }
 
-export default function TasteDescription({ text }: Props) {
+export default function TasteDescription(props: Props) {
 	return (
-		<View style={styles.container}>
-			<CustomText styles={styles.text}>{text}</CustomText>
-		</View>
+		<TextEllipsis
+			text={props.text}
+			containerStyles={{
+				...props.containerStyles,
+				...styles.taste,
+			}}
+		/>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		width: "auto",
-		minWidth: 35,
+	taste: {
 		backgroundColor: COLORS.baseColor,
-		borderRadius: 25,
-		alignItems: "center",
-		justifyContent: "center",
-		padding: 5,
-		margin: 3,
-	},
-	text: {
-		color: COLORS.white,
-		fontSize: 8,
 	},
 });

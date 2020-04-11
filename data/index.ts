@@ -15,6 +15,23 @@ export const COFFEES: ICoffee[] = [
 			latitude: 13.6595684,
 			longitude: -86.4453649,
 		},
+		methods: {
+			chemex: {
+				rating: 4.3,
+			},
+			aeropress: {
+				rating: 3.9,
+			},
+			v60: {
+				rating: 4.2,
+			},
+			espresso: {
+				rating: 0,
+			},
+			frenchPress: {
+				rating: 0,
+			},
+		},
 	},
 	{
 		name: "Etiopia Buriso Amaje",
@@ -28,6 +45,23 @@ export const COFFEES: ICoffee[] = [
 			latitude: 7.850021,
 			longitude: 35.9432573,
 		},
+		methods: {
+			chemex: {
+				rating: 4.3,
+			},
+			aeropress: {
+				rating: 3.9,
+			},
+			v60: {
+				rating: 4.2,
+			},
+			espresso: {
+				rating: 0,
+			},
+			frenchPress: {
+				rating: 0,
+			},
+		},
 	},
 	{
 		name: "Guatemala Tata Nahual",
@@ -40,6 +74,23 @@ export const COFFEES: ICoffee[] = [
 		coordinates: {
 			latitude: 14.5004814,
 			longitude: -90.884421,
+		},
+		methods: {
+			chemex: {
+				rating: 4.3,
+			},
+			aeropress: {
+				rating: 3.9,
+			},
+			v60: {
+				rating: 4.2,
+			},
+			espresso: {
+				rating: 0,
+			},
+			frenchPress: {
+				rating: 0,
+			},
 		},
 	},
 ];
