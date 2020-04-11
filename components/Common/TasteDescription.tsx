@@ -1,6 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { COLORS } from "../../styles/colors";
 import TextEllipsis from "./TextEllipsis";
 
 interface Props {
@@ -13,16 +11,8 @@ export default function TasteDescription(props: Props) {
 	return (
 		<TextEllipsis
 			text={props.text}
-			containerStyles={{
-				...props.containerStyles,
-				...styles.taste,
-			}}
+			color="baseColor"
+			containerStyles={props.containerStyles}
 		/>
 	);
 }
-
-const styles = StyleSheet.create({
-	taste: {
-		backgroundColor: COLORS.baseColor,
-	},
-});

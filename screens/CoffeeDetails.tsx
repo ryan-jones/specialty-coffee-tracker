@@ -8,6 +8,7 @@ import Circle from "../components/Common/Circle";
 import CoffeeNotes from "../components/CoffeeNotes";
 import BrewMethods from "../components/BrewMethods/BrewMethods";
 import CoffeeOrigin from "../components/CoffeeOrigin";
+import ContentSection from "../components/Common/ContentSection";
 
 interface Props {
 	navigation: any;
@@ -19,8 +20,8 @@ export default function CoffeeDetailsScreen(props: Props) {
 		<ScrollView>
 			<View style={styles.screen}>
 				<View style={styles.imageContainer}></View>
-				<View style={styles.content}>
-					<Circle>
+				<ContentSection>
+					<Circle containerStyles={styles.circle}>
 						<CustomText styles={styles.rating}>{coffee.rating}</CustomText>
 						<CustomText styles={{ fontSize: 12, color: COLORS.white }}>
 							out of 5
@@ -42,7 +43,7 @@ export default function CoffeeDetailsScreen(props: Props) {
 						<Process process={coffee.process} />
 						<CoffeeOrigin coffee={coffee} />
 					</View>
-				</View>
+				</ContentSection>
 			</View>
 		</ScrollView>
 	);
@@ -63,6 +64,10 @@ const styles = StyleSheet.create({
 	},
 	imageContainer: {
 		height: 300,
+	},
+	circle: {
+		position: "absolute",
+		top: -80,
 	},
 	content: {
 		backgroundColor: COLORS.white,

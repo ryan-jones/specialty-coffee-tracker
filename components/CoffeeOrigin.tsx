@@ -14,7 +14,7 @@ export default function CoffeeOrigin({ coffee }: Props) {
 				Origin: {coffee.region}, {coffee.country}
 			</CustomText>
 			<View style={styles.mapContainer}>
-				<Map coffee={coffee} />
+				<Map coffees={[coffee]} />
 			</View>
 		</View>
 	);

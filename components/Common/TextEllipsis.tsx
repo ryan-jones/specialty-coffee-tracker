@@ -1,21 +1,27 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import CustomText from "./CustomText";
-import { COLORS } from "../../styles/colors";
+import { COLORS, GRADIENTS } from "../../styles/colors";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface Props {
 	text: string | number;
+	color: string;
 	textStyles?: any;
 	containerStyles?: any;
 }
 
 export default function TextEllipsis(props: Props) {
+	console.log("props", props);
 	return (
-		<View style={{ ...styles.container, ...props.containerStyles }}>
+		<LinearGradient
+			colors={GRADIENTS[props.color]}
+			style={{ ...styles.container, ...props.containerStyles }}
+		>
 			<CustomText styles={{ ...styles.text, ...props.textStyles }}>
 				{props.text}
 			</CustomText>
-		</View>
+		</LinearGradient>
 	);
 }
 
@@ -23,7 +29,7 @@ const styles = StyleSheet.create({
 	container: {
 		width: "auto",
 		minWidth: 35,
-		borderRadius: 25,
+		borderRadius: 15,
 		alignItems: "center",
 		justifyContent: "center",
 		padding: 5,
@@ -31,7 +37,7 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		color: COLORS.white,
-		fontSize: 8,
+		fontSize: 12,
 		textAlign: "center",
 	},
 });

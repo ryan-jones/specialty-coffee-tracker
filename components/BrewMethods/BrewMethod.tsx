@@ -1,6 +1,5 @@
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
-import CustomText from "../Common/CustomText";
 import TextEllipsis from "../Common/TextEllipsis";
 import { COLORS } from "../../styles/colors";
 
@@ -10,45 +9,25 @@ interface Props {
 }
 
 const icons: any = {
-	chemex: {
-		selected: require("../../assets/images/chemex.png"),
-		unselected: require("../../assets/images/chemex.png"),
-	},
-	v60: {
-		selected: require("../../assets/images/v60-select.png"),
-		unselected: require("../../assets/images/v60.png"),
-	},
-	espresso: {
-		selected: require("../../assets/images/espresso-select.png"),
-		unselected: require("../../assets/images/espresso.png"),
-	},
-	frenchPress: {
-		selected: require("../../assets/images/frenchpress-select.png"),
-		unselected: require("../../assets/images/frenchpress.png"),
-	},
-	syphon: {
-		selected: require("../../assets/images/syphon-select.png"),
-		unselected: require("../../assets/images/syphon.png"),
-	},
-	aeropress: {
-		selected: require("../../assets/images/aeropress-select.png"),
-		unselected: require("../../assets/images/aeropress.png"),
-	},
+	chemex: require("../../assets/images/chemex.png"),
+	v60: require("../../assets/images/v60.png"),
+	espresso: require("../../assets/images/espresso.png"),
+	frenchPress: require("../../assets/images/frenchpress.png"),
+	syphon: require("../../assets/images/syphon.png"),
+	aeropress: require("../../assets/images/aeropress.png"),
 };
 
 export default function BrewMethod({ name, rating }: Props) {
-	const setIcon = () => {
-		return rating > 0 ? icons[name].selected : icons[name].unselected;
-	};
-	const setBackgroundColor = () => {
-		return { backgroundColor: rating > 0 ? COLORS.baseColor : COLORS.black };
-	};
 	return (
 		<View style={styles.container}>
 			<View style={styles.iconContainer}>
-				<Image style={styles.icon} source={setIcon()} />
+				<Image style={styles.icon} source={icons[name]} />
 			</View>
-			<TextEllipsis text={rating} containerStyles={setBackgroundColor()} />
+			<TextEllipsis
+				text={rating}
+				color="baseColor"
+				containerStyles={{ backgroundColor: COLORS.baseColor }}
+			/>
 		</View>
 	);
 }

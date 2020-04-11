@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { COLORS } from "../../styles/colors";
+import { COLORS, GRADIENTS } from "../../styles/colors";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface Props {
 	children: any;
@@ -10,16 +11,19 @@ interface Props {
 
 export default function Circle(props: Props) {
 	return (
-		<View style={styles.container}>
-			<View style={styles.circle}>{props.children}</View>
+		<View style={{ ...styles.container, ...props.containerStyles }}>
+			<LinearGradient
+				colors={GRADIENTS.baseColor}
+				style={{ ...styles.circle, ...props.circleStyles }}
+			>
+				{props.children}
+			</LinearGradient>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
-		position: "absolute",
-		top: -80,
 		height: 140,
 		width: 140,
 		backgroundColor: COLORS.white,

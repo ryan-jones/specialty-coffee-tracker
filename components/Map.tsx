@@ -4,21 +4,23 @@ import { Platform, StyleSheet } from "react-native";
 import { ICoffee } from "../models/interfaces";
 
 interface Props {
-	coffee: ICoffee;
+	coffees: ICoffee[];
 }
-export default function Map({ coffee }: Props) {
+export default function Map({ coffees }: Props) {
 	return (
 		<MapView
 			style={styles.map}
 			mapType={Platform.OS === "ios" ? "satellite" : "standard"}
 			initialRegion={{
-				latitude: coffee.coordinates.latitude,
-				longitude: coffee.coordinates.longitude,
+				latitude: coffees[0].coordinates.latitude,
+				longitude: coffees[0].coordinates.longitude,
 				latitudeDelta: 0,
 				longitudeDelta: 0,
 			}}
 		>
-			<Marker coordinate={coffee.coordinates} title={coffee.name} />
+			{coffees.map((coffee: ICoffee) => (
+				<Marker coordinate={coffee.coordinates} title={coffee.name} />
+			))}
 		</MapView>
 	);
 }

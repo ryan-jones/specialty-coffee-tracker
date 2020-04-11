@@ -11,11 +11,12 @@ interface Props {
 }
 
 export default function BrewMethods({ methods }: Props) {
+	const brewMethods = Object.keys(methods).filter((key) => methods[key].rating);
 	return (
 		<View style={styles.container}>
 			<CustomText styles={styles.text}>Rating by brew method: </CustomText>
 			<View style={styles.methodContainer}>
-				{Object.keys(methods).map((key: string) => (
+				{brewMethods.map((key: string) => (
 					<BrewMethod key={key} name={key} rating={methods[key].rating} />
 				))}
 			</View>

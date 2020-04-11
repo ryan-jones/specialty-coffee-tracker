@@ -1,15 +1,15 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { ICoffee } from "../../models/interfaces";
-import CustomText from "../Common/CustomText";
-import { COLORS } from "../../styles/colors";
-import Circle from "../Common/Circle";
+import { ICoffee } from "../../../models/interfaces";
+import Circle from "../../Common/Circle";
+import CustomText from "../../Common/CustomText";
+import { COLORS } from "../../../styles/colors";
 
 interface Props extends ICoffee {
 	onSelect: (coffee: any) => void;
 }
 
-export default function CoffeeListItem(props: Props) {
+export default function FavoriteCoffeeListItem(props: Props) {
 	return (
 		<TouchableOpacity onPress={() => props.onSelect(props.name)}>
 			<View style={styles.itemContainer}>

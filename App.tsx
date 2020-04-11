@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
-import CustomText from "./components/Common/CustomText";
 import Navigator from "./navigation/navigator";
+import { enableScreens } from "react-native-screens";
+
+enableScreens();
 
 const setFonts = () => {
 	return Font.loadAsync({

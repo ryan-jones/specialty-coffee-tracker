@@ -1,4 +1,4 @@
-import { ICoffee } from "../models/interfaces";
+import { ICoffee, IRoaster } from "../models/interfaces";
 
 export const COFFEES: ICoffee[] = [
 	{
@@ -92,5 +92,29 @@ export const COFFEES: ICoffee[] = [
 				rating: 0,
 			},
 		},
+	},
+];
+
+export const ROASTERS: IRoaster[] = [
+	{
+		name: "Morrow Coffee",
+		city: "Barcelona",
+		country: "Spain",
+		postalCode: "08003",
+		address: "Plaza España",
+	},
+	{
+		name: "Right Side Coffee",
+		city: "Casteldelfells",
+		country: "Spain",
+		postalCode: "08003",
+		address: "Casteldelfells",
+	},
+	{
+		name: "Satan Cafe",
+		address: "Gothica",
+		city: "Barcelona",
+		country: "Spain",
+		postalCode: "08001",
 	},
 ];
