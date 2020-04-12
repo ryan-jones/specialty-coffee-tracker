@@ -23,6 +23,7 @@ export interface IRoaster {
 	city: string;
 	country: string;
 	postalCode: string;
+	rating: number;
 }
 
 export interface IMethod {

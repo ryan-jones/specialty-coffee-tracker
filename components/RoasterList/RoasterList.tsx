@@ -11,12 +11,12 @@ interface Props {
 export default function RoasterList(props: Props) {
 	return (
 		<View style={styles.listContainer}>
-			<ScrollView style={styles.scroll}>
+			<ScrollView>
 				{props.roasters.map((roaster) => (
 					<RoasterListItem
 						key={roaster.name}
 						{...roaster}
-						onSelect={props.onSelect}
+						onSelect={() => props.onSelect(roaster)}
 					/>
 				))}
 			</ScrollView>
@@ -27,10 +27,5 @@ export default function RoasterList(props: Props) {
 const styles = StyleSheet.create({
 	listContainer: {
 		width: "100%",
-	},
-	scroll: {
-		padding: 15,
-		borderColor: "black",
-		borderWidth: 1,
 	},
 });

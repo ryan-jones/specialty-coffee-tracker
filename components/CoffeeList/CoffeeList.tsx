@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import CoffeeListItem from "./CoffeeListItem";
 import { ICoffee } from "../../models/interfaces";
+import { ScrollView } from "react-native-gesture-handler";
 
 interface Props {
 	coffees: ICoffee[];
@@ -12,13 +13,15 @@ interface Props {
 export default function CoffeeList(props: Props) {
 	return (
 		<View style={styles.listContainer}>
-			{props.coffees.map((coffee) => (
-				<CoffeeListItem
-					key={coffee.name}
-					{...coffee}
-					onSelect={() => props.onSelect(coffee)}
-				/>
-			))}
+			<ScrollView>
+				{props.coffees.map((coffee) => (
+					<CoffeeListItem
+						key={coffee.name}
+						{...coffee}
+						onSelect={() => props.onSelect(coffee)}
+					/>
+				))}
+			</ScrollView>
 		</View>
 	);
 }
@@ -26,8 +29,5 @@ export default function CoffeeList(props: Props) {
 const styles = StyleSheet.create({
 	listContainer: {
 		width: "100%",
-		flexDirection: "row",
-		marginVertical: 15,
-		justifyContent: "space-evenly",
 	},
 });

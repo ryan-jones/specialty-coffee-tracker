@@ -1,18 +1,16 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { ICoffee } from "../../models/interfaces";
+import { IRoaster } from "../../models/interfaces";
 import CustomText from "../Common/CustomText";
+import ListItem from "../Common/ListItem";
 import { COLORS } from "../../styles/colors";
 import Circle from "../Common/Circle";
-import CoffeeNotes from "../CoffeeNotes";
-import ListItem from "../Common/ListItem";
 
-interface Props extends ICoffee {
+interface Props extends IRoaster {
 	onSelect: (coffee: any) => void;
 }
 
-export default function CoffeeListItem(props: Props) {
-	const selectNotes = props.notes.slice(0, 3);
+export default function RoasterListItem(props: Props) {
 	return (
 		<TouchableOpacity onPress={() => props.onSelect(props.name)}>
 			<ListItem>
@@ -20,13 +18,8 @@ export default function CoffeeListItem(props: Props) {
 					<View style={styles.textContainer}>
 						<CustomText styles={styles.name}>{props.name}</CustomText>
 						<CustomText styles={styles.region}>
-							{props.region}, {props.country}
+							{props.city}, {props.country}
 						</CustomText>
-						<CoffeeNotes
-							notes={selectNotes}
-							containerStyles={styles.notes}
-							noteStyles={styles.note}
-						/>
 					</View>
 					<View style={styles.rating}>
 						<Circle
@@ -79,15 +72,5 @@ const styles = StyleSheet.create({
 		fontSize: 12,
 		textAlign: "center",
 		color: "grey",
-	},
-	notes: {
-		marginHorizontal: 0,
-		marginTop: 20,
-		marginBottom: 0,
-		width: "auto",
-	},
-	note: {
-		margin: 0,
-		marginRight: 5,
 	},
 });

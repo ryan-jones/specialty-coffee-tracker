@@ -102,6 +102,7 @@ export const ROASTERS: IRoaster[] = [
 		country: "Spain",
 		postalCode: "08003",
 		address: "Plaza España",
+		rating: 4.4,
 	},
 	{
 		name: "Right Side Coffee",
@@ -109,6 +110,7 @@ export const ROASTERS: IRoaster[] = [
 		country: "Spain",
 		postalCode: "08003",
 		address: "Casteldelfells",
+		rating: 4.2,
 	},
 	{
 		name: "Satan Cafe",
@@ -116,5 +118,6 @@ export const ROASTERS: IRoaster[] = [
 		city: "Barcelona",
 		country: "Spain",
 		postalCode: "08001",
+		rating: 3.9,
 	},
 ];

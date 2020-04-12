@@ -12,7 +12,6 @@ interface Props {
 }
 
 export default function TextEllipsis(props: Props) {
-	console.log("props", props);
 	return (
 		<LinearGradient
 			colors={GRADIENTS[props.color]}

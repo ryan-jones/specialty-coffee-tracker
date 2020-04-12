@@ -15,7 +15,7 @@ export default function CoffeeNotes(props: Props) {
 				<TasteDescription
 					key={note}
 					text={note}
-					containerStyles={props.noteStyles}
+					noteStyles={props.noteStyles}
 				/>
 			))}
 		</View>

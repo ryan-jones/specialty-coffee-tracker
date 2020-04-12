@@ -7,6 +7,8 @@ import { COFFEES, ROASTERS } from "../data";
 import Map from "../components/Map";
 import ContentSection from "../components/Common/ContentSection";
 import FavoriteRoasterList from "../components/Favorites/Roasters/FavoriteRoasterList";
+import { ICoffee } from "../models/interfaces";
+import Statistic from "../components/Common/Statistic";
 
 interface Props {
 	navigation: any;
@@ -15,6 +17,25 @@ interface Props {
 export default function ProfileScreen(props: Props) {
 	const coffees = COFFEES.slice(0, 3);
 	const roasters = ROASTERS.slice(0, 3);
+	const stats = [
+		{
+			text: "Coffees",
+			value: COFFEES.length,
+		},
+		{
+			text: "Roasters",
+			value: ROASTERS.length,
+		},
+		{
+			text: "Regions",
+			value: COFFEES.reduce((list: string[], coffee: ICoffee) => {
+				if (list.indexOf(coffee.country) > 0) {
+					return list;
+				}
+				return list.concat(coffee.country);
+			}, []).length,
+		},
+	];
 	return (
 		<ScrollView>
 			<View style={styles.screen}>
@@ -24,8 +45,12 @@ export default function ProfileScreen(props: Props) {
 					</View>
 				</View>
 				<ContentSection>
+					<View style={styles.statistics}>
+						{stats.map((stat) => (
+							<Statistic key={stat.text} text={stat.text} value={stat.value} />
+						))}
+					</View>
 					<View style={styles.favorites}>
-						<CustomText>My Favorite Coffees</CustomText>
 						<FavoriteCoffeeList
 							coffees={coffees}
 							textStyles={styles.text}
@@ -33,7 +58,6 @@ export default function ProfileScreen(props: Props) {
 						/>
 					</View>
 					<View style={styles.favorites}>
-						<CustomText>My Favorite Roasters</CustomText>
 						<FavoriteRoasterList
 							roasters={roasters}
 							textStyles={styles.text}
@@ -58,6 +82,12 @@ const styles = StyleSheet.create({
 	imageContainer: {
 		height: 300,
 		width: "100%",
+	},
+	statistics: {
+		width: "100%",
+		flexDirection: "row",
+		justifyContent: "space-evenly",
+		paddingHorizontal: 15,
 	},
 	favorites: {
 		width: "100%",

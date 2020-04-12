@@ -4,7 +4,7 @@ import TextEllipsis from "./TextEllipsis";
 interface Props {
 	text: string;
 	textStyles?: any;
-	containerStyles?: any;
+	noteStyles?: any;
 }
 
 export default function TasteDescription(props: Props) {
@@ -12,7 +12,8 @@ export default function TasteDescription(props: Props) {
 		<TextEllipsis
 			text={props.text}
 			color="baseColor"
-			containerStyles={props.containerStyles}
+			containerStyles={props.noteStyles}
+			textStyles={props.textStyles}
 		/>
 	);
 }
