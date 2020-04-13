@@ -7,36 +7,18 @@ import ContentSection from "../components/Common/ContentSection";
 import FavoriteRoasterList from "../components/Favorites/Roasters/FavoriteRoasterList";
 import { ICoffee } from "../models/interfaces";
 import Statistic from "../components/Common/Statistic";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import CustomHeaderButton from "../components/Common/HeaderButton";
 import MenuButton from "../components/Common/MenuButton";
+import { useSelector } from "react-redux";
 
 interface Props {
 	navigation: any;
 }
 
 export default function ProfileScreen(props: Props) {
-	const coffees = COFFEES.slice(0, 3);
-	const roasters = ROASTERS.slice(0, 3);
-	const stats = [
-		{
-			text: "Coffees",
-			value: COFFEES.length,
-		},
-		{
-			text: "Roasters",
-			value: ROASTERS.length,
-		},
-		{
-			text: "Regions",
-			value: COFFEES.reduce((list: string[], coffee: ICoffee) => {
-				if (list.indexOf(coffee.country) > 0) {
-					return list;
-				}
-				return list.concat(coffee.country);
-			}, []).length,
-		},
-	];
+	const { favCoffees, favRoasters, stats } = useSelector(
+		(state: any) => state.profile
+	);
+
 	return (
 		<ScrollView>
 			<View style={styles.screen}>
@@ -47,20 +29,20 @@ export default function ProfileScreen(props: Props) {
 				</View>
 				<ContentSection>
 					<View style={styles.statistics}>
-						{stats.map((stat) => (
+						{stats.map((stat: any) => (
 							<Statistic key={stat.text} text={stat.text} value={stat.value} />
 						))}
 					</View>
 					<View style={styles.favorites}>
 						<FavoriteCoffeeList
-							coffees={coffees}
+							coffees={favCoffees}
 							textStyles={styles.text}
 							navigation={props.navigation}
 						/>
 					</View>
 					<View style={styles.favorites}>
 						<FavoriteRoasterList
-							roasters={roasters}
+							roasters={favRoasters}
 							textStyles={styles.text}
 							navigation={props.navigation}
 						/>

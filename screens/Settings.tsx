@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import MenuButton from "../components/Common/MenuButton";
 
 export default function SettingsScreen() {
 	return (
@@ -9,8 +10,11 @@ export default function SettingsScreen() {
 	);
 }
 
-SettingsScreen.navigationOptions = {
-	headerTitle: "Settings",
+SettingsScreen.navigationOptions = (navData: any) => {
+	return {
+		title: "Settings",
+		headerLeft: () => <MenuButton navigation={navData.navigation} />,
+	};
 };
 
 const styles = StyleSheet.create({

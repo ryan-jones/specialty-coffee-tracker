@@ -1,14 +1,27 @@
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { TabsNavigator } from "./bottomTabs";
-import { createStackNavigator } from "react-navigation-stack";
-import SettingsScreen from "../screens/Settings";
+import { SettingsNavigator } from "./stacks";
+import { COLORS } from "../styles/colors";
 
-const SettingsNavigator = createStackNavigator({
-	Settings: SettingsScreen,
-});
-const MainNavigator = createDrawerNavigator({
-	Profile: TabsNavigator,
-	Settings: SettingsNavigator,
-});
+const MainNavigator = createDrawerNavigator(
+	{
+		Profile: {
+			screen: TabsNavigator,
+			navigationOptions: {
+				drawerLabel: "Home",
+			},
+		},
+		Settings: SettingsNavigator,
+	},
+	{
+		contentOptions: {
+			activeTintColor: COLORS.baseColor,
+			labelStyle: {
+				fontFamily: "main-en",
+				fontWeight: "bold",
+			},
+		},
+	}
+);
 
 export default MainNavigator;

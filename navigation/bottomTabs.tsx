@@ -52,6 +52,10 @@ export const TabsNavigator =
 					},
 					style: {
 						backgroundColor: COLORS.baseColor,
+						paddingTop: 10,
+					},
+					labelStyle: {
+						fontFamily: "main-en",
 					},
 					inactiveTintColor: COLORS.black,
 					activeTintColor: COLORS.white,

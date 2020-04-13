@@ -1,25 +1,42 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useEffect, useCallback } from "react";
+import { View, StyleSheet, Modal } from "react-native";
 import CoffeeList from "../components/CoffeeList/CoffeeList";
-import { COFFEES } from "../data";
 import { ICoffee } from "../models/interfaces";
 import CustomHeaderButton from "../components/Common/HeaderButton";
 import MenuButton from "../components/Common/MenuButton";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleCoffeeModal } from "../store/actions/coffee";
+import CustomText from "../components/Common/CustomText";
 
 interface Props {
 	navigation: any;
 }
 
 const CoffeesScreen = (props: Props) => {
+	const { allCoffees, showModal } = useSelector((state: any) => state.coffees);
+	const dispatch = useDispatch();
+
+	const toggleModalHandler = useCallback(() => {
+		dispatch(toggleCoffeeModal());
+	}, [dispatch]);
+
+	useEffect(() => {
+		props.navigation.setParams({ toggleModal: toggleModalHandler });
+	}, [toggleModalHandler]);
+
 	const onSelectCoffee = (coffee: ICoffee) => {
 		props.navigation.navigate({
 			routeName: "CoffeeDetails",
 			params: { coffee },
 		});
 	};
+	console.log("showModal", showModal);
 	return (
 		<View style={styles.screen}>
-			<CoffeeList coffees={COFFEES} onSelect={onSelectCoffee} />
+			<Modal visible={showModal} animationType="slide">
+				<CustomText>Test modal</CustomText>
+			</Modal>
+			<CoffeeList coffees={allCoffees} onSelect={onSelectCoffee} />
 		</View>
 	);
 };
@@ -31,7 +48,7 @@ CoffeesScreen.navigationOptions = (navData: any) => {
 			<CustomHeaderButton
 				iconName="ios-add-circle-outline"
 				title="add coffee"
-				onPress={() => {}}
+				onPress={navData.navigation.getParam("toggleModal")}
 			></CustomHeaderButton>
 		),
 		headerLeft: () => <MenuButton navigation={navData.navigation} />,

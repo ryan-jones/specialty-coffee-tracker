@@ -1,17 +1,17 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { ROASTERS } from "../data";
 import { IRoaster } from "../models/interfaces";
 import RoasterList from "../components/RoasterList/RoasterList";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/Common/HeaderButton";
 import MenuButton from "../components/Common/MenuButton";
+import { useSelector } from "react-redux";
 
 interface Props {
 	navigation: any;
 }
 
 export default function RoastersScreen(props: Props) {
+	const roasters = useSelector((state: any) => state.roasters.allRoasters);
 	const onSelectRoaster = (roaster: IRoaster) => {
 		props.navigation.navigate({
 			routeName: "RoasterDetails",
@@ -20,7 +20,7 @@ export default function RoastersScreen(props: Props) {
 	};
 	return (
 		<View style={styles.screen}>
-			<RoasterList roasters={ROASTERS} onSelect={onSelectRoaster} />
+			<RoasterList roasters={roasters} onSelect={onSelectRoaster} />
 		</View>
 	);
 }

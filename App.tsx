@@ -4,6 +4,8 @@ import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import Navigator from "./navigation/navigator";
 import { enableScreens } from "react-native-screens";
+import store from "./store";
+import { Provider } from "react-redux";
 
 enableScreens();
 
@@ -21,7 +23,11 @@ export default function App() {
 			<AppLoading startAsync={setFonts} onFinish={() => setFontLoaded(true)} />
 		);
 	}
-	return <Navigator />;
+	return (
+		<Provider store={store}>
+			<Navigator />
+		</Provider>
+	);
 }
 
 const styles = StyleSheet.create({

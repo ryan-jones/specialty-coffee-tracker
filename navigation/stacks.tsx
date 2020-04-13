@@ -6,6 +6,7 @@ import CoffeesScreen from "../screens/Coffees";
 import ProfileScreen from "../screens/Profile";
 import RoastersScreen from "../screens/Roasters";
 import RoasterDetailsScreen from "../screens/RoasterDetails";
+import SettingsScreen from "../screens/Settings";
 
 const defaultNavigationOptions = {
 	headerStyle: {
@@ -37,6 +38,15 @@ export const CoffeeNavigator = createStackNavigator(
 	{
 		Coffees: CoffeesScreen,
 		CoffeeDetails: CoffeeDetailsScreen,
+	},
+	{
+		defaultNavigationOptions,
+	}
+);
+
+export const SettingsNavigator = createStackNavigator(
+	{
+		Settings: SettingsScreen,
 	},
 	{
 		defaultNavigationOptions,
