@@ -28,14 +28,14 @@ export default function CoffeeList(props: Props) {
 					/>
 				))}
 			</View>
-			<View style={styles.link}>
+			{/* <View style={styles.link}>
 				<Link
 					text="View all my coffees ->"
 					navigation={props.navigation}
 					routeName="Coffees"
 					styles={props.textStyles}
 				/>
-			</View>
+			</View> */}
 		</View>
 	);
 }

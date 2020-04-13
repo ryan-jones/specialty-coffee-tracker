@@ -19,7 +19,11 @@ export default function Map({ coffees }: Props) {
 			}}
 		>
 			{coffees.map((coffee: ICoffee) => (
-				<Marker coordinate={coffee.coordinates} title={coffee.name} />
+				<Marker
+					key={coffee.name}
+					coordinate={coffee.coordinates}
+					title={coffee.name}
+				/>
 			))}
 		</MapView>
 	);

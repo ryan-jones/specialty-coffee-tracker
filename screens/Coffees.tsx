@@ -3,8 +3,8 @@ import { View, StyleSheet } from "react-native";
 import CoffeeList from "../components/CoffeeList/CoffeeList";
 import { COFFEES } from "../data";
 import { ICoffee } from "../models/interfaces";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/Common/HeaderButton";
+import MenuButton from "../components/Common/MenuButton";
 
 interface Props {
 	navigation: any;
@@ -24,17 +24,18 @@ const CoffeesScreen = (props: Props) => {
 	);
 };
 
-CoffeesScreen.navigationOptions = {
-	title: "My Coffees",
-	headerRight: () => (
-		<HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-			<Item
+CoffeesScreen.navigationOptions = (navData: any) => {
+	return {
+		title: "My Coffees",
+		headerRight: () => (
+			<CustomHeaderButton
 				iconName="ios-add-circle-outline"
 				title="add coffee"
 				onPress={() => {}}
-			/>
-		</HeaderButtons>
-	),
+			></CustomHeaderButton>
+		),
+		headerLeft: () => <MenuButton navigation={navData.navigation} />,
+	};
 };
 
 const styles = StyleSheet.create({

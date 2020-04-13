@@ -1,7 +1,5 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
-import Card from "../components/Common/Card";
-import CustomText from "../components/Common/CustomText";
 import FavoriteCoffeeList from "../components/Favorites/Coffees/FavoriteCoffeeList";
 import { COFFEES, ROASTERS } from "../data";
 import Map from "../components/Map";
@@ -9,6 +7,9 @@ import ContentSection from "../components/Common/ContentSection";
 import FavoriteRoasterList from "../components/Favorites/Roasters/FavoriteRoasterList";
 import { ICoffee } from "../models/interfaces";
 import Statistic from "../components/Common/Statistic";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import CustomHeaderButton from "../components/Common/HeaderButton";
+import MenuButton from "../components/Common/MenuButton";
 
 interface Props {
 	navigation: any;
@@ -70,8 +71,11 @@ export default function ProfileScreen(props: Props) {
 	);
 }
 
-ProfileScreen.navigationOptions = {
-	title: "Profile",
+ProfileScreen.navigationOptions = (navData: any) => {
+	return {
+		title: "Profile",
+		headerLeft: () => <MenuButton navigation={navData.navigation} />,
+	};
 };
 
 const styles = StyleSheet.create({

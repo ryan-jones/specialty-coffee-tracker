@@ -28,14 +28,14 @@ export default function FavoriteRoasterList(props: Props) {
 					/>
 				))}
 			</View>
-			<View style={styles.link}>
+			{/* <View style={styles.link}>
 				<Link
 					text="View all my roasters ->"
 					navigation={props.navigation}
 					routeName="Roasters"
 					styles={props.textStyles}
 				/>
-			</View>
+			</View> */}
 		</View>
 	);
 }
