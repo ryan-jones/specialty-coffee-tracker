@@ -6,7 +6,7 @@ interface Props {
 	navigation: any;
 	text: string;
 	routeName: string;
-	styles?: any;
+	styles?: object;
 }
 
 export default function Link(props: Props) {

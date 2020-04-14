@@ -6,9 +6,9 @@ import Link from "../../Common/Link";
 
 interface Props {
 	coffees: ICoffee[];
-	listStyles?: any;
-	textStyles?: any;
 	navigation: any;
+	textStyles?: object;
+	listStyles?: object;
 }
 
 export default function CoffeeList(props: Props) {

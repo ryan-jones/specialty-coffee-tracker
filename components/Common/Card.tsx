@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { View, StyleSheet } from "react-native";
 
 interface Props {
-	children: any;
-	styles?: any;
+	children: ReactNode;
+	styles?: object;
 }
 export default function Card({ children, styles }: Props) {
 	return <View style={{ ...localStyles.card, ...styles }}>{children}</View>;
@@ -12,6 +12,7 @@ export default function Card({ children, styles }: Props) {
 const localStyles = StyleSheet.create({
 	card: {
 		width: "100%",
+		height: "100%",
 		backgroundColor: "white",
 		borderRadius: 5,
 		padding: 15,

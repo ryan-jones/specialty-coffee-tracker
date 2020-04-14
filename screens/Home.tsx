@@ -3,7 +3,6 @@ import { View, StyleSheet, Button } from "react-native";
 import CustomText from "../components/Common/CustomText";
 import TextInput from "../components/Common/TextInput";
 import Card from "../components/Common/Card";
-import { COLORS } from "../styles/colors";
 
 interface Props {
 	navigation: any;

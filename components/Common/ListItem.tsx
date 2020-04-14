@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { View, StyleSheet } from "react-native";
 import { COLORS } from "../../styles/colors";
 
 interface Props {
-	children: any;
+	children: ReactNode;
 }
 export default function ListItem({ children }: Props) {
 	return <View style={styles.container}>{children}</View>;

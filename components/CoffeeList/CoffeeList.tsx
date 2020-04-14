@@ -6,8 +6,8 @@ import { ScrollView } from "react-native-gesture-handler";
 
 interface Props {
 	coffees: ICoffee[];
-	onSelect: (coffee: any) => void;
-	styles?: any;
+	onSelect: (coffee: ICoffee) => void;
+	styles?: object;
 }
 
 export default function CoffeeList(props: Props) {

@@ -3,9 +3,9 @@ import { View, StyleSheet } from "react-native";
 import TasteDescription from "./Common/TasteDescription";
 
 interface Props {
-	containerStyles?: any;
-	noteStyles?: any;
 	notes: string[];
+	containerStyles?: object;
+	noteStyles?: object;
 }
 
 export default function CoffeeNotes(props: Props) {

@@ -1,3 +1,5 @@
+import { NavigationScreenProp, NavigationState } from "react-navigation";
+
 export interface ICoffee {
 	name: string;
 	region: string;
@@ -29,3 +31,5 @@ export interface IRoaster {
 export interface IMethod {
 	rating: number;
 }
+
+export type Navigation = NavigationScreenProp<NavigationState, any>;

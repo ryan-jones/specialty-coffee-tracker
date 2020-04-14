@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Text, StyleSheet } from "react-native";
 
 interface IProps {
-	children: any;
-	styles?: any;
+	children: ReactNode;
+	styles?: object;
 }
 export default function CustomText(props: IProps) {
 	return (

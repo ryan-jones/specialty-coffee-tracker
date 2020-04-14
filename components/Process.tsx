@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, ImageSourcePropType } from "react-native";
 import CustomText from "./Common/CustomText";
 import { COLORS } from "../styles/colors";
 
@@ -23,10 +23,10 @@ const icons: any = {
 };
 
 export default function Process({ process }: Props) {
-	const setIcon = (key: string) => {
+	const setIcon = (key: string): ImageSourcePropType => {
 		return key === process ? icons[key].selected : icons[key].unselected;
 	};
-	const setTextStyles = (key: string) => {
+	const setTextStyles = (key: string): object => {
 		return {
 			textAlign: "center",
 			color: key === process ? COLORS.baseColor : COLORS.black,

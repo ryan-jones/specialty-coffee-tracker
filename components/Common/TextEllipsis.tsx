@@ -7,8 +7,8 @@ import { LinearGradient } from "expo-linear-gradient";
 interface Props {
 	text: string | number;
 	color: string;
-	textStyles?: any;
-	containerStyles?: any;
+	textStyles?: object;
+	containerStyles?: object;
 }
 
 export default function TextEllipsis(props: Props) {

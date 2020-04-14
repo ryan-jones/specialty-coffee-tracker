@@ -6,9 +6,9 @@ import FavoriteRoasterListItem from "./FavoriteRoasterListItem";
 
 interface Props {
 	roasters: IRoaster[];
-	listStyles?: any;
-	textStyles?: any;
 	navigation: any;
+	textStyles?: object;
+	listStyles?: object;
 }
 
 export default function FavoriteRoasterList(props: Props) {

@@ -5,13 +5,13 @@ import { COFFEES, ROASTERS } from "../data";
 import Map from "../components/Map";
 import ContentSection from "../components/Common/ContentSection";
 import FavoriteRoasterList from "../components/Favorites/Roasters/FavoriteRoasterList";
-import { ICoffee } from "../models/interfaces";
 import Statistic from "../components/Common/Statistic";
 import MenuButton from "../components/Common/MenuButton";
 import { useSelector } from "react-redux";
+import { Navigation } from "../models/interfaces";
 
 interface Props {
-	navigation: any;
+	navigation: Navigation;
 }
 
 export default function ProfileScreen(props: Props) {

@@ -1,12 +1,12 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { View, StyleSheet } from "react-native";
 import { COLORS, GRADIENTS } from "../../styles/colors";
 import { LinearGradient } from "expo-linear-gradient";
 
 interface Props {
-	children: any;
-	containerStyles?: any;
-	circleStyles?: any;
+	children: ReactNode;
+	containerStyles?: object;
+	circleStyles?: object;
 }
 
 export default function Circle(props: Props) {

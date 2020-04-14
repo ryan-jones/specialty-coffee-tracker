@@ -1,7 +1,6 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { IRoaster } from "../../../models/interfaces";
-import Circle from "../../Common/Circle";
 import CustomText from "../../Common/CustomText";
 import { COLORS } from "../../../styles/colors";
 

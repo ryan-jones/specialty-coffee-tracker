@@ -1,15 +1,16 @@
 import React, { useEffect, useCallback } from "react";
-import { View, StyleSheet, Modal } from "react-native";
+import { View, StyleSheet } from "react-native";
 import CoffeeList from "../components/CoffeeList/CoffeeList";
-import { ICoffee } from "../models/interfaces";
+import { ICoffee, Navigation } from "../models/interfaces";
 import CustomHeaderButton from "../components/Common/HeaderButton";
 import MenuButton from "../components/Common/MenuButton";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleCoffeeModal } from "../store/actions/coffee";
-import CustomText from "../components/Common/CustomText";
+import CardModal from "../components/Common/CardModal";
+import AddCoffee from "../components/AddCoffee/AddCoffee";
 
 interface Props {
-	navigation: any;
+	navigation: Navigation;
 }
 
 const CoffeesScreen = (props: Props) => {
@@ -30,12 +31,11 @@ const CoffeesScreen = (props: Props) => {
 			params: { coffee },
 		});
 	};
-	console.log("showModal", showModal);
 	return (
 		<View style={styles.screen}>
-			<Modal visible={showModal} animationType="slide">
-				<CustomText>Test modal</CustomText>
-			</Modal>
+			<CardModal visible={showModal}>
+				<AddCoffee />
+			</CardModal>
 			<CoffeeList coffees={allCoffees} onSelect={onSelectCoffee} />
 		</View>
 	);
@@ -58,6 +58,7 @@ CoffeesScreen.navigationOptions = (navData: any) => {
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
+		height: "100%",
 		alignItems: "center",
 	},
 });

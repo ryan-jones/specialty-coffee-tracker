@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { COLORS } from "../styles/colors";
 import CustomText from "../components/Common/CustomText";
-import { ICoffee } from "../models/interfaces";
+import { ICoffee, Navigation } from "../models/interfaces";
 import Process from "../components/Process";
 import Circle from "../components/Common/Circle";
 import CoffeeNotes from "../components/CoffeeNotes";
@@ -11,7 +11,7 @@ import CoffeeOrigin from "../components/CoffeeOrigin";
 import ContentSection from "../components/Common/ContentSection";
 
 interface Props {
-	navigation: any;
+	navigation: Navigation;
 }
 
 export default function CoffeeDetailsScreen(props: Props) {
