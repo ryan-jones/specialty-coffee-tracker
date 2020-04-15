@@ -3,10 +3,10 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import { COLORS } from "../styles/colors";
 import CustomText from "../components/Common/CustomText";
 import { ICoffee, Navigation } from "../models/interfaces";
-import Process from "../components/Process";
+import Process from "../components/Process/ShowProcess";
 import Circle from "../components/Common/Circle";
 import CoffeeNotes from "../components/CoffeeNotes";
-import BrewMethods from "../components/BrewMethods/BrewMethods";
+import BrewMethods from "../components/BrewMethods/ShowBrewMethods/BrewMethods";
 import CoffeeOrigin from "../components/CoffeeOrigin";
 import ContentSection from "../components/Common/ContentSection";
 

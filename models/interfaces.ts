@@ -11,9 +11,10 @@ export interface ICoffee {
 	methods: {
 		chemex: IMethod;
 		v60: IMethod;
-		frenchPress: IMethod;
+		frenchpress: IMethod;
 		espresso: IMethod;
 		aeropress: IMethod;
+		syphon: IMethod;
 	};
 	description?: string;
 	coordinates?: any;
@@ -29,7 +30,17 @@ export interface IRoaster {
 }
 
 export interface IMethod {
+	rating: number | string;
+	cases: IBrewCase[];
+	notes?: string[];
+}
+
+export interface IBrewCase {
+	water: number;
+	grams: number;
 	rating: number;
+	description: string;
+	notes: string[];
 }
 
 export type Navigation = NavigationScreenProp<NavigationState, any>;

@@ -12,7 +12,7 @@ export default function Card({ children, styles }: Props) {
 const localStyles = StyleSheet.create({
 	card: {
 		width: "100%",
-		height: "100%",
+		minHeight: "50%",
 		backgroundColor: "white",
 		borderRadius: 5,
 		padding: 15,

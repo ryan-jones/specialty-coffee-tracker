@@ -1,5 +1,5 @@
 import { COFFEES } from "../../data";
-import { TOGGLE_COFFEE_MODAL, ADD_COFFEE } from "../actions/coffee";
+import { ADD_COFFEE } from "../actions/coffees";
 
 const initialState = {
 	allCoffees: COFFEES,
@@ -14,12 +14,6 @@ const coffeeReducer = (state = initialState, action: any) => {
 				allCoffees: state.allCoffees.concat(action.payload),
 			};
 
-		case TOGGLE_COFFEE_MODAL:
-			console.log("triggered");
-			return {
-				...state,
-				showModal: !state.showModal,
-			};
 		default:
 			return state;
 	}

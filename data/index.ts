@@ -18,18 +18,23 @@ export const COFFEES: ICoffee[] = [
 		methods: {
 			chemex: {
 				rating: 4.3,
+				cases: [],
 			},
 			aeropress: {
 				rating: 3.9,
+				cases: [],
 			},
 			v60: {
 				rating: 4.2,
+				cases: [],
 			},
 			espresso: {
 				rating: 0,
+				cases: [],
 			},
-			frenchPress: {
+			frenchpress: {
 				rating: 0,
+				cases: [],
 			},
 		},
 	},
@@ -48,18 +53,23 @@ export const COFFEES: ICoffee[] = [
 		methods: {
 			chemex: {
 				rating: 4.3,
+				cases: [],
 			},
 			aeropress: {
 				rating: 3.9,
+				cases: [],
 			},
 			v60: {
 				rating: 4.2,
+				cases: [],
 			},
 			espresso: {
 				rating: 0,
+				cases: [],
 			},
-			frenchPress: {
+			frenchpress: {
 				rating: 0,
+				cases: [],
 			},
 		},
 	},
@@ -78,18 +88,23 @@ export const COFFEES: ICoffee[] = [
 		methods: {
 			chemex: {
 				rating: 4.3,
+				cases: [],
 			},
 			aeropress: {
 				rating: 3.9,
+				cases: [],
 			},
 			v60: {
 				rating: 4.2,
+				cases: [],
 			},
 			espresso: {
 				rating: 0,
+				cases: [],
 			},
-			frenchPress: {
+			frenchpress: {
 				rating: 0,
+				cases: [],
 			},
 		},
 	},
@@ -120,4 +135,13 @@ export const ROASTERS: IRoaster[] = [
 		postalCode: "08001",
 		rating: 3.9,
 	},
+];
+
+export const METHODS = [
+	"chemex",
+	"v60",
+	"espresso",
+	"frenchpress",
+	"aeropress",
+	"syphon",
 ];

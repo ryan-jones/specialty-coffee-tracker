@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import BrewMethod from "./BrewMethod";
-import { IMethod } from "../../models/interfaces";
-import CustomText from "../Common/CustomText";
+import { IMethod } from "../../../models/interfaces";
+import CustomText from "../../Common/CustomText";
 
 interface Props {
 	methods: {

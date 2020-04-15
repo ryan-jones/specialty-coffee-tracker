@@ -7,6 +7,7 @@ import ProfileScreen from "../screens/Profile";
 import RoastersScreen from "../screens/Roasters";
 import RoasterDetailsScreen from "../screens/RoasterDetails";
 import SettingsScreen from "../screens/Settings";
+import AddCoffeeScreen from "../screens/AddCoffee";
 
 const defaultNavigationOptions = {
 	headerStyle: {
@@ -38,9 +39,11 @@ export const CoffeeNavigator = createStackNavigator(
 	{
 		Coffees: CoffeesScreen,
 		CoffeeDetails: CoffeeDetailsScreen,
+		AddCoffee: AddCoffeeScreen,
 	},
 	{
 		defaultNavigationOptions,
+		initialRouteName: "Coffees",
 	}
 );
 
