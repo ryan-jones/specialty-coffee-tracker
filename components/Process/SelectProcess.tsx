@@ -18,7 +18,7 @@ export default function SelectProcess({ process, dispatch }: Props) {
 				{icons.map((icon) => (
 					<TouchableOpacity
 						onPress={() =>
-							dispatch({ type: "ADD_COFFEE_PROCESS", payload: icon })
+							dispatch({ type: "SELECT_COFFEE_PROCESS", payload: icon })
 						}
 					>
 						<Process name={icon} isSelected={icon === process} />

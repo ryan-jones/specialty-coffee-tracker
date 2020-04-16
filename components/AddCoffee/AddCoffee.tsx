@@ -1,129 +1,117 @@
-import React, { useReducer } from "react";
-import { View, StyleSheet } from "react-native";
-import CustomTextInput from "../Common/CustomTextInput";
+import React, { useReducer, useState } from "react";
+import { View, StyleSheet, Button, ScrollView } from "react-native";
 import CustomText from "../Common/CustomText";
 import SelectBrewMethod from "../BrewMethods/AddBrewMethod/SelectBrewMethod";
-import { setBrewMethodRatings, setCoffeeAverageRating } from "../../utils";
-import { IBrewCase, IMethod } from "../../models/interfaces";
-import SelectProcess from "../Process/SelectProcess";
+import { ADD_COFFEE_STATE, addCoffeeReducer } from "./localStore";
+import SelectCoffeeNotes from "../CoffeeDetails/SelectCoffeeNotes";
+import BasicInfo from "../CoffeeDetails/BasicInfo";
+import ReturnFormButton from "../Common/ReturnFormButton";
+import { useDispatch } from "react-redux";
+import { COLORS } from "../../styles/colors";
+import { addCoffee } from "../../store/actions/coffees";
+import FormView from "./FormView";
+import { getCurrentFrame } from "expo/build/AR";
 
-export default function AddCoffee() {
-	const initialState: any = {
-		name: "",
-		region: "",
-		country: "",
-		process: "",
-		roaster: "",
-		notes: [],
-		rating: "",
-		description: "",
-		coordinates: {
-			lat: null,
-			lng: null,
-		},
-		methods: {
-			chemex: {
-				rating: 0,
-				cases: [],
-			},
-			aeropress: {
-				rating: 0,
-				cases: [],
-			},
-			v60: {
-				rating: 0,
-				cases: [],
-			},
-			espresso: {
-				rating: 0,
-				cases: [],
-			},
-			frenchpress: {
-				rating: 0,
-				cases: [],
-			},
-			syphon: {
-				rating: 0,
-				cases: [],
-			},
-		},
-	};
-	const reducer = (state: any, action: any) => {
-		switch (action.type) {
-			case "UPDATE_NAME":
-				return { ...state, name: action.payload };
-			case "UPDATE_REGION":
-				return { ...state, region: action.payload };
-			case "ADD_COFFEE_PROCESS":
-				return { ...state, process: action.payload };
-			case "ADD_BREW_METHOD":
-				const { name, brewCase } = action.payload;
-				const updatedMethod: IMethod = {
-					...state.methods[name],
-					cases: [...state.methods[name].cases, brewCase],
-				};
-				updatedMethod.rating = setBrewMethodRatings(updatedMethod);
+interface Props {
+	navigation: any;
+}
 
-				const updatedMethods = {
-					...state.methods,
-					[name]: {
-						...updatedMethod,
-					},
-				};
-				const newAverageRating: number = setCoffeeAverageRating(updatedMethods);
-				return {
-					...state,
-					rating: newAverageRating,
-					notes: [...state.notes, ...brewCase.notes],
-					methods: updatedMethods,
-				};
-			default:
-				return state;
-		}
+export default function AddCoffee({ navigation }: Props) {
+	const [showPage, setShowPage] = useState({
+		coffeeDetails: true,
+		brewMethods: false,
+		notes: false,
+	});
+	const dispatch = useDispatch();
+	const [addCoffeeState, addCoffeeDispatch] = useReducer(
+		addCoffeeReducer,
+		ADD_COFFEE_STATE
+	);
+	const onCancel = () => {
+		addCoffeeDispatch({ type: "CLEAR_ADD_COFFEE " });
+		navigation.goBack();
 	};
-	const [state, dispatch] = useReducer(reducer, initialState);
-	const setDispatch = (type: string, payload: any) => {
-		dispatch({ type, payload });
+	const onNavigate = (pageSettings: object) => {
+		setShowPage((current) => ({ ...current, ...pageSettings }));
 	};
-
 	return (
-		<View style={styles.container}>
-			<CustomText>First, let's add the basic details</CustomText>
-			<CustomText>{state.rating}</CustomText>
-			<CustomTextInput
-				label="name"
-				value={state.name}
-				onChangeText={(value: string) => setDispatch("UPDATE_NAME", value)}
-				placeholder="name"
-			/>
-			<CustomTextInput
-				label="region"
-				value={state.region}
-				onChangeText={(value: any) => setDispatch("UPDATE_REGION", value)}
-				placeholder="Colombia"
-			/>
-			<CustomTextInput
-				label="country"
-				value={state.country}
-				onChangeText={(value: any) => setDispatch("UPDATE_COUNTRY", value)}
-				placeholder="Colombia"
-			/>
-			<SelectProcess process={state.process} dispatch={dispatch} />
-			<CustomText styles={styles.text}>
-				Have you tried out any brew methods yet?
-			</CustomText>
-			<SelectBrewMethod dispatch={dispatch} methods={state.methods} />
-		</View>
+		<ScrollView style={styles.scroll} contentContainerStyle={{ flexGrow: 1 }}>
+			<View style={styles.container}>
+				{showPage.coffeeDetails && (
+					<BasicInfo
+						state={addCoffeeState}
+						dispatch={addCoffeeDispatch}
+						btnLabel="Add Coffee"
+						onPress={() =>
+							onNavigate({ coffeeDetails: false, brewMethods: true })
+						}
+					/>
+				)}
+				{showPage.brewMethods && (
+					<FormView
+						text={{ back: "< Back to coffee details", forward: "Continue " }}
+						onBack={() =>
+							onNavigate({ coffeeDetails: true, brewMethods: false })
+						}
+						onForward={() => onNavigate({ brewMethods: false, notes: true })}
+						onCancel={onCancel}
+					>
+						<View>
+							<CustomText styles={styles.text}>Already had a cup?</CustomText>
+							<CustomText styles={styles.text}>
+								It's optional to add some brewing details
+							</CustomText>
+						</View>
+						<SelectBrewMethod
+							dispatch={addCoffeeDispatch}
+							methods={addCoffeeState.methods}
+						/>
+					</FormView>
+				)}
+				{showPage.notes && (
+					<FormView
+						text={{ back: "< Back to brew methods", forward: "Save Coffee " }}
+						onBack={() => onNavigate({ brewMethods: true, notes: false })}
+						onForward={() => {
+							dispatch(addCoffee(addCoffeeState));
+							navigation.goBack();
+						}}
+						onCancel={onCancel}
+					>
+						<CustomText styles={styles.text}>
+							Lastly, feel free to add some flavour notes
+						</CustomText>
+						<SelectCoffeeNotes
+							dispatch={addCoffeeDispatch}
+							notes={addCoffeeState.notes}
+						/>
+					</FormView>
+				)}
+			</View>
+		</ScrollView>
 	);
 }
 
 const styles = StyleSheet.create({
+	scroll: {
+		flex: 1,
+	},
 	container: {
+		flex: 1,
+		borderWidth: 1,
 		width: "100%",
-		justifyContent: "center",
+		height: "100%",
 		alignItems: "center",
+		backgroundColor: COLORS.white,
+		padding: 15,
+	},
+	header: {
+		marginVertical: 15,
+		textAlign: "center",
+		fontSize: 18,
 	},
 	text: {
-		marginTop: 25,
+		textAlign: "center",
+		fontSize: 18,
 	},
 });

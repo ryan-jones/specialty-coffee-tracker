@@ -5,9 +5,9 @@ import CustomText from "../components/Common/CustomText";
 import { ICoffee, Navigation } from "../models/interfaces";
 import Process from "../components/Process/ShowProcess";
 import Circle from "../components/Common/Circle";
-import CoffeeNotes from "../components/CoffeeNotes";
+import CoffeeNotes from "../components/CoffeeDetails/CoffeeNotes";
 import BrewMethods from "../components/BrewMethods/ShowBrewMethods/BrewMethods";
-import CoffeeOrigin from "../components/CoffeeOrigin";
+import CoffeeOrigin from "../components/CoffeeDetails/CoffeeOrigin";
 import ContentSection from "../components/Common/ContentSection";
 
 interface Props {

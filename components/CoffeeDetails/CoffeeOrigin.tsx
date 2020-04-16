@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import CustomText from "./Common/CustomText";
-import Map from "./Map";
-import { ICoffee } from "../models/interfaces";
+import CustomText from "../Common/CustomText";
+import Map from "../Map";
+import { ICoffee } from "../../models/interfaces";
 
 interface Props {
 	coffee: ICoffee;

@@ -53,10 +53,7 @@ export default function SelectBrewMethod({ dispatch, methods }: Props) {
 		dispatch({ type: "ADD_BREW_METHOD", payload: method });
 		setShowModal(false);
 	};
-	const onCancel = () => {
-		dispatch({ type: "CLEAR_NEW_BREW_METHOD" });
-		setShowModal(false);
-	};
+	const onCancel = () => setShowModal(false);
 	return (
 		<View style={styles.viewContainer}>
 			<Modal visible={showModal} animationType="slide">
@@ -105,6 +102,7 @@ const styles = StyleSheet.create({
 		flexWrap: "wrap",
 		marginTop: 15,
 		width: "100%",
+		flexGrow: 3,
 		justifyContent: "space-evenly",
 	},
 	text: {
@@ -112,7 +110,6 @@ const styles = StyleSheet.create({
 	},
 	methodContainer: {
 		marginVertical: 15,
-		marginHorizontal: 20,
 		width: 100,
 		alignItems: "center",
 	},

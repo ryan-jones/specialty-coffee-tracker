@@ -4,7 +4,7 @@ import { ICoffee } from "../../models/interfaces";
 import CustomText from "../Common/CustomText";
 import { COLORS } from "../../styles/colors";
 import Circle from "../Common/Circle";
-import CoffeeNotes from "../CoffeeNotes";
+import CoffeeNotes from "../CoffeeDetails/CoffeeNotes";
 import ListItem from "../Common/ListItem";
 
 interface Props extends ICoffee {

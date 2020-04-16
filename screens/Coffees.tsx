@@ -31,7 +31,7 @@ CoffeesScreen.navigationOptions = (navData: any) => {
 		title: "My Coffees",
 		headerRight: () => (
 			<CustomHeaderButton
-				iconName="ios-add-circle-outline"
+				iconName="md-add-circle-outline"
 				title="add coffee"
 				onPress={() => navData.navigation.navigate({ routeName: "AddCoffee" })}
 			></CustomHeaderButton>

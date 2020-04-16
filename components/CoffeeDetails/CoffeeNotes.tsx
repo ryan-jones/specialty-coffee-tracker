@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import TasteDescription from "./Common/TasteDescription";
+import TasteDescription from "../Common/TasteDescription";
 
 interface Props {
 	notes: string[];
