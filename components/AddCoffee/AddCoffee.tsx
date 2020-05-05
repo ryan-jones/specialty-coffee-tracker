@@ -1,14 +1,18 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import CustomText from "../Common/CustomText";
 import SelectBrewMethod from "../BrewMethods/AddBrewMethod/SelectBrewMethod";
-import { ADD_COFFEE_STATE, addCoffeeReducer } from "./localStore";
 import SelectCoffeeNotes from "../CoffeeDetails/SelectCoffeeNotes";
 import BasicInfo from "../CoffeeDetails/BasicInfo";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { COLORS } from "../../styles/colors";
-import { addCoffee } from "../../store/actions/coffees";
 import FormView from "../Common/FormView";
+import { INote } from "../../models/interfaces";
+import {
+	clearNewCoffee,
+	updateCoffeeNotes,
+	addNewCoffee,
+} from "../../store/actions/coffees";
 
 interface Props {
 	navigation: any;
@@ -21,28 +25,24 @@ export default function AddCoffee({ navigation }: Props) {
 		notes: false,
 	});
 	const dispatch = useDispatch();
-	const [addCoffeeState, addCoffeeDispatch] = useReducer(
-		addCoffeeReducer,
-		ADD_COFFEE_STATE
-	);
+	const newCoffeeState: any = useSelector((state: any) => state.newCoffee);
+
 	const onCancel = () => {
-		addCoffeeDispatch({ type: "CLEAR_ADD_COFFEE " });
+		dispatch(clearNewCoffee());
 		navigation.goBack();
 	};
 	const onNavigate = (pageSettings: object) => {
 		setShowPage((current) => ({ ...current, ...pageSettings }));
 	};
 
-	const updateNotes = (notes: string[]) => {
-		addCoffeeDispatch({ type: "UPDATE_COFFEE_NOTES", payload: notes });
+	const updateNotes = (notes: INote[]) => {
+		dispatch(updateCoffeeNotes(notes.map((n) => n.name)));
 	};
 
 	return (
 		<View style={styles.container}>
 			{showPage.coffeeDetails && (
 				<BasicInfo
-					state={addCoffeeState}
-					dispatch={addCoffeeDispatch}
 					btnLabel="Continue"
 					onPress={() =>
 						onNavigate({ coffeeDetails: false, brewMethods: true })
@@ -62,10 +62,7 @@ export default function AddCoffee({ navigation }: Props) {
 							It's optional to add some brewing details
 						</CustomText>
 					</View>
-					<SelectBrewMethod
-						dispatch={addCoffeeDispatch}
-						methods={addCoffeeState.methods}
-					/>
+					<SelectBrewMethod />
 				</FormView>
 			)}
 			{showPage.notes && (
@@ -73,7 +70,8 @@ export default function AddCoffee({ navigation }: Props) {
 					text={{ back: "< Back to brew methods", forward: "Save Coffee " }}
 					onBack={() => onNavigate({ brewMethods: true, notes: false })}
 					onForward={() => {
-						dispatch(addCoffee(addCoffeeState));
+						dispatch(addNewCoffee(newCoffeeState));
+						dispatch(clearNewCoffee());
 						navigation.goBack();
 					}}
 					onCancel={onCancel}
@@ -82,8 +80,8 @@ export default function AddCoffee({ navigation }: Props) {
 						Lastly, feel free to add some flavour notes
 					</CustomText>
 					<SelectCoffeeNotes
-						update={(notes: string[]) => updateNotes(notes)}
-						notes={addCoffeeState.notes}
+						update={(notes: INote[]) => updateNotes(notes)}
+						notes={newCoffeeState.notes}
 					/>
 				</FormView>
 			)}

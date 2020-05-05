@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { TextInput, View, StyleSheet, TouchableOpacity } from "react-native";
-import CustomText from "./CustomText";
+import { StyleSheet, View, TouchableOpacity, TextInput } from "react-native";
 import { get } from "../../utils";
 import { REACT_APP_API_KEY } from "react-native-dotenv";
+import { useDispatch } from "react-redux";
+import { updateNewCoffeeLocation } from "../../store/actions/newCoffee";
+import CustomText from "./CustomText";
 
 interface Props {
-	dispatch: any;
 	location: string;
 }
 interface ISuggestion {
@@ -17,10 +18,11 @@ const url = "https://maps.googleapis.com/maps/api/place";
 
 const key = REACT_APP_API_KEY;
 
-export default function AutoCompleteInput({ location, dispatch }: Props) {
+export default function AutoCompleteInput({ location }: Props) {
 	const [input, setInput] = useState(location);
 	const [suggestions, setSuggestions] = useState([]);
 	const [showSuggestions, setShowSuggestions] = useState(true);
+	const dispatch = useDispatch();
 
 	const onChangeText = (value: string) => {
 		setShowSuggestions(true);
@@ -53,16 +55,15 @@ export default function AutoCompleteInput({ location, dispatch }: Props) {
 	const onSelectLocation = (location: ISuggestion) => {
 		get(`${url}/details/json?place_id=${location.placeId}&key=${key}`).then(
 			(response: any) => {
-				dispatch({
-					type: "UPDATE_LOCATION",
-					payload: {
+				dispatch(
+					updateNewCoffeeLocation({
 						coordinates: response.result.geometry.location,
 						location: response.result.formatted_address,
-					},
-				});
-				setShowSuggestions(false);
+					})
+				);
 			}
 		);
+		setShowSuggestions(false);
 	};
 
 	return (

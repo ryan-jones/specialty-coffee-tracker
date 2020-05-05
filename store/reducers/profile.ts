@@ -18,10 +18,10 @@ const initialState = {
 		{
 			text: "Regions",
 			value: COFFEES.reduce((list: string[], coffee: ICoffee) => {
-				if (list.indexOf(coffee.country) > 0) {
+				if (list.indexOf(coffee.location) > 0) {
 					return list;
 				}
-				return list.concat(coffee.country);
+				return list.concat(coffee.location);
 			}, []).length,
 		},
 	],

@@ -4,26 +4,23 @@ import CustomText from "../Common/CustomText";
 import CustomTextInput from "../Common/CustomTextInput";
 import SelectProcess from "../Process/SelectProcess";
 import AutoCompleteInput from "../Common/AutoCompleteInput";
+import {
+	updateNewCoffeeName,
+	updateNewCoffeeDescription,
+} from "../../store/actions/newCoffee";
+import { useDispatch, useSelector } from "react-redux";
+import { ICoffee } from "../../models/interfaces";
 
 interface Props {
 	onPress: () => void;
-	dispatch: any;
-	state: any;
 	btnLabel: string;
 }
 
-export default function BasicInfo({
-	onPress,
-	dispatch,
-	state,
-	btnLabel,
-}: Props) {
-	const setDispatch = (type: string, payload: string) => {
-		dispatch({ type, payload });
-	};
-	const isValid = (): boolean => {
-		return state.name && state.location;
-	};
+export default function BasicInfo({ onPress, btnLabel }: Props) {
+	const dispatch = useDispatch();
+	const store: ICoffee = useSelector((state: any) => state.newCoffee);
+
+	const isValid = () => store.name && store.location;
 	return (
 		<View style={styles.container}>
 			<CustomText styles={styles.header}>
@@ -31,19 +28,21 @@ export default function BasicInfo({
 			</CustomText>
 			<CustomTextInput
 				label="name*"
-				value={state.name}
-				onChangeText={(value: string) => setDispatch("UPDATE_NAME", value)}
+				value={store.name}
+				onChangeText={(value: string) => dispatch(updateNewCoffeeName(value))}
 				placeholder="name"
 			/>
-			<AutoCompleteInput location={state.location} dispatch={dispatch} />
+			<AutoCompleteInput location={store.location} />
 
 			<CustomTextInput
 				label="description"
-				value={state.description}
+				value={store.description}
 				placeholder="Grown at an altitude of 5000m"
-				onChangeText={(value: any) => setDispatch("UPDATE_DESCRIPTION", value)}
+				onChangeText={(value: string) =>
+					dispatch(updateNewCoffeeDescription(value))
+				}
 			/>
-			<SelectProcess process={state.process} dispatch={dispatch} />
+			<SelectProcess process={store.process} />
 			<View style={styles.button}>
 				<Button title={btnLabel} onPress={onPress} disabled={!isValid()} />
 			</View>

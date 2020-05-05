@@ -1,4 +1,5 @@
 import coffeeReducer from "./reducers/coffees";
+import addNewCoffeeReducer from "./reducers/newCoffee";
 import roasterReducer from "./reducers/roasters";
 import profileReducer from "./reducers/profile";
 import { createStore, combineReducers } from "redux";
@@ -8,6 +9,7 @@ const rootReducer = combineReducers({
 	profile: profileReducer,
 	coffees: coffeeReducer,
 	roasters: roasterReducer,
+	newCoffee: addNewCoffeeReducer,
 });
 
 const store = createStore(rootReducer, composeWithDevTools());

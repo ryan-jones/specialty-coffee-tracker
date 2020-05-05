@@ -6,6 +6,8 @@ import CustomText from "../../Common/CustomText";
 import { IMethod } from "../../../models/interfaces";
 import AddBrewMethod from "./AddBrewMethod";
 import TextEllipsis from "../../Common/TextEllipsis";
+import { useDispatch, useSelector } from "react-redux";
+import { updateNewCoffeeBrewMethod } from "../../../store/actions/newCoffee";
 
 const icons: any = {
 	chemex: {
@@ -34,16 +36,11 @@ const icons: any = {
 	},
 };
 
-interface Props {
-	methods: {
-		[key: string]: IMethod;
-	};
-	dispatch: any;
-}
-
-export default function SelectBrewMethod({ dispatch, methods }: Props) {
+export default function SelectBrewMethod() {
 	const [showModal, setShowModal] = useState(false);
 	const [selectedBrewMethod, setSelectedBrewMethod] = useState("");
+	const dispatch = useDispatch();
+	const methods = useSelector((state: any) => state.newCoffee.methods);
 
 	const setIcon = (method: string) => {
 		return Number(methods[method].rating) > 0
@@ -51,7 +48,7 @@ export default function SelectBrewMethod({ dispatch, methods }: Props) {
 			: icons[method].unselected;
 	};
 	const addBrewMethod = (method: IMethod) => {
-		dispatch({ type: "ADD_BREW_METHOD", payload: method });
+		dispatch(updateNewCoffeeBrewMethod(method));
 		setShowModal(false);
 	};
 	const onCancel = () => setShowModal(false);

@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-	View,
-	StyleSheet,
-	ImageSourcePropType,
-	Image,
-	Button,
-} from "react-native";
+import { View, StyleSheet, ImageSourcePropType, Image } from "react-native";
 import { INote } from "../../../models/interfaces";
 import CustomTextInput from "../../Common/CustomTextInput";
 import FormButtons from "../../Common/FormButtons";

@@ -2,15 +2,17 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import CustomText from "../Common/CustomText";
 import Process from ".";
+import { useDispatch } from "react-redux";
+import { updateNewCoffeeProcess } from "../../store/actions/newCoffee";
 
 interface Props {
 	process: string;
-	dispatch: any;
 }
 
 const icons = ["washed", "natural", "honey"];
 
-export default function SelectProcess({ process, dispatch }: Props) {
+export default function SelectProcess({ process }: Props) {
+	const dispatch = useDispatch();
 	return (
 		<View style={styles.process}>
 			<CustomText styles={styles.text}>Processing method:</CustomText>
@@ -18,9 +20,7 @@ export default function SelectProcess({ process, dispatch }: Props) {
 				{icons.map((icon) => (
 					<TouchableOpacity
 						key={icon}
-						onPress={() =>
-							dispatch({ type: "SELECT_COFFEE_PROCESS", payload: icon })
-						}
+						onPress={() => dispatch(updateNewCoffeeProcess(icon))}
 					>
 						<Process name={icon} isSelected={icon === process} />
 					</TouchableOpacity>

@@ -33,10 +33,6 @@ export default function SelectCoffeeNotes({ notes, update }: Props) {
 		);
 	}, [notes]);
 
-	// const [selectedNotes, setSelectedNotes] = useState([
-	// 	...initialNotes,
-	// 	...DEFAULT_NOTES,
-	// ]);
 	const [textValue, setTextValue] = useState("");
 
 	const updateNotes = (note: INote) => {
@@ -45,7 +41,6 @@ export default function SelectCoffeeNotes({ notes, update }: Props) {
 				? { name: note.name, isSelected: !selectedNote.isSelected }
 				: selectedNote
 		);
-		console.log("new notes", updatedNotes);
 		update(updatedNotes);
 	};
 	const addNote = () => {
