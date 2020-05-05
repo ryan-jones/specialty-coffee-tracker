@@ -1,4 +1,4 @@
-import { ICoffee, IMethod } from "../../models/interfaces";
+import { ICoffee, IMethod, IMethods } from "../../models/interfaces";
 import { setBrewMethodRatings, setCoffeeAverageRating } from "../../utils";
 import {
 	UPDATE_NEW_COFFEE_NAME,
@@ -77,7 +77,7 @@ const addNewCoffeeReducer = (state = initialState, action: any) => {
 			};
 			updatedMethod.rating = setBrewMethodRatings(updatedMethod);
 
-			const updatedMethods = {
+			const updatedMethods: IMethods = {
 				...state.methods,
 				[name]: {
 					...updatedMethod,

@@ -19,21 +19,15 @@ const DEFAULT_NOTES: INote[] = [
 ];
 
 export default function SelectCoffeeNotes({ notes, update }: Props) {
-	const selectedNotes = useMemo(() => {
-		const initialNotes: INote[] = notes.map((note) => ({
-			name: note.name,
-			isSelected: true,
-		}));
-		return [...initialNotes, ...DEFAULT_NOTES].reduce(
-			(list: INote[], current) => {
-				if (list.find((item: INote) => item.name === current.name)) return list;
-				return list.concat(current);
-			},
-			[]
-		);
-	}, [notes]);
-
+	console.log("notes", notes);
 	const [textValue, setTextValue] = useState("");
+	const selectedNotes = [...notes, ...DEFAULT_NOTES].reduce(
+		(list: INote[], current: INote) => {
+			if (list.find((item: INote) => item.name === current.name)) return list;
+			return list.concat(current);
+		},
+		[]
+	);
 
 	const updateNotes = (note: INote) => {
 		const updatedNotes = selectedNotes.map((selectedNote) =>

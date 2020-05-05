@@ -7,14 +7,7 @@ export interface ICoffee {
 	roaster: string;
 	notes: string[];
 	rating: string;
-	methods: {
-		chemex: IMethod;
-		v60: IMethod;
-		frenchpress: IMethod;
-		espresso: IMethod;
-		aeropress: IMethod;
-		syphon: IMethod;
-	};
+	methods: IMethods;
 	description?: string;
 	coordinates?: any;
 }
@@ -26,6 +19,10 @@ export interface IRoaster {
 	country: string;
 	postalCode: string;
 	rating: number;
+}
+
+export interface IMethods {
+	[key: string]: IMethod;
 }
 
 export interface IMethod {

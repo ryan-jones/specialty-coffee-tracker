@@ -8,11 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { COLORS } from "../../styles/colors";
 import FormView from "../Common/FormView";
 import { INote } from "../../models/interfaces";
-import {
-	clearNewCoffee,
-	updateCoffeeNotes,
-	addNewCoffee,
-} from "../../store/actions/coffees";
+import { clearNewCoffee, addNewCoffee } from "../../store/actions/coffees";
 
 interface Props {
 	navigation: any;
@@ -24,6 +20,7 @@ export default function AddCoffee({ navigation }: Props) {
 		brewMethods: false,
 		notes: false,
 	});
+	const [notes, setNotes] = useState<INote[]>([]);
 	const dispatch = useDispatch();
 	const newCoffeeState: any = useSelector((state: any) => state.newCoffee);
 
@@ -33,10 +30,6 @@ export default function AddCoffee({ navigation }: Props) {
 	};
 	const onNavigate = (pageSettings: object) => {
 		setShowPage((current) => ({ ...current, ...pageSettings }));
-	};
-
-	const updateNotes = (notes: INote[]) => {
-		dispatch(updateCoffeeNotes(notes.map((n) => n.name)));
 	};
 
 	return (
@@ -70,7 +63,12 @@ export default function AddCoffee({ navigation }: Props) {
 					text={{ back: "< Back to brew methods", forward: "Save Coffee " }}
 					onBack={() => onNavigate({ brewMethods: true, notes: false })}
 					onForward={() => {
-						dispatch(addNewCoffee(newCoffeeState));
+						dispatch(
+							addNewCoffee({
+								...newCoffeeState,
+								notes: notes.map(({ name }) => name),
+							})
+						);
 						dispatch(clearNewCoffee());
 						navigation.goBack();
 					}}
@@ -79,10 +77,7 @@ export default function AddCoffee({ navigation }: Props) {
 					<CustomText styles={styles.text}>
 						Lastly, feel free to add some flavour notes
 					</CustomText>
-					<SelectCoffeeNotes
-						update={(notes: INote[]) => updateNotes(notes)}
-						notes={newCoffeeState.notes}
-					/>
+					<SelectCoffeeNotes update={setNotes} notes={notes} />
 				</FormView>
 			)}
 		</View>
