@@ -3,8 +3,7 @@ import { setBrewMethodRatings, setCoffeeAverageRating } from "../../utils";
 
 export const ADD_COFFEE_STATE: ICoffee = {
 	name: "",
-	region: "",
-	country: "",
+	location: "",
 	process: "",
 	roaster: "",
 	notes: [],
@@ -44,12 +43,19 @@ export const ADD_COFFEE_STATE: ICoffee = {
 export const addCoffeeReducer = (state: any, action: any) => {
 	switch (action.type) {
 		case "UPDATE_NAME":
-			console.log("updateName", action);
 			return { ...state, name: action.payload };
 		case "UPDATE_REGION":
 			return { ...state, region: action.payload };
 		case "UPDATE_COUNTRY":
 			return { ...state, country: action.payload };
+		case "UPDATE_LOCATION":
+			const { location, coordinates } = action.payload;
+			console.log("payload", action.payload);
+			return {
+				...state,
+				coordinates,
+				location,
+			};
 		case "UPDATE_DESCRIPTION":
 			return { ...state, description: action.payload };
 		case "SELECT_COFFEE_PROCESS":

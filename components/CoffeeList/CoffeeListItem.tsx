@@ -8,7 +8,7 @@ import CoffeeNotes from "../CoffeeDetails/CoffeeNotes";
 import ListItem from "../Common/ListItem";
 
 interface Props extends ICoffee {
-	onSelect: (coffee: any) => void;
+	onSelect: (coffee: string) => void;
 }
 
 export default function CoffeeListItem(props: Props) {
@@ -19,9 +19,7 @@ export default function CoffeeListItem(props: Props) {
 				<View style={styles.item}>
 					<View style={styles.textContainer}>
 						<CustomText styles={styles.name}>{props.name}</CustomText>
-						<CustomText styles={styles.region}>
-							{props.region}, {props.country}
-						</CustomText>
+						<CustomText styles={styles.region}>{props.location}</CustomText>
 						<CoffeeNotes
 							notes={selectNotes}
 							containerStyles={styles.notes}

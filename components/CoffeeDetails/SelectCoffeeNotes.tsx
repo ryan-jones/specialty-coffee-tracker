@@ -1,17 +1,13 @@
-import React, { useState } from "react";
-import { View, Button, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useMemo } from "react";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import TextEllipsis from "../Common/TextEllipsis";
 import CustomTextInput from "../Common/CustomTextInput";
 import { Ionicons } from "@expo/vector-icons";
+import { INote } from "../../models/interfaces";
 
 interface Props {
-	notes: string[];
-	dispatch: any;
-}
-
-interface INote {
-	name: string;
-	isSelected: boolean;
+	notes: INote[];
+	update: (notes: INote[]) => void;
 }
 
 const DEFAULT_NOTES: INote[] = [
@@ -22,13 +18,25 @@ const DEFAULT_NOTES: INote[] = [
 	{ name: "floral", isSelected: false },
 ];
 
-export default function SelectCoffeeNotes({ notes }: Props) {
-	const initialNotes = notes.map((note) => ({ name: note, isSelected: true }));
+export default function SelectCoffeeNotes({ notes, update }: Props) {
+	const selectedNotes = useMemo(() => {
+		const initialNotes: INote[] = notes.map((note) => ({
+			name: note.name,
+			isSelected: true,
+		}));
+		return [...initialNotes, ...DEFAULT_NOTES].reduce(
+			(list: INote[], current) => {
+				if (list.find((item: INote) => item.name === current.name)) return list;
+				return list.concat(current);
+			},
+			[]
+		);
+	}, [notes]);
 
-	const [selectedNotes, setSelectedNotes] = useState([
-		...initialNotes,
-		...DEFAULT_NOTES,
-	]);
+	// const [selectedNotes, setSelectedNotes] = useState([
+	// 	...initialNotes,
+	// 	...DEFAULT_NOTES,
+	// ]);
 	const [textValue, setTextValue] = useState("");
 
 	const updateNotes = (note: INote) => {
@@ -37,7 +45,8 @@ export default function SelectCoffeeNotes({ notes }: Props) {
 				? { name: note.name, isSelected: !selectedNote.isSelected }
 				: selectedNote
 		);
-		setSelectedNotes(updatedNotes);
+		console.log("new notes", updatedNotes);
+		update(updatedNotes);
 	};
 	const addNote = () => {
 		const exists = selectedNotes.find(
@@ -45,7 +54,7 @@ export default function SelectCoffeeNotes({ notes }: Props) {
 		);
 		if (textValue && !exists) {
 			const value = { name: textValue.toLowerCase(), isSelected: true };
-			setSelectedNotes((sNotes) => [...sNotes, value]);
+			update([...selectedNotes, value]);
 		}
 	};
 	return (

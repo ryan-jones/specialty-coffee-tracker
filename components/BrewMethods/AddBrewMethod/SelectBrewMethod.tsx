@@ -1,10 +1,11 @@
-import React, { useState, ReducerAction } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Image, Modal } from "react-native";
 import { METHODS } from "../../../data";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import CustomText from "../../Common/CustomText";
 import { IMethod } from "../../../models/interfaces";
 import AddBrewMethod from "./AddBrewMethod";
+import TextEllipsis from "../../Common/TextEllipsis";
 
 const icons: any = {
 	chemex: {
@@ -49,7 +50,7 @@ export default function SelectBrewMethod({ dispatch, methods }: Props) {
 			? icons[method].selected
 			: icons[method].unselected;
 	};
-	const addBrewMethod = (method: any) => {
+	const addBrewMethod = (method: IMethod) => {
 		dispatch({ type: "ADD_BREW_METHOD", payload: method });
 		setShowModal(false);
 	};
@@ -75,6 +76,13 @@ export default function SelectBrewMethod({ dispatch, methods }: Props) {
 					>
 						<View style={styles.methodContainer}>
 							<View style={styles.iconContainer}>
+								{methods[method].cases.length > 0 && (
+									<TextEllipsis
+										containerStyles={styles.methodCases}
+										text={methods[method].cases.length}
+										color="baseColor"
+									/>
+								)}
 								<Image style={styles.icon} source={setIcon(method)} />
 							</View>
 							<CustomText styles={styles.text}>{method}</CustomText>
@@ -104,6 +112,17 @@ const styles = StyleSheet.create({
 		width: "100%",
 		flexGrow: 3,
 		justifyContent: "space-evenly",
+	},
+	methodCases: {
+		position: "absolute",
+		top: -15,
+		right: -10,
+		width: 20,
+		minWidth: 20,
+		height: 20,
+		borderRadius: 10,
+		margin: 0,
+		padding: 0,
 	},
 	text: {
 		textAlign: "center",

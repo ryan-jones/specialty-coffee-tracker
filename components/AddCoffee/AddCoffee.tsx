@@ -1,16 +1,14 @@
 import React, { useReducer, useState } from "react";
-import { View, StyleSheet, Button, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import CustomText from "../Common/CustomText";
 import SelectBrewMethod from "../BrewMethods/AddBrewMethod/SelectBrewMethod";
 import { ADD_COFFEE_STATE, addCoffeeReducer } from "./localStore";
 import SelectCoffeeNotes from "../CoffeeDetails/SelectCoffeeNotes";
 import BasicInfo from "../CoffeeDetails/BasicInfo";
-import ReturnFormButton from "../Common/ReturnFormButton";
 import { useDispatch } from "react-redux";
 import { COLORS } from "../../styles/colors";
 import { addCoffee } from "../../store/actions/coffees";
-import FormView from "./FormView";
-import { getCurrentFrame } from "expo/build/AR";
+import FormView from "../Common/FormView";
 
 interface Props {
 	navigation: any;
@@ -34,61 +32,62 @@ export default function AddCoffee({ navigation }: Props) {
 	const onNavigate = (pageSettings: object) => {
 		setShowPage((current) => ({ ...current, ...pageSettings }));
 	};
+
+	const updateNotes = (notes: string[]) => {
+		addCoffeeDispatch({ type: "UPDATE_COFFEE_NOTES", payload: notes });
+	};
+
 	return (
-		<ScrollView style={styles.scroll} contentContainerStyle={{ flexGrow: 1 }}>
-			<View style={styles.container}>
-				{showPage.coffeeDetails && (
-					<BasicInfo
-						state={addCoffeeState}
-						dispatch={addCoffeeDispatch}
-						btnLabel="Add Coffee"
-						onPress={() =>
-							onNavigate({ coffeeDetails: false, brewMethods: true })
-						}
-					/>
-				)}
-				{showPage.brewMethods && (
-					<FormView
-						text={{ back: "< Back to coffee details", forward: "Continue " }}
-						onBack={() =>
-							onNavigate({ coffeeDetails: true, brewMethods: false })
-						}
-						onForward={() => onNavigate({ brewMethods: false, notes: true })}
-						onCancel={onCancel}
-					>
-						<View>
-							<CustomText styles={styles.text}>Already had a cup?</CustomText>
-							<CustomText styles={styles.text}>
-								It's optional to add some brewing details
-							</CustomText>
-						</View>
-						<SelectBrewMethod
-							dispatch={addCoffeeDispatch}
-							methods={addCoffeeState.methods}
-						/>
-					</FormView>
-				)}
-				{showPage.notes && (
-					<FormView
-						text={{ back: "< Back to brew methods", forward: "Save Coffee " }}
-						onBack={() => onNavigate({ brewMethods: true, notes: false })}
-						onForward={() => {
-							dispatch(addCoffee(addCoffeeState));
-							navigation.goBack();
-						}}
-						onCancel={onCancel}
-					>
+		<View style={styles.container}>
+			{showPage.coffeeDetails && (
+				<BasicInfo
+					state={addCoffeeState}
+					dispatch={addCoffeeDispatch}
+					btnLabel="Continue"
+					onPress={() =>
+						onNavigate({ coffeeDetails: false, brewMethods: true })
+					}
+				/>
+			)}
+			{showPage.brewMethods && (
+				<FormView
+					text={{ back: "< Back to coffee details", forward: "Continue " }}
+					onBack={() => onNavigate({ coffeeDetails: true, brewMethods: false })}
+					onForward={() => onNavigate({ brewMethods: false, notes: true })}
+					onCancel={onCancel}
+				>
+					<View>
+						<CustomText styles={styles.text}>Already had a cup?</CustomText>
 						<CustomText styles={styles.text}>
-							Lastly, feel free to add some flavour notes
+							It's optional to add some brewing details
 						</CustomText>
-						<SelectCoffeeNotes
-							dispatch={addCoffeeDispatch}
-							notes={addCoffeeState.notes}
-						/>
-					</FormView>
-				)}
-			</View>
-		</ScrollView>
+					</View>
+					<SelectBrewMethod
+						dispatch={addCoffeeDispatch}
+						methods={addCoffeeState.methods}
+					/>
+				</FormView>
+			)}
+			{showPage.notes && (
+				<FormView
+					text={{ back: "< Back to brew methods", forward: "Save Coffee " }}
+					onBack={() => onNavigate({ brewMethods: true, notes: false })}
+					onForward={() => {
+						dispatch(addCoffee(addCoffeeState));
+						navigation.goBack();
+					}}
+					onCancel={onCancel}
+				>
+					<CustomText styles={styles.text}>
+						Lastly, feel free to add some flavour notes
+					</CustomText>
+					<SelectCoffeeNotes
+						update={(notes: string[]) => updateNotes(notes)}
+						notes={addCoffeeState.notes}
+					/>
+				</FormView>
+			)}
+		</View>
 	);
 }
 

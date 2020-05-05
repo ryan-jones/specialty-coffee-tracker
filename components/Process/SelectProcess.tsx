@@ -17,6 +17,7 @@ export default function SelectProcess({ process, dispatch }: Props) {
 			<View style={styles.icons}>
 				{icons.map((icon) => (
 					<TouchableOpacity
+						key={icon}
 						onPress={() =>
 							dispatch({ type: "SELECT_COFFEE_PROCESS", payload: icon })
 						}

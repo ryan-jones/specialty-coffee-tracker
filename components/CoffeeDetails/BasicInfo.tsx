@@ -3,6 +3,7 @@ import { View, Button, StyleSheet } from "react-native";
 import CustomText from "../Common/CustomText";
 import CustomTextInput from "../Common/CustomTextInput";
 import SelectProcess from "../Process/SelectProcess";
+import AutoCompleteInput from "../Common/AutoCompleteInput";
 
 interface Props {
 	onPress: () => void;
@@ -21,7 +22,7 @@ export default function BasicInfo({
 		dispatch({ type, payload });
 	};
 	const isValid = (): boolean => {
-		return state.name && state.country;
+		return state.name && state.location;
 	};
 	return (
 		<View style={styles.container}>
@@ -34,18 +35,8 @@ export default function BasicInfo({
 				onChangeText={(value: string) => setDispatch("UPDATE_NAME", value)}
 				placeholder="name"
 			/>
-			<CustomTextInput
-				label="region"
-				value={state.region}
-				onChangeText={(value: any) => setDispatch("UPDATE_REGION", value)}
-				placeholder="Colombia"
-			/>
-			<CustomTextInput
-				label="country*"
-				value={state.country}
-				onChangeText={(value: any) => setDispatch("UPDATE_COUNTRY", value)}
-				placeholder="Colombia"
-			/>
+			<AutoCompleteInput location={state.location} dispatch={dispatch} />
+
 			<CustomTextInput
 				label="description"
 				value={state.description}

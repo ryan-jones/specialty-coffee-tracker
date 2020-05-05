@@ -2,8 +2,7 @@ import { NavigationScreenProp, NavigationState } from "react-navigation";
 
 export interface ICoffee {
 	name: string;
-	region: string;
-	country: string;
+	location: string;
 	process: string;
 	roaster: string;
 	notes: string[];
@@ -44,3 +43,8 @@ export interface IBrewCase {
 }
 
 export type Navigation = NavigationScreenProp<NavigationState, any>;
+
+export interface INote {
+	name: string;
+	isSelected: boolean;
+}

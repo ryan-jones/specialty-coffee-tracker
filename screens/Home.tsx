@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Button } from "react-native";
 import CustomText from "../components/Common/CustomText";
-import TextInput from "../components/Common/TextInput";
+import CustomTextInput from "../components/Common/CustomTextInput";
 import Card from "../components/Common/Card";
 
 interface Props {
@@ -11,6 +11,7 @@ interface Props {
 export default function HomeScreen(props: Props) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+
 	return (
 		<View style={styles.screen}>
 			<CustomText styles={styles.header}>Welcome to Coffee Select!</CustomText>
@@ -18,19 +19,19 @@ export default function HomeScreen(props: Props) {
 				<View style={styles.form}>
 					<CustomText>Log in to get started</CustomText>
 					<View style={styles.formInputs}>
-						<TextInput
+						<CustomTextInput
 							label="User email"
 							value={email}
 							placeholder="Enter your email"
 							keyboardType="default"
-							onChange={(email: string) => setEmail(email)}
+							onChangeText={(email: string) => setEmail(email)}
 						/>
-						<TextInput
+						<CustomTextInput
 							label="User password"
 							value={password}
 							placeholder="Enter your password"
 							keyboardType="default"
-							onChange={(pwd: string) => setPassword(pwd)}
+							onChangeText={(pwd: string) => setPassword(pwd)}
 						/>
 					</View>
 					<View style={styles.formButtons}>
