@@ -19,7 +19,6 @@ const DEFAULT_NOTES: INote[] = [
 ];
 
 export default function SelectCoffeeNotes({ notes, update }: Props) {
-	console.log("notes", notes);
 	const [textValue, setTextValue] = useState("");
 	const selectedNotes = [...notes, ...DEFAULT_NOTES].reduce(
 		(list: INote[], current: INote) => {

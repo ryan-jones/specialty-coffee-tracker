@@ -10,6 +10,7 @@ import FormView from "../Common/FormView";
 import { INote } from "../../models/interfaces";
 import { addNewCoffee } from "../../store/actions/coffees";
 import { clearNewCoffee } from "../../store/actions/newCoffee";
+import { setSelectedNotes } from "../../utils";
 
 interface Props {
 	navigation: any;
@@ -68,7 +69,7 @@ export default function AddCoffee({ navigation }: Props) {
 						dispatch(
 							addNewCoffee({
 								...newCoffeeState,
-								notes: notes.map(({ name }) => name),
+								notes: setSelectedNotes(notes),
 							})
 						);
 						dispatch(clearNewCoffee());

@@ -17,7 +17,7 @@ export const initialState: ICoffee = {
 	process: "",
 	roaster: "",
 	notes: [],
-	rating: "",
+	rating: "0",
 	description: "",
 	coordinates: {
 		lat: null,
@@ -72,11 +72,15 @@ const addNewCoffeeReducer = (state = initialState, action: any) => {
 			return { ...state, process: action.payload };
 		case UPDATE_NEW_COFFEE_BREW_METHOD:
 			const { name, brewCase } = action.payload;
+			console.log("brewcase name", name);
+			console.log("brew case", brewCase);
+
 			const updatedMethod: IMethod = {
 				...state.methods[name],
 				cases: [...state.methods[name].cases, brewCase],
 			};
 			updatedMethod.rating = setBrewMethodRatings(updatedMethod);
+			console.log("updatedMethod", updatedMethod);
 
 			const updatedMethods: IMethods = {
 				...state.methods,
