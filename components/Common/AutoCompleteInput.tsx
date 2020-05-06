@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, TextInput } from "react-native";
+import {
+	StyleSheet,
+	View,
+	TouchableOpacity,
+	TextInput,
+	FlatList,
+} from "react-native";
 import { get } from "../../utils";
 import { REACT_APP_API_KEY } from "react-native-dotenv";
 import { useDispatch } from "react-redux";
@@ -80,16 +86,19 @@ export default function AutoCompleteInput({ location }: Props) {
 				value={input}
 			/>
 			<View style={styles.suggestions}>
-				{showSuggestions &&
-					suggestions.map((suggestion: ISuggestion) => (
-						<TouchableOpacity onPress={() => onSelectLocation(suggestion)}>
-							<View style={styles.description}>
-								<CustomText key={suggestion.id}>
-									{suggestion.description}
-								</CustomText>
-							</View>
-						</TouchableOpacity>
-					))}
+				{showSuggestions && (
+					<FlatList
+						data={suggestions}
+						renderItem={({ item }) => (
+							<TouchableOpacity onPress={() => onSelectLocation(item)}>
+								<View style={styles.description}>
+									<CustomText>{item.description}</CustomText>
+								</View>
+							</TouchableOpacity>
+						)}
+						keyExtractor={(suggestion: ISuggestion) => suggestion.id}
+					/>
+				)}
 			</View>
 		</View>
 	);
@@ -110,7 +119,7 @@ const styles = StyleSheet.create({
 	},
 	suggestions: {
 		marginTop: 0,
-		maxHeight: 100,
+		maxHeight: 160,
 		overflow: "scroll",
 	},
 	description: {

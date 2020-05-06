@@ -3,8 +3,7 @@ import { ICoffee, IRoaster } from "../models/interfaces";
 export const COFFEES: ICoffee[] = [
 	{
 		name: "Una regla de Dios",
-		region: "Mozonte, Nueva Segovia",
-		country: "Nicaragua",
+		location: "Mozonte, Nueva Segovia",
 		process: "washed",
 		roaster: "Right Side",
 		notes: ["kiwi", "grosella", "almendra"],
@@ -40,8 +39,7 @@ export const COFFEES: ICoffee[] = [
 	},
 	{
 		name: "Etiopia Buriso Amaje",
-		region: "Sidamo",
-		country: "Ethiopia",
+		location: "Sidamo, Ethiopia",
 		process: "natural",
 		roaster: "Morrow Coffee",
 		rating: "3.8",
@@ -75,8 +73,7 @@ export const COFFEES: ICoffee[] = [
 	},
 	{
 		name: "Guatemala Tata Nahual",
-		region: "Acatenango",
-		country: "Guatemala",
+		location: "Acatenango, Guatemala",
 		process: "washed",
 		roaster: "Morrow Coffee",
 		rating: "4.0",

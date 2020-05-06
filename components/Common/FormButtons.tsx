@@ -5,7 +5,7 @@ interface Props {
 	onCancel: () => void;
 	onForward: () => void;
 	btnTitle: string;
-	disabled: any;
+	disabled?: any;
 }
 
 export default function FormButtons(props: Props) {
