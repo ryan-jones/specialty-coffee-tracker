@@ -52,6 +52,7 @@ export default function SelectBrewMethod() {
 		setShowModal(false);
 	};
 	const onCancel = () => setShowModal(false);
+
 	return (
 		<View style={styles.viewContainer}>
 			<Modal visible={showModal} animationType="slide">

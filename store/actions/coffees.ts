@@ -8,10 +8,6 @@ export const addNewCoffee = (coffee: ICoffee) => {
 	return { type: ADD_COFFEE, payload: coffee };
 };
 
-export const clearNewCoffee = () => {
-	return { type: CLEAR_ADD_COFFEE };
-};
-
 export const updateCoffeeNotes = (notes: string[]) => {
 	return { type: UPDATE_COFFEE_NOTES, payload: notes };
 };

@@ -8,6 +8,7 @@ import {
 	UPDATE_NEW_COFFEE_DESCRIPTION,
 	UPDATE_NEW_COFFEE_PROCESS,
 	UPDATE_NEW_COFFEE_BREW_METHOD,
+	CLEAR_NEW_COFFEE,
 } from "../actions/newCoffee";
 
 export const initialState: ICoffee = {
@@ -90,6 +91,8 @@ const addNewCoffeeReducer = (state = initialState, action: any) => {
 				notes: [...state.notes, ...brewCase.notes],
 				methods: updatedMethods,
 			};
+		case CLEAR_NEW_COFFEE:
+			return initialState;
 		default:
 			return state;
 	}

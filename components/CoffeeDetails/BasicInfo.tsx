@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Button, StyleSheet } from "react-native";
 import CustomText from "../Common/CustomText";
 import CustomTextInput from "../Common/CustomTextInput";
@@ -14,13 +14,14 @@ import { ICoffee } from "../../models/interfaces";
 interface Props {
 	onPress: () => void;
 	btnLabel: string;
+	stateSlice: string;
 }
 
-export default function BasicInfo({ onPress, btnLabel }: Props) {
+export default function BasicInfo({ onPress, btnLabel, stateSlice }: Props) {
+	const [isValidName, setIsValidName] = useState(true);
 	const dispatch = useDispatch();
-	const store: ICoffee = useSelector((state: any) => state.newCoffee);
+	const store: ICoffee = useSelector((state: any) => state[stateSlice]);
 
-	const isValid = () => store.name && store.location;
 	return (
 		<View style={styles.container}>
 			<CustomText styles={styles.header}>
@@ -29,7 +30,15 @@ export default function BasicInfo({ onPress, btnLabel }: Props) {
 			<CustomTextInput
 				label="name*"
 				value={store.name}
-				onChangeText={(value: string) => dispatch(updateNewCoffeeName(value))}
+				invalidWarning="A name must be provided"
+				isValid={isValidName}
+				onChangeText={(value: string) => {
+					setIsValidName(value.trim().length > 0);
+					dispatch(updateNewCoffeeName(value));
+				}}
+				onEndEditing={() => {
+					setIsValidName(store.name.trim().length > 0);
+				}}
 				placeholder="name"
 			/>
 			<AutoCompleteInput location={store.location} />
@@ -44,7 +53,11 @@ export default function BasicInfo({ onPress, btnLabel }: Props) {
 			/>
 			<SelectProcess process={store.process} />
 			<View style={styles.button}>
-				<Button title={btnLabel} onPress={onPress} disabled={!isValid()} />
+				<Button
+					title={btnLabel}
+					onPress={onPress}
+					disabled={!store.name || !store.location}
+				/>
 			</View>
 		</View>
 	);

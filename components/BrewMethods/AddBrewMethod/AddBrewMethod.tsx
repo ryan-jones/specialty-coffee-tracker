@@ -52,6 +52,8 @@ export default function AddBrewMethod({
 			<CustomTextInput
 				label="rating"
 				value={rating}
+				invalidWarning="Ratings are between 0-5"
+				isValid={brewCase.rating <= 5}
 				keyboardType="numeric"
 				onChangeText={setRating}
 				placeholder="0"
@@ -67,6 +69,7 @@ export default function AddBrewMethod({
 			<FormButtons
 				btnTitle="Add method"
 				onCancel={onCancel}
+				disabled={!brewCase.grams || brewCase.water || brewCase.rating <= 5}
 				onForward={() => addBrewMethod({ brewCase, name: method })}
 			/>
 		</View>

@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { COLORS } from "../../styles/colors";
 import FormView from "../Common/FormView";
 import { INote } from "../../models/interfaces";
-import { clearNewCoffee, addNewCoffee } from "../../store/actions/coffees";
+import { addNewCoffee } from "../../store/actions/coffees";
+import { clearNewCoffee } from "../../store/actions/newCoffee";
 
 interface Props {
 	navigation: any;
@@ -37,6 +38,7 @@ export default function AddCoffee({ navigation }: Props) {
 			{showPage.coffeeDetails && (
 				<BasicInfo
 					btnLabel="Continue"
+					stateSlice="newCoffee"
 					onPress={() =>
 						onNavigate({ coffeeDetails: false, brewMethods: true })
 					}
