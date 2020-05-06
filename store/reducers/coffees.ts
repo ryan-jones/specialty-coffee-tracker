@@ -1,13 +1,19 @@
-import { COFFEES } from "../../data";
-import { ADD_COFFEE } from "../actions/coffees";
+import { ADD_COFFEE, COFFEES_LOADED } from "../actions/coffees";
 
 const initialState = {
-	allCoffees: COFFEES,
+	allCoffees: [],
+	loaded: false,
 	showModal: false,
 };
 
 const coffeeReducer = (state = initialState, action: any) => {
 	switch (action.type) {
+		case COFFEES_LOADED:
+			return {
+				...state,
+				loaded: true,
+				allCoffees: action.payload,
+			};
 		case ADD_COFFEE:
 			return {
 				...state,

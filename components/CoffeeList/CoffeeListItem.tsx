@@ -12,7 +12,7 @@ interface Props extends ICoffee {
 }
 
 export default function CoffeeListItem(props: Props) {
-	const selectNotes = props.notes.slice(0, 3);
+	const selectNotes = props.notes ? props.notes.slice(0, 3) : [];
 	return (
 		<TouchableOpacity onPress={() => props.onSelect(props.name)}>
 			<ListItem>

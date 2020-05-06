@@ -4,24 +4,22 @@ import CoffeeList from "../components/CoffeeList/CoffeeList";
 import { ICoffee, Navigation } from "../models/interfaces";
 import CustomHeaderButton from "../components/Common/HeaderButton";
 import MenuButton from "../components/Common/MenuButton";
-import { useSelector } from "react-redux";
 
 interface Props {
 	navigation: Navigation;
 }
 
 const CoffeesScreen = (props: Props) => {
-	const { allCoffees } = useSelector((state: any) => state.coffees);
-
 	const onSelectCoffee = (coffee: ICoffee) => {
 		props.navigation.navigate({
 			routeName: "CoffeeDetails",
 			params: { coffee },
 		});
 	};
+
 	return (
 		<View style={styles.screen}>
-			<CoffeeList coffees={allCoffees} onSelect={onSelectCoffee} />
+			<CoffeeList onSelect={onSelectCoffee} />
 		</View>
 	);
 };

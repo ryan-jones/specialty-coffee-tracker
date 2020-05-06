@@ -1,6 +1,7 @@
 import { NavigationScreenProp, NavigationState } from "react-navigation";
 
 export interface ICoffee {
+	id?: string;
 	name: string;
 	location: string;
 	process: string;

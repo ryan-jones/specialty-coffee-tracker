@@ -2,8 +2,8 @@ import coffeeReducer from "./reducers/coffees";
 import addNewCoffeeReducer from "./reducers/newCoffee";
 import roasterReducer from "./reducers/roasters";
 import profileReducer from "./reducers/profile";
-import { createStore, combineReducers } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
 	profile: profileReducer,
@@ -12,6 +12,6 @@ const rootReducer = combineReducers({
 	newCoffee: addNewCoffeeReducer,
 });
 
-const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;

@@ -25,14 +25,3 @@ export const setSelectedNotes = (notes: INote[]): string[] =>
 	notes.reduce((list: string[], note: INote) => {
 		return note.isSelected ? list.concat(note.name) : list;
 	}, []);
-
-export const get = (url: string): Promise<any> => {
-	return fetch(url)
-		.then((response: any) => {
-			if (response.status === 200) {
-				return response.json();
-			}
-			throw new Error(`Error of type ${response.status}`);
-		})
-		.catch((err) => console.error(err));
-};

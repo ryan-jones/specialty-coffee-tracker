@@ -6,7 +6,7 @@ import {
 	TextInput,
 	FlatList,
 } from "react-native";
-import { get } from "../../utils";
+import { get } from "../../utils/http";
 import { REACT_APP_API_KEY } from "react-native-dotenv";
 import { useDispatch } from "react-redux";
 import { updateNewCoffeeLocation } from "../../store/actions/newCoffee";
@@ -28,6 +28,7 @@ export default function AutoCompleteInput({ location }: Props) {
 	const [input, setInput] = useState(location);
 	const [suggestions, setSuggestions] = useState([]);
 	const [showSuggestions, setShowSuggestions] = useState(false);
+	const [showErrorMessage, setShowErrorMessage] = useState(false);
 	const dispatch = useDispatch();
 
 	const onChangeText = (value: string) => {
@@ -61,8 +62,9 @@ export default function AutoCompleteInput({ location }: Props) {
 	}, [location]);
 
 	const onSelectLocation = (location: ISuggestion) => {
-		get(`${url}/details/json?place_id=${location.placeId}&key=${key}`).then(
-			(response: any) => {
+		get(`${url}/details/json?place_id=${location.placeId}&key=${key}`)
+			.then((response: any) => {
+				if (showErrorMessage) setShowErrorMessage(false);
 				setInput(location.description);
 				dispatch(
 					updateNewCoffeeLocation({
@@ -70,8 +72,11 @@ export default function AutoCompleteInput({ location }: Props) {
 						location: response.result.formatted_address,
 					})
 				);
-			}
-		);
+			})
+			.catch((err: Error) => {
+				setInput(location.description);
+				setShowErrorMessage(true);
+			});
 		setShowSuggestions(false);
 	};
 
@@ -100,6 +105,9 @@ export default function AutoCompleteInput({ location }: Props) {
 					/>
 				)}
 			</View>
+			{showErrorMessage && (
+				<CustomText>An error occurred while saving location data!</CustomText>
+			)}
 		</View>
 	);
 }
