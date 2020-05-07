@@ -3,12 +3,12 @@ import { View, StyleSheet, Alert } from "react-native";
 import { Navigation, INote, ICoffee } from "../models/interfaces";
 import CoffeeForm from "../components/Forms/Coffee";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	editSelectedCoffee,
-	clearSelectedCoffee,
-} from "../store/actions/coffees";
 import { setSelectedNotes } from "../utils";
 import FormContext from "../contexts/formContext";
+import {
+	clearSelectedCoffee,
+	editSelectedCoffee,
+} from "../store/actions/selectedCoffee";
 
 interface Props {
 	navigation: Navigation;

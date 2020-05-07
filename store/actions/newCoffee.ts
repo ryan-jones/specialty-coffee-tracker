@@ -1,27 +1,19 @@
-export const UPDATE_NEW_COFFEE_NAME = "UPDATE_NEW_COFFEE_NAME";
-export const UPDATE_NEW_COFFEE_REGION = "UPDATE_NEW_COFFEE_REGION";
-export const UPDATE_NEW_COFFEE_COUNTRY = "UPDATE_NEW_COFFEE_COUNTRY";
+import { ICoffee } from "../../models/interfaces";
+import { Dispatch } from "redux";
+import { post } from "../../utils/http";
+import { REACT_APP_API_URL } from "react-native-dotenv";
+
+const url = REACT_APP_API_URL;
+
 export const UPDATE_NEW_COFFEE_LOCATION = "UPDATE_NEW_COFFEE_LOCATION";
-export const UPDATE_NEW_COFFEE_DESCRIPTION = "UPDATE_NEW_COFFEE_DESCRIPTION";
-export const UPDATE_NEW_COFFEE_PROCESS = "UPDATE_NEW_COFFEE_PROCESS";
 export const UPDATE_NEW_COFFEE_BREW_METHOD = "UPDATE_NEW_COFFEE_BREW_METHOD";
 export const CLEAR_NEW_COFFEE = "CLEAR_NEW_COFFEE";
+export const ADD_NEW_COFFEE_SUCCESS = "ADD_NEW_COFFEE_SUCCESS";
+export const ADD_NEW_COFFEE_ERROR = "ADD_NEW_COFFEE_ERROR";
 export const UPDATE_NEW_COFFEE_BASIC = "UPDATE_NEW_COFFEE_BASIC";
 
 export const updateNewCoffeeBasic = (key: string, value: string) => {
 	return { type: UPDATE_NEW_COFFEE_BASIC, payload: { key, name } };
-};
-
-export const updateNewCoffeeName = (name: string) => {
-	return { type: UPDATE_NEW_COFFEE_NAME, payload: name };
-};
-
-export const updateNewCoffeeRegion = (region: string) => {
-	return { type: UPDATE_NEW_COFFEE_REGION, payload: region };
-};
-
-export const updateNewCoffeeCountry = (country: string) => {
-	return { type: UPDATE_NEW_COFFEE_COUNTRY, payload: country };
 };
 
 export const updateNewCoffeeLocation = ({ location, coordinates }: any) => {
@@ -31,18 +23,21 @@ export const updateNewCoffeeLocation = ({ location, coordinates }: any) => {
 	};
 };
 
-export const updateNewCoffeeDescription = (description: string) => {
-	return { type: UPDATE_NEW_COFFEE_DESCRIPTION, payload: description };
-};
-
-export const updateNewCoffeeProcess = (process: string) => {
-	return { type: UPDATE_NEW_COFFEE_PROCESS, payload: process };
-};
-
 export const updateNewCoffeeBrewMethod = (method: any) => {
 	return { type: UPDATE_NEW_COFFEE_BREW_METHOD, payload: method };
 };
 
 export const clearNewCoffee = () => {
 	return { type: CLEAR_NEW_COFFEE };
+};
+
+export const addNewCoffee = (coffee: ICoffee) => {
+	return async (dispatch: Dispatch) => {
+		try {
+			const response = await post(`${url}/coffees.json`, coffee);
+			dispatch({ type: ADD_NEW_COFFEE_SUCCESS });
+		} catch (err) {
+			throw Error(err);
+		}
+	};
 };

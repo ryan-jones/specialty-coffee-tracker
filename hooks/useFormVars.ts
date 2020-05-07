@@ -17,7 +17,7 @@ export default function useFormVars() {
 	const store: any = useSelector((state) => state);
 
 	const coffee: ICoffee =
-		type === "add" ? store.newCoffee : store.coffees.selectedCoffee;
+		type === "add" ? store.newCoffee : store.selectedCoffee;
 
 	const basicActionCreator =
 		type === "add" ? updateNewCoffeeBasic : updateSelectedCoffeeBasic;

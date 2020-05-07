@@ -3,8 +3,7 @@ import { View, StyleSheet, Alert } from "react-native";
 import { Navigation, INote } from "../models/interfaces";
 import CoffeeForm from "../components/Forms/Coffee";
 import { useSelector, useDispatch } from "react-redux";
-import { clearNewCoffee } from "../store/actions/newCoffee";
-import { addNewCoffee } from "../store/actions/coffees";
+import { clearNewCoffee, addNewCoffee } from "../store/actions/newCoffee";
 import { setSelectedNotes } from "../utils";
 import FormContext from "../contexts/formContext";
 

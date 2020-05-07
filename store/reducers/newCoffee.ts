@@ -1,12 +1,7 @@
 import { IMethod, IMethods } from "../../models/interfaces";
 import { setBrewMethodRatings, setCoffeeAverageRating } from "../../utils";
 import {
-	UPDATE_NEW_COFFEE_NAME,
-	UPDATE_NEW_COFFEE_REGION,
-	UPDATE_NEW_COFFEE_COUNTRY,
 	UPDATE_NEW_COFFEE_LOCATION,
-	UPDATE_NEW_COFFEE_DESCRIPTION,
-	UPDATE_NEW_COFFEE_PROCESS,
 	UPDATE_NEW_COFFEE_BREW_METHOD,
 	CLEAR_NEW_COFFEE,
 	UPDATE_NEW_COFFEE_BASIC,

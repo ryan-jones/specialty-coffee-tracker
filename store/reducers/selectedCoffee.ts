@@ -1,12 +1,7 @@
 import { IMethod, IMethods } from "../../models/interfaces";
 import { setBrewMethodRatings, setCoffeeAverageRating } from "../../utils";
 import {
-	UPDATE_SELECTED_COFFEE_NAME,
-	UPDATE_SELECTED_COFFEE_REGION,
-	UPDATE_SELECTED_COFFEE_COUNTRY,
 	UPDATE_SELECTED_COFFEE_LOCATION,
-	UPDATE_SELECTED_COFFEE_DESCRIPTION,
-	UPDATE_SELECTED_COFFEE_PROCESS,
 	UPDATE_SELECTED_COFFEE_BREW_METHOD,
 	CLEAR_SELECTED_COFFEE,
 	SET_SELECTED_COFFEE,
@@ -15,7 +10,7 @@ import {
 
 export const initialState: any = null;
 
-const addNewCoffeeReducer = (state = initialState, action: any) => {
+const selectedCoffeeReducer = (state = initialState, action: any) => {
 	switch (action.type) {
 		case SET_SELECTED_COFFEE:
 			return action.payload;
@@ -60,4 +55,4 @@ const addNewCoffeeReducer = (state = initialState, action: any) => {
 	}
 };
 
-export default addNewCoffeeReducer;
+export default selectedCoffeeReducer;
