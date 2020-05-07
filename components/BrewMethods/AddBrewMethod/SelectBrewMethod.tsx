@@ -42,6 +42,7 @@ export default function SelectBrewMethod() {
 	const dispatch = useDispatch();
 
 	const { coffee, brewMethodActionCreator } = useFormVars();
+	console.log("coffee in select brew method", coffee);
 	const { methods } = coffee;
 
 	const setIcon = (method: string) => {

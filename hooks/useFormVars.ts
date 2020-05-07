@@ -10,28 +10,24 @@ import {
 	updateSelectedCoffeeBasic,
 } from "../store/actions/selectedCoffee";
 import { useSelector } from "react-redux";
-import { ICoffee } from "../models/interfaces";
 
 export default function useFormVars() {
 	const { type } = useFormContext();
-	const store: any = useSelector((state) => state);
+	const { newCoffee, selectedCoffee }: any = useSelector((state) => state);
 
-	const coffee: ICoffee =
-		type === "add" ? store.newCoffee : store.selectedCoffee;
-
-	const basicActionCreator =
-		type === "add" ? updateNewCoffeeBasic : updateSelectedCoffeeBasic;
-
-	const locationActionCreator =
-		type === "add" ? updateNewCoffeeLocation : updateSelectedCoffeeLocation;
-
-	const brewMethodActionCreator =
-		type === "add" ? updateNewCoffeeBrewMethod : updateSelectedCoffeeBrewMethod;
-
-	return {
-		coffee,
-		basicActionCreator,
-		locationActionCreator,
-		brewMethodActionCreator,
-	};
+	return type === "add"
+		? {
+				type,
+				coffee: newCoffee,
+				basicActionCreator: updateNewCoffeeBasic,
+				locationActionCreator: updateNewCoffeeLocation,
+				brewMethodActionCreator: updateNewCoffeeBrewMethod,
+		  }
+		: {
+				type,
+				coffee: selectedCoffee.edited,
+				basicActionCreator: updateSelectedCoffeeBasic,
+				locationActionCreator: updateSelectedCoffeeLocation,
+				brewMethodActionCreator: updateSelectedCoffeeBrewMethod,
+		  };
 }

@@ -20,12 +20,14 @@ export default function AddCoffeeScreen(props: Props) {
 		props.navigation.goBack();
 	};
 
-	const onSave = async (notes: INote[]) => {
+	const onSave = async (notes?: INote[]) => {
 		try {
 			dispatch(
 				addNewCoffee({
 					...newCoffeeState,
-					notes: [...newCoffeeState.notes, ...setSelectedNotes(notes)],
+					notes: notes
+						? [...newCoffeeState.notes, ...setSelectedNotes(notes)]
+						: newCoffeeState.notes,
 				})
 			);
 			dispatch(clearNewCoffee());

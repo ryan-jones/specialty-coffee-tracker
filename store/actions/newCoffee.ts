@@ -34,7 +34,15 @@ export const clearNewCoffee = () => {
 export const addNewCoffee = (coffee: ICoffee) => {
 	return async (dispatch: Dispatch) => {
 		try {
-			await post(`${url}/coffees.json`, coffee);
+			const response = await post(`${url}/coffeeDetails.json`, coffee);
+			console.log("did we have a response?", response);
+			await post(`${url}/coffees.json`, {
+				id: response.name,
+				name: coffee.name,
+				location: coffee.location,
+				notes: coffee.notes,
+				rating: coffee.rating,
+			});
 			dispatch({ type: ADD_NEW_COFFEE_SUCCESS });
 		} catch (err) {
 			throw Error(err);

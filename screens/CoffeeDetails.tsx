@@ -1,33 +1,25 @@
-import React, { useEffect } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import React from "react";
+import { View, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
 import { COLORS } from "../styles/colors";
 import CustomText from "../components/Common/CustomText";
-import { ICoffee, Navigation } from "../models/interfaces";
 import Process from "../components/Process/ShowProcess";
 import Circle from "../components/Common/Circle";
 import CoffeeNotes from "../components/CoffeeDetails/CoffeeNotes";
 import BrewMethods from "../components/BrewMethods/ShowBrewMethods/BrewMethods";
-import CoffeeOrigin from "../components/CoffeeDetails/CoffeeOrigin";
 import ContentSection from "../components/Common/ContentSection";
 import CustomHeaderButton from "../components/Common/HeaderButton";
-import { useDispatch, useSelector } from "react-redux";
-import { setSelectedCoffee } from "../store/actions/selectedCoffee";
+import { useSelector } from "react-redux";
 
-interface Props {
-	navigation: Navigation;
-}
+export default function CoffeeDetailsScreen() {
+	const coffee = useSelector((state: any) => state.selectedCoffee.edited);
 
-export default function CoffeeDetailsScreen(props: Props) {
-	const coffeeId: ICoffee = props.navigation.getParam("coffee");
-	const coffee = useSelector((state: any) =>
-		state.coffees.allCoffees.find(({ id }: any) => id === coffeeId)
-	);
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		props.navigation.setParams({ dispatch });
-	}, [dispatch]);
-
+	if (!coffee) {
+		return (
+			<View style={styles.warning}>
+				<ActivityIndicator size="large" />
+			</View>
+		);
+	}
 	return (
 		<ScrollView>
 			<View style={styles.screen}>
@@ -51,7 +43,7 @@ export default function CoffeeDetailsScreen(props: Props) {
 					<BrewMethods methods={coffee.methods} />
 					<View style={styles.details}>
 						<Process process={coffee.process} />
-						<CoffeeOrigin coffee={coffee} />
+						{/* <CoffeeOrigin coffee={coffee} /> */}
 					</View>
 				</ContentSection>
 			</View>
@@ -60,16 +52,14 @@ export default function CoffeeDetailsScreen(props: Props) {
 }
 
 CoffeeDetailsScreen.navigationOptions = (data: any) => {
-	const coffee = data.navigation.getParam("coffee");
-	const dispatch = data.navigation.getParam("dispatch");
+	const coffeeName = data.navigation.getParam("coffeeName");
 	return {
-		headerTitle: coffee.name,
+		headerTitle: coffeeName,
 		headerRight: () => (
 			<CustomHeaderButton
-				iconName="md-add-circle-outline"
+				iconName="md-create"
 				title="edit coffee"
 				onPress={() => {
-					dispatch(setSelectedCoffee(coffee));
 					data.navigation.navigate({ routeName: "EditCoffee" });
 				}}
 			></CustomHeaderButton>
@@ -118,5 +108,10 @@ const styles = StyleSheet.create({
 	details: {
 		width: "100%",
 		justifyContent: "space-evenly",
+	},
+	warning: {
+		height: "100%",
+		justifyContent: "center",
+		alignItems: "center",
 	},
 });

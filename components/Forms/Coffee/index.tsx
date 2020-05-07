@@ -10,7 +10,7 @@ import { COLORS } from "../../../styles/colors";
 
 interface Props {
 	onCancel: () => void;
-	onSave: (notes: INote[]) => void;
+	onSave: (notes?: INote[]) => void;
 }
 export default function CoffeeForm({ onCancel, onSave }: Props) {
 	const [showPage, setShowPage] = useState({
@@ -29,9 +29,11 @@ export default function CoffeeForm({ onCancel, onSave }: Props) {
 			{showPage.coffeeDetails && (
 				<BasicInfo
 					btnLabel="Continue"
-					onPress={() =>
+					onForward={() =>
 						onNavigate({ coffeeDetails: false, brewMethods: true })
 					}
+					onCancel={onCancel}
+					onSave={onSave}
 				/>
 			)}
 			{showPage.brewMethods && (
@@ -40,6 +42,7 @@ export default function CoffeeForm({ onCancel, onSave }: Props) {
 					onBack={() => onNavigate({ coffeeDetails: true, brewMethods: false })}
 					onForward={() => onNavigate({ brewMethods: false, notes: true })}
 					onCancel={onCancel}
+					onSave={onSave}
 				>
 					<View>
 						<CustomText styles={styles.text}>Already had a cup?</CustomText>

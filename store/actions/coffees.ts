@@ -20,7 +20,6 @@ export const fetchCoffees = () => {
 				type: COFFEES_LOADED_SUCCESS,
 				payload: response
 					? Object.keys(response).map((key: string) => ({
-							id: key,
 							...response[key],
 					  }))
 					: [],

@@ -6,9 +6,13 @@ import {
 	CLEAR_SELECTED_COFFEE,
 	SET_SELECTED_COFFEE,
 	UPDATE_SELECTED_COFFEE_BASIC,
+	RESET_SELECTED_COFFEE,
 } from "../actions/selectedCoffee";
 
-export const initialState: any = null;
+export const initialState: any = {
+	original: null,
+	edited: null,
+};
 
 const selectedCoffeeReducer = (state = initialState, action: any) => {
 	switch (action.type) {
@@ -18,18 +22,27 @@ const selectedCoffeeReducer = (state = initialState, action: any) => {
 			if (!newState.notes) {
 				newState.notes = [];
 			}
-			return newState;
+			return {
+				original: newState,
+				edited: newState,
+			};
 		case UPDATE_SELECTED_COFFEE_BASIC:
 			return {
 				...state,
-				[action.payload.key]: action.payload.value,
+				edited: {
+					...state.edited,
+					[action.payload.key]: action.payload.value,
+				},
 			};
 		case UPDATE_SELECTED_COFFEE_LOCATION:
 			const { location, coordinates } = action.payload;
 			return {
 				...state,
-				coordinates,
-				location,
+				edited: {
+					...state.edited,
+					coordinates,
+					location,
+				},
 			};
 		case UPDATE_SELECTED_COFFEE_BREW_METHOD:
 			const { name, brewCase } = action.payload;
@@ -51,9 +64,17 @@ const selectedCoffeeReducer = (state = initialState, action: any) => {
 			const newAverageRating: number = setCoffeeAverageRating(updatedMethods);
 			return {
 				...state,
-				rating: newAverageRating,
-				notes: [...state.notes, ...brewCase.notes],
-				methods: updatedMethods,
+				edited: {
+					...state.edited,
+					rating: newAverageRating,
+					notes: [...state.notes, ...brewCase.notes],
+					methods: updatedMethods,
+				},
+			};
+		case RESET_SELECTED_COFFEE:
+			return {
+				...state,
+				edited: state.original,
 			};
 		case CLEAR_SELECTED_COFFEE:
 			return initialState;

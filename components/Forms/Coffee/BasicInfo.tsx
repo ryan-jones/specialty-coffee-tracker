@@ -1,18 +1,26 @@
 import React, { useState } from "react";
-import { View, Button, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import CustomText from "../../Common/CustomText";
 import CustomTextInput from "../../Common/CustomTextInput";
 import SelectProcess from "../../Process/SelectProcess";
 import AutoCompleteInput from "../../Common/AutoCompleteInput";
 import { useDispatch } from "react-redux";
 import useFormVars from "../../../hooks/useFormVars";
+import FormButtons from "../../Common/FormButtons";
 
 interface Props {
-	onPress: () => void;
 	btnLabel: string;
+	onForward: () => void;
+	onCancel: () => void;
+	onSave?: () => void;
 }
 
-export default function BasicInfo({ onPress, btnLabel }: Props) {
+export default function BasicInfo({
+	onForward,
+	onCancel,
+	btnLabel,
+	onSave,
+}: Props) {
 	const [isValidName, setIsValidName] = useState(true);
 	const { coffee, basicActionCreator } = useFormVars();
 	const dispatch = useDispatch();
@@ -47,13 +55,12 @@ export default function BasicInfo({ onPress, btnLabel }: Props) {
 				}
 			/>
 			<SelectProcess process={coffee.process} />
-			<View style={styles.button}>
-				<Button
-					title={btnLabel}
-					onPress={onPress}
-					disabled={!coffee.name || !coffee.location}
-				/>
-			</View>
+			<FormButtons
+				btnTitle={btnLabel}
+				onForward={onForward}
+				onCancel={onCancel}
+				disabled={!coffee.name || !coffee.location}
+			/>
 		</View>
 	);
 }
