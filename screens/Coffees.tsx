@@ -19,7 +19,7 @@ const CoffeesScreen = (props: Props) => {
 
 	return (
 		<View style={styles.screen}>
-			<CoffeeList onSelect={onSelectCoffee} />
+			<CoffeeList onSelect={onSelectCoffee} navigation={props.navigation} />
 		</View>
 	);
 };

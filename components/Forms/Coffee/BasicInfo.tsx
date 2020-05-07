@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import { View, Button, StyleSheet } from "react-native";
-import CustomText from "../Common/CustomText";
-import CustomTextInput from "../Common/CustomTextInput";
-import SelectProcess from "../Process/SelectProcess";
-import AutoCompleteInput from "../Common/AutoCompleteInput";
+import CustomText from "../../Common/CustomText";
+import CustomTextInput from "../../Common/CustomTextInput";
+import SelectProcess from "../../Process/SelectProcess";
+import AutoCompleteInput from "../../Common/AutoCompleteInput";
 import {
 	updateNewCoffeeName,
 	updateNewCoffeeDescription,
-} from "../../store/actions/newCoffee";
+} from "../../../store/actions/newCoffee";
 import { useDispatch, useSelector } from "react-redux";
-import { ICoffee } from "../../models/interfaces";
+import { ICoffee } from "../../../models/interfaces";
+import useFormVars from "../../../hooks/useFormVars";
 
 interface Props {
 	onPress: () => void;
 	btnLabel: string;
-	stateSlice: string;
 }
 
-export default function BasicInfo({ onPress, btnLabel, stateSlice }: Props) {
+export default function BasicInfo({ onPress, btnLabel }: Props) {
 	const [isValidName, setIsValidName] = useState(true);
+	const { coffee, basicActionCreator } = useFormVars();
 	const dispatch = useDispatch();
-	const store: ICoffee = useSelector((state: any) => state[stateSlice]);
 
 	return (
 		<View style={styles.container}>
@@ -29,34 +29,34 @@ export default function BasicInfo({ onPress, btnLabel, stateSlice }: Props) {
 			</CustomText>
 			<CustomTextInput
 				label="name*"
-				value={store.name}
+				value={coffee.name}
 				invalidWarning="A name must be provided"
 				isValid={isValidName}
 				onChangeText={(value: string) => {
 					setIsValidName(value.trim().length > 0);
-					dispatch(updateNewCoffeeName(value));
+					dispatch(basicActionCreator("name", value));
 				}}
 				onEndEditing={() => {
-					setIsValidName(store.name.trim().length > 0);
+					setIsValidName(coffee.name.trim().length > 0);
 				}}
 				placeholder="name"
 			/>
-			<AutoCompleteInput location={store.location} />
+			<AutoCompleteInput location={coffee.location} />
 
 			<CustomTextInput
 				label="description"
-				value={store.description}
+				value={coffee.description}
 				placeholder="Grown at an altitude of 5000m"
 				onChangeText={(value: string) =>
-					dispatch(updateNewCoffeeDescription(value))
+					dispatch(basicActionCreator("description", value))
 				}
 			/>
-			<SelectProcess process={store.process} />
+			<SelectProcess process={coffee.process} />
 			<View style={styles.button}>
 				<Button
 					title={btnLabel}
 					onPress={onPress}
-					disabled={!store.name || !store.location}
+					disabled={!coffee.name || !coffee.location}
 				/>
 			</View>
 		</View>

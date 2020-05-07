@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import TextEllipsis from "../Common/TextEllipsis";
 import CustomTextInput from "../Common/CustomTextInput";

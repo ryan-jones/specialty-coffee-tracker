@@ -5,7 +5,7 @@ import { COLORS } from "../../../styles/colors";
 
 interface Props {
 	name: string;
-	rating: number;
+	rating: number | string;
 }
 
 const icons: any = {

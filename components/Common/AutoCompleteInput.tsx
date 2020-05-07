@@ -9,8 +9,8 @@ import {
 import { get } from "../../utils/http";
 import { REACT_APP_API_KEY } from "react-native-dotenv";
 import { useDispatch } from "react-redux";
-import { updateNewCoffeeLocation } from "../../store/actions/newCoffee";
 import CustomText from "./CustomText";
+import useFormVars from "../../hooks/useFormVars";
 
 interface Props {
 	location: string;
@@ -29,6 +29,7 @@ export default function AutoCompleteInput({ location }: Props) {
 	const [suggestions, setSuggestions] = useState([]);
 	const [showSuggestions, setShowSuggestions] = useState(false);
 	const [showErrorMessage, setShowErrorMessage] = useState(false);
+	const { locationActionCreator } = useFormVars();
 	const dispatch = useDispatch();
 
 	const onChangeText = (value: string) => {
@@ -67,7 +68,7 @@ export default function AutoCompleteInput({ location }: Props) {
 				if (showErrorMessage) setShowErrorMessage(false);
 				setInput(location.description);
 				dispatch(
-					updateNewCoffeeLocation({
+					locationActionCreator({
 						coordinates: response.result.geometry.location,
 						location: response.result.formatted_address,
 					})

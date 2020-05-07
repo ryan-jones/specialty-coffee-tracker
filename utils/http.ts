@@ -17,3 +17,12 @@ export const post = async (url: string, body: any): Promise<any> => {
 		throw Error(err);
 	}
 };
+
+export const put = async (url: string, body: any): Promise<any> => {
+	try {
+		const response: AxiosResponse = await axios.put(url, body);
+		return response.data;
+	} catch (err) {
+		throw Error(err);
+	}
+};

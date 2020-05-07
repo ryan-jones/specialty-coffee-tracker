@@ -10,9 +10,7 @@ interface Props {
 export default function CoffeeOrigin({ coffee }: Props) {
 	return (
 		<View style={styles.originContainer}>
-			<CustomText styles={styles.text}>
-				Origin: {coffee.region}, {coffee.country}
-			</CustomText>
+			<CustomText styles={styles.text}>Origin: {coffee.location}</CustomText>
 			<View style={styles.mapContainer}>
 				<Map coffees={[coffee]} />
 			</View>

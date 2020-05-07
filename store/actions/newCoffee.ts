@@ -6,6 +6,11 @@ export const UPDATE_NEW_COFFEE_DESCRIPTION = "UPDATE_NEW_COFFEE_DESCRIPTION";
 export const UPDATE_NEW_COFFEE_PROCESS = "UPDATE_NEW_COFFEE_PROCESS";
 export const UPDATE_NEW_COFFEE_BREW_METHOD = "UPDATE_NEW_COFFEE_BREW_METHOD";
 export const CLEAR_NEW_COFFEE = "CLEAR_NEW_COFFEE";
+export const UPDATE_NEW_COFFEE_BASIC = "UPDATE_NEW_COFFEE_BASIC";
+
+export const updateNewCoffeeBasic = (key: string, value: string) => {
+	return { type: UPDATE_NEW_COFFEE_BASIC, payload: { key, name } };
+};
 
 export const updateNewCoffeeName = (name: string) => {
 	return { type: UPDATE_NEW_COFFEE_NAME, payload: name };

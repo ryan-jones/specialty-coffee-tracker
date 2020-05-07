@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { COLORS } from "../styles/colors";
 import CustomText from "../components/Common/CustomText";
@@ -9,6 +9,9 @@ import CoffeeNotes from "../components/CoffeeDetails/CoffeeNotes";
 import BrewMethods from "../components/BrewMethods/ShowBrewMethods/BrewMethods";
 import CoffeeOrigin from "../components/CoffeeDetails/CoffeeOrigin";
 import ContentSection from "../components/Common/ContentSection";
+import CustomHeaderButton from "../components/Common/HeaderButton";
+import { useDispatch } from "react-redux";
+import { selectCoffee } from "../store/actions/coffees";
 
 interface Props {
 	navigation: Navigation;
@@ -16,6 +19,12 @@ interface Props {
 
 export default function CoffeeDetailsScreen(props: Props) {
 	const coffee: ICoffee = props.navigation.getParam("coffee");
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		props.navigation.setParams({ dispatch });
+	}, [dispatch]);
+
 	return (
 		<ScrollView>
 			<View style={styles.screen}>
@@ -28,18 +37,16 @@ export default function CoffeeDetailsScreen(props: Props) {
 						</CustomText>
 					</Circle>
 					<CustomText styles={styles.name}>{coffee.name}</CustomText>
-					{coffee.description && (
-						<CustomText styles={styles.description}>
-							"{coffee.description}"
-						</CustomText>
-					)}
+					<CustomText styles={styles.description}>
+						{coffee.description}
+					</CustomText>
+
 					<CoffeeNotes
 						notes={coffee.notes}
 						noteStyles={{ padding: 5, minWidth: 50 }}
 					/>
 					<BrewMethods methods={coffee.methods} />
 					<View style={styles.details}>
-						{/* <CustomText>Roasted by: {coffee.roaster}</CustomText> */}
 						<Process process={coffee.process} />
 						<CoffeeOrigin coffee={coffee} />
 					</View>
@@ -50,9 +57,20 @@ export default function CoffeeDetailsScreen(props: Props) {
 }
 
 CoffeeDetailsScreen.navigationOptions = (data: any) => {
-	const title = data.navigation.getParam("coffee").name;
+	const coffee = data.navigation.getParam("coffee");
+	const dispatch = data.navigation.getParam("dispatch");
 	return {
-		headerTitle: title,
+		headerTitle: coffee.name,
+		headerRight: () => (
+			<CustomHeaderButton
+				iconName="md-add-circle-outline"
+				title="edit coffee"
+				onPress={() => {
+					dispatch(selectCoffee(coffee));
+					data.navigation.navigate({ routeName: "EditCoffee" });
+				}}
+			></CustomHeaderButton>
+		),
 	};
 };
 

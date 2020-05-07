@@ -1,72 +1,37 @@
 import { IMethod, IMethods } from "../../models/interfaces";
 import { setBrewMethodRatings, setCoffeeAverageRating } from "../../utils";
 import {
-	UPDATE_NEW_COFFEE_NAME,
-	UPDATE_NEW_COFFEE_REGION,
-	UPDATE_NEW_COFFEE_COUNTRY,
-	UPDATE_NEW_COFFEE_LOCATION,
-	UPDATE_NEW_COFFEE_DESCRIPTION,
-	UPDATE_NEW_COFFEE_PROCESS,
-	UPDATE_NEW_COFFEE_BREW_METHOD,
-	CLEAR_NEW_COFFEE,
-	UPDATE_NEW_COFFEE_BASIC,
-} from "../actions/newCoffee";
+	UPDATE_SELECTED_COFFEE_NAME,
+	UPDATE_SELECTED_COFFEE_REGION,
+	UPDATE_SELECTED_COFFEE_COUNTRY,
+	UPDATE_SELECTED_COFFEE_LOCATION,
+	UPDATE_SELECTED_COFFEE_DESCRIPTION,
+	UPDATE_SELECTED_COFFEE_PROCESS,
+	UPDATE_SELECTED_COFFEE_BREW_METHOD,
+	CLEAR_SELECTED_COFFEE,
+	SET_SELECTED_COFFEE,
+	UPDATE_SELECTED_COFFEE_BASIC,
+} from "../actions/selectedCoffee";
 
-export const initialState: any = {
-	name: "",
-	location: "",
-	process: "",
-	roaster: "",
-	notes: [],
-	rating: "0",
-	description: "",
-	coordinates: {
-		lat: null,
-		lng: null,
-	},
-	methods: {
-		chemex: {
-			rating: 0,
-			cases: [],
-		},
-		aeropress: {
-			rating: 0,
-			cases: [],
-		},
-		v60: {
-			rating: 0,
-			cases: [],
-		},
-		espresso: {
-			rating: 0,
-			cases: [],
-		},
-		frenchpress: {
-			rating: 0,
-			cases: [],
-		},
-		syphon: {
-			rating: 0,
-			cases: [],
-		},
-	},
-};
+export const initialState: any = null;
 
 const addNewCoffeeReducer = (state = initialState, action: any) => {
 	switch (action.type) {
-		case UPDATE_NEW_COFFEE_BASIC:
+		case SET_SELECTED_COFFEE:
+			return action.payload;
+		case UPDATE_SELECTED_COFFEE_BASIC:
 			return {
 				...state,
 				[action.payload.key]: action.payload.value,
 			};
-		case UPDATE_NEW_COFFEE_LOCATION:
+		case UPDATE_SELECTED_COFFEE_LOCATION:
 			const { location, coordinates } = action.payload;
 			return {
 				...state,
 				coordinates,
 				location,
 			};
-		case UPDATE_NEW_COFFEE_BREW_METHOD:
+		case UPDATE_SELECTED_COFFEE_BREW_METHOD:
 			const { name, brewCase } = action.payload;
 
 			const updatedMethod: IMethod = {
@@ -88,7 +53,7 @@ const addNewCoffeeReducer = (state = initialState, action: any) => {
 				notes: [...state.notes, ...brewCase.notes],
 				methods: updatedMethods,
 			};
-		case CLEAR_NEW_COFFEE:
+		case CLEAR_SELECTED_COFFEE:
 			return initialState;
 		default:
 			return state;
