@@ -13,7 +13,12 @@ export const initialState: any = null;
 const selectedCoffeeReducer = (state = initialState, action: any) => {
 	switch (action.type) {
 		case SET_SELECTED_COFFEE:
-			return action.payload;
+			const newState = { ...action.payload };
+			// firebase does not store empty arrays
+			if (!newState.notes) {
+				newState.notes = [];
+			}
+			return newState;
 		case UPDATE_SELECTED_COFFEE_BASIC:
 			return {
 				...state,
@@ -28,11 +33,13 @@ const selectedCoffeeReducer = (state = initialState, action: any) => {
 			};
 		case UPDATE_SELECTED_COFFEE_BREW_METHOD:
 			const { name, brewCase } = action.payload;
-
+			const method = state.methods[name];
+			// firebase does not store empty array values
 			const updatedMethod: IMethod = {
-				...state.methods[name],
-				cases: [...state.methods[name].cases, brewCase],
+				...method,
+				cases: method.cases ? [...method.cases, brewCase] : [brewCase],
 			};
+
 			updatedMethod.rating = setBrewMethodRatings(updatedMethod);
 
 			const updatedMethods: IMethods = {

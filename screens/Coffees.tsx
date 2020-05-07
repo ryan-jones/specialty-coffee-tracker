@@ -13,7 +13,7 @@ const CoffeesScreen = (props: Props) => {
 	const onSelectCoffee = (coffee: ICoffee) => {
 		props.navigation.navigate({
 			routeName: "CoffeeDetails",
-			params: { coffee },
+			params: { coffee: coffee.id },
 		});
 	};
 

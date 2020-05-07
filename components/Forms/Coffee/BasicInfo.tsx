@@ -4,12 +4,7 @@ import CustomText from "../../Common/CustomText";
 import CustomTextInput from "../../Common/CustomTextInput";
 import SelectProcess from "../../Process/SelectProcess";
 import AutoCompleteInput from "../../Common/AutoCompleteInput";
-import {
-	updateNewCoffeeName,
-	updateNewCoffeeDescription,
-} from "../../../store/actions/newCoffee";
-import { useDispatch, useSelector } from "react-redux";
-import { ICoffee } from "../../../models/interfaces";
+import { useDispatch } from "react-redux";
 import useFormVars from "../../../hooks/useFormVars";
 
 interface Props {

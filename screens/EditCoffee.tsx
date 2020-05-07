@@ -16,7 +16,7 @@ interface Props {
 
 export default function EditCoffeeScreen(props: Props) {
 	const selectedCoffee: ICoffee = useSelector(
-		(state: any) => state.coffees.selectedCoffee
+		(state: any) => state.selectedCoffee
 	);
 
 	const dispatch = useDispatch();
@@ -37,6 +37,7 @@ export default function EditCoffeeScreen(props: Props) {
 			dispatch(clearSelectedCoffee());
 			props.navigation.goBack();
 		} catch (err) {
+			console.log("the error!!!!", err);
 			Alert.alert("Coffee failed to save!");
 		}
 	};

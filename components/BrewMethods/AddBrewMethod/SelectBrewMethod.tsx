@@ -55,6 +55,14 @@ export default function SelectBrewMethod() {
 	};
 	const onCancel = () => setShowModal(false);
 
+	const hasCases = (method: string) => {
+		return (
+			methods[method] &&
+			methods[method].cases &&
+			methods[method].cases.length > 0
+		);
+	};
+
 	return (
 		<View style={styles.viewContainer}>
 			<Modal visible={showModal} animationType="slide">
@@ -76,7 +84,7 @@ export default function SelectBrewMethod() {
 					>
 						<View style={styles.methodContainer}>
 							<View style={styles.iconContainer}>
-								{methods[method].cases.length > 0 && (
+								{hasCases(method) && (
 									<TextEllipsis
 										containerStyles={styles.methodCases}
 										text={methods[method].cases.length}

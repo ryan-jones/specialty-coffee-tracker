@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import CustomText from "../Common/CustomText";
 import Process from ".";
 import { useDispatch } from "react-redux";
-import { updateNewCoffeeProcess } from "../../store/actions/newCoffee";
+import useFormVars from "../../hooks/useFormVars";
 
 interface Props {
 	process: string;
@@ -12,6 +12,7 @@ interface Props {
 const icons = ["washed", "natural", "honey"];
 
 export default function SelectProcess({ process }: Props) {
+	const { basicActionCreator } = useFormVars();
 	const dispatch = useDispatch();
 	return (
 		<View style={styles.process}>
@@ -20,7 +21,7 @@ export default function SelectProcess({ process }: Props) {
 				{icons.map((icon) => (
 					<TouchableOpacity
 						key={icon}
-						onPress={() => dispatch(updateNewCoffeeProcess(icon))}
+						onPress={() => dispatch(basicActionCreator("process", icon))}
 					>
 						<Process name={icon} isSelected={icon === process} />
 					</TouchableOpacity>

@@ -18,11 +18,11 @@ export default function CoffeeList(props: Props) {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchCoffees());
-		// const pageLoad = props.navigation.addListener(
-		// 	"willFocus",
-		// 	dispatch(fetchCoffees())
-		// );
-		// return () => pageLoad.remove();
+		const pageLoad = props.navigation.addListener(
+			"willFocus",
+			dispatch(fetchCoffees())
+		);
+		return () => pageLoad.remove();
 	}, []);
 
 	if (!coffees.loaded) {

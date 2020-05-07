@@ -10,15 +10,18 @@ import BrewMethods from "../components/BrewMethods/ShowBrewMethods/BrewMethods";
 import CoffeeOrigin from "../components/CoffeeDetails/CoffeeOrigin";
 import ContentSection from "../components/Common/ContentSection";
 import CustomHeaderButton from "../components/Common/HeaderButton";
-import { useDispatch } from "react-redux";
-import { selectCoffee } from "../store/actions/coffees";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedCoffee } from "../store/actions/selectedCoffee";
 
 interface Props {
 	navigation: Navigation;
 }
 
 export default function CoffeeDetailsScreen(props: Props) {
-	const coffee: ICoffee = props.navigation.getParam("coffee");
+	const coffeeId: ICoffee = props.navigation.getParam("coffee");
+	const coffee = useSelector((state: any) =>
+		state.coffees.allCoffees.find(({ id }: any) => id === coffeeId)
+	);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -66,7 +69,7 @@ CoffeeDetailsScreen.navigationOptions = (data: any) => {
 				iconName="md-add-circle-outline"
 				title="edit coffee"
 				onPress={() => {
-					dispatch(selectCoffee(coffee));
+					dispatch(setSelectedCoffee(coffee));
 					data.navigation.navigate({ routeName: "EditCoffee" });
 				}}
 			></CustomHeaderButton>

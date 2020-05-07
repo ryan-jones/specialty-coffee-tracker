@@ -13,7 +13,7 @@ export const ADD_NEW_COFFEE_ERROR = "ADD_NEW_COFFEE_ERROR";
 export const UPDATE_NEW_COFFEE_BASIC = "UPDATE_NEW_COFFEE_BASIC";
 
 export const updateNewCoffeeBasic = (key: string, value: string) => {
-	return { type: UPDATE_NEW_COFFEE_BASIC, payload: { key, name } };
+	return { type: UPDATE_NEW_COFFEE_BASIC, payload: { key, value } };
 };
 
 export const updateNewCoffeeLocation = ({ location, coordinates }: any) => {
@@ -34,7 +34,7 @@ export const clearNewCoffee = () => {
 export const addNewCoffee = (coffee: ICoffee) => {
 	return async (dispatch: Dispatch) => {
 		try {
-			const response = await post(`${url}/coffees.json`, coffee);
+			await post(`${url}/coffees.json`, coffee);
 			dispatch({ type: ADD_NEW_COFFEE_SUCCESS });
 		} catch (err) {
 			throw Error(err);

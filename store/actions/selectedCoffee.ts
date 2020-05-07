@@ -44,7 +44,7 @@ export const setSelectedCoffee = (coffee: ICoffee) => {
 export const editSelectedCoffee = (coffee: ICoffee) => {
 	return async (dispatch: Dispatch) => {
 		try {
-			const response = await put(`${url}/coffees.json`, coffee);
+			await put(`${url}/coffees/${coffee.id}.json`, coffee);
 			dispatch({
 				type: COFFEE_UPDATE_SUCCESS,
 			});
