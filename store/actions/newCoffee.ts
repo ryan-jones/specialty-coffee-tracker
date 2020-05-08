@@ -35,7 +35,6 @@ export const addNewCoffee = (coffee: ICoffee) => {
 	return async (dispatch: Dispatch) => {
 		try {
 			const response = await post(`${url}/coffeeDetails.json`, coffee);
-			console.log("did we have a response?", response);
 			await post(`${url}/coffees.json`, {
 				id: response.name,
 				name: coffee.name,

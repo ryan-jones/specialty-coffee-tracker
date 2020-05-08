@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import CoffeeListItem from "./CoffeeListItem";
-import { ICoffee } from "../../models/interfaces";
-import CustomText from "../Common/CustomText";
+import { ICoffee } from "../../../models/interfaces";
+import CustomText from "../../Common/CustomText";
 
 interface Props {
 	onSelect: (coffee: ICoffee) => void;

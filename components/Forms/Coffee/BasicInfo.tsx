@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import CustomText from "../../Common/CustomText";
 import CustomTextInput from "../../Common/CustomTextInput";
-import SelectProcess from "../../Process/SelectProcess";
+import SelectProcess from "../../Coffee/Process/SelectProcess";
 import AutoCompleteInput from "../../Common/AutoCompleteInput";
 import { useDispatch } from "react-redux";
 import useFormVars from "../../../hooks/useFormVars";
@@ -25,34 +25,35 @@ export default function BasicInfo({
 	const { coffee, basicActionCreator } = useFormVars();
 	const dispatch = useDispatch();
 
+	const inputChangeHandler = useCallback(
+		(inputIdentifier, inputValue, inputValidity) => {
+			dispatch(basicActionCreator(inputIdentifier, inputValue));
+		},
+		[dispatch]
+	);
+
 	return (
 		<View style={styles.container}>
 			<CustomText styles={styles.header}>
 				First, let's add the basic details
 			</CustomText>
 			<CustomTextInput
+				id="name"
 				label="name*"
-				value={coffee.name}
+				required
+				initialValue={coffee.name}
 				invalidWarning="A name must be provided"
-				isValid={isValidName}
-				onChangeText={(value: string) => {
-					setIsValidName(value.trim().length > 0);
-					dispatch(basicActionCreator("name", value));
-				}}
-				onEndEditing={() => {
-					setIsValidName(coffee.name.trim().length > 0);
-				}}
+				onChangeText={inputChangeHandler}
 				placeholder="name"
 			/>
 			<AutoCompleteInput location={coffee.location} />
 
 			<CustomTextInput
+				id="description"
 				label="description"
-				value={coffee.description}
+				initialValue={coffee.description}
 				placeholder="Grown at an altitude of 5000m"
-				onChangeText={(value: string) =>
-					dispatch(basicActionCreator("description", value))
-				}
+				onChangeText={inputChangeHandler}
 			/>
 			<SelectProcess process={coffee.process} />
 			<FormButtons

@@ -1,9 +1,9 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import CustomText from "../Common/CustomText";
+import CustomText from "../../Common/CustomText";
 import Process from ".";
 import { useDispatch } from "react-redux";
-import useFormVars from "../../hooks/useFormVars";
+import useFormVars from "../../../hooks/useFormVars";
 
 interface Props {
 	process: string;

@@ -19,7 +19,6 @@ export default function Statistic({ text, value }: Props) {
 const styles = StyleSheet.create({
 	container: {
 		alignItems: "center",
-		// borderWidth: 1,
 		paddingHorizontal: 10,
 		flexWrap: "wrap",
 	},

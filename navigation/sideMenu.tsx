@@ -3,7 +3,7 @@ import { TabsNavigator } from "./bottomTabs";
 import { SettingsNavigator } from "./stacks";
 import { COLORS } from "../styles/colors";
 
-const MainNavigator = createDrawerNavigator(
+const DrawerNavigator = createDrawerNavigator(
 	{
 		Profile: {
 			screen: TabsNavigator,
@@ -24,4 +24,4 @@ const MainNavigator = createDrawerNavigator(
 	}
 );
 
-export default MainNavigator;
+export default DrawerNavigator;

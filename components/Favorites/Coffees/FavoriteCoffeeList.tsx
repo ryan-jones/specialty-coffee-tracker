@@ -2,7 +2,6 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import FavoriteCoffeeListItem from "./FavoriteCoffeeListItem";
 import { ICoffee } from "../../../models/interfaces";
-import Link from "../../Common/Link";
 
 interface Props {
 	coffees: ICoffee[];
@@ -28,14 +27,6 @@ export default function CoffeeList(props: Props) {
 					/>
 				))}
 			</View>
-			{/* <View style={styles.link}>
-				<Link
-					text="View all my coffees ->"
-					navigation={props.navigation}
-					routeName="Coffees"
-					styles={props.textStyles}
-				/>
-			</View> */}
 		</View>
 	);
 }

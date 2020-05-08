@@ -13,8 +13,8 @@ export const post = async (url: string, body: any): Promise<any> => {
 	try {
 		const response: AxiosResponse = await axios.post(url, body);
 		return response.data;
-	} catch (err) {
-		throw Error(err);
+	} catch (error) {
+		throw Error(error);
 	}
 };
 

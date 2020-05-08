@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
-import TextEllipsis from "../../Common/TextEllipsis";
-import { COLORS } from "../../../styles/colors";
+import TextEllipsis from "../../../Common/TextEllipsis";
+import { COLORS } from "../../../../styles/colors";
 
 interface Props {
 	name: string;
@@ -9,12 +9,12 @@ interface Props {
 }
 
 const icons: any = {
-	chemex: require("../../../assets/images/chemex.png"),
-	v60: require("../../../assets/images/v60.png"),
-	espresso: require("../../../assets/images/espresso.png"),
-	frenchpress: require("../../../assets/images/frenchpress.png"),
-	syphon: require("../../../assets/images/syphon.png"),
-	aeropress: require("../../../assets/images/aeropress.png"),
+	chemex: require("../../../../assets/images/chemex.png"),
+	v60: require("../../../../assets/images/v60.png"),
+	espresso: require("../../../../assets/images/espresso.png"),
+	frenchpress: require("../../../../assets/images/frenchpress.png"),
+	syphon: require("../../../../assets/images/syphon.png"),
+	aeropress: require("../../../../assets/images/aeropress.png"),
 };
 
 export default function BrewMethod({ name, rating }: Props) {

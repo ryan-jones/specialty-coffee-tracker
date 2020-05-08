@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { View, StyleSheet, ImageSourcePropType, Image } from "react-native";
-import { INote } from "../../../models/interfaces";
-import CustomTextInput from "../../Common/CustomTextInput";
-import FormButtons from "../../Common/FormButtons";
+import { INote } from "../../../../models/interfaces";
+import CustomTextInput from "../../../Common/CustomTextInput";
+import FormButtons from "../../../Common/FormButtons";
 import SelectCoffeeNotes from "../../CoffeeDetails/SelectCoffeeNotes";
-import { setSelectedNotes } from "../../../utils";
+import { setSelectedNotes } from "../../../../utils";
 
 interface Props {
 	method: string;

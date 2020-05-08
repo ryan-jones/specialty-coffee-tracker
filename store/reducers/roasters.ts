@@ -1,8 +1,7 @@
-import { ROASTERS } from "../../data";
 import { ADD_ROASTER, TOGGLE_ROASTER_MODAL } from "../actions/roasters";
 
 const initialState = {
-	allRoasters: ROASTERS,
+	allRoasters: [],
 	showModal: false,
 };
 

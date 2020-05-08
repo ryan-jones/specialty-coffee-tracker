@@ -1,7 +1,6 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import FavoriteCoffeeList from "../components/Favorites/Coffees/FavoriteCoffeeList";
-import { COFFEES, ROASTERS } from "../data";
 import Map from "../components/Map";
 import ContentSection from "../components/Common/ContentSection";
 import FavoriteRoasterList from "../components/Favorites/Roasters/FavoriteRoasterList";
@@ -24,7 +23,7 @@ export default function ProfileScreen(props: Props) {
 			<View style={styles.screen}>
 				<View style={styles.imageContainer}>
 					<View style={styles.mapContainer}>
-						<Map coffees={COFFEES} />
+						{/* <Map coffees={COFFEES} /> */}
 					</View>
 				</View>
 				<ContentSection>

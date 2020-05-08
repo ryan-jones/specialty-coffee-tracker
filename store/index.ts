@@ -5,6 +5,7 @@ import profileReducer from "./reducers/profile";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import selectedCoffeeReducer from "./reducers/selectedCoffee";
+import authReducer from "./reducers/auth";
 
 const rootReducer = combineReducers({
 	profile: profileReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
 	roasters: roasterReducer,
 	newCoffee: addNewCoffeeReducer,
 	selectedCoffee: selectedCoffeeReducer,
+	auth: authReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

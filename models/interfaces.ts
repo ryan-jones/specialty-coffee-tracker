@@ -1,7 +1,6 @@
 import { NavigationScreenProp, NavigationState } from "react-navigation";
 
 export interface ICoffee {
-	id?: string;
 	name: string;
 	location: string;
 	process: string;
@@ -9,6 +8,7 @@ export interface ICoffee {
 	notes: string[];
 	rating: string;
 	methods: IMethods;
+	id?: string;
 	description?: string;
 	coordinates?: any;
 }

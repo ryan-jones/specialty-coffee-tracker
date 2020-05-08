@@ -1,11 +1,11 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { ICoffee } from "../../models/interfaces";
-import CustomText from "../Common/CustomText";
-import { COLORS } from "../../styles/colors";
-import Circle from "../Common/Circle";
+import { ICoffee } from "../../../models/interfaces";
+import CustomText from "../../Common/CustomText";
+import { COLORS } from "../../../styles/colors";
+import Circle from "../../Common/Circle";
 import CoffeeNotes from "../CoffeeDetails/CoffeeNotes";
-import ListItem from "../Common/ListItem";
+import ListItem from "../../Common/ListItem";
 
 interface Props extends ICoffee {
 	onSelect: (coffee: string) => void;

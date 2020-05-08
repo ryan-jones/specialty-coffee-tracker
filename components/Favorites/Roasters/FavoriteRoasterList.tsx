@@ -1,7 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { IRoaster } from "../../../models/interfaces";
-import Link from "../../Common/Link";
 import FavoriteRoasterListItem from "./FavoriteRoasterListItem";
 
 interface Props {
@@ -28,14 +27,6 @@ export default function FavoriteRoasterList(props: Props) {
 					/>
 				))}
 			</View>
-			{/* <View style={styles.link}>
-				<Link
-					text="View all my roasters ->"
-					navigation={props.navigation}
-					routeName="Roasters"
-					styles={props.textStyles}
-				/>
-			</View> */}
 		</View>
 	);
 }

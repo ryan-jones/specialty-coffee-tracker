@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
-import CoffeeList from "../components/CoffeeList/CoffeeList";
+import CoffeeList from "../components/Coffee/CoffeeList";
 import { ICoffee } from "../models/interfaces";
 import CustomHeaderButton from "../components/Common/HeaderButton";
 import MenuButton from "../components/Common/MenuButton";

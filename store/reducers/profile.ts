@@ -1,28 +1,20 @@
-import { COFFEES, ROASTERS } from "../../data";
-import { ICoffee } from "../../models/interfaces";
-
 const LOGGED_IN = "LOGGED_IN";
 
 const initialState = {
-	favCoffees: COFFEES.slice(0, 3),
-	favRoasters: ROASTERS.slice(0, 3),
+	favCoffees: [],
+	favRoasters: [],
 	stats: [
 		{
 			text: "Coffees",
-			value: COFFEES.length,
+			value: 0,
 		},
 		{
 			text: "Roasters",
-			value: ROASTERS.length,
+			value: 0,
 		},
 		{
 			text: "Regions",
-			value: COFFEES.reduce((list: string[], coffee: ICoffee) => {
-				if (list.indexOf(coffee.location) > 0) {
-					return list;
-				}
-				return list.concat(coffee.location);
-			}, []).length,
+			value: [],
 		},
 	],
 };

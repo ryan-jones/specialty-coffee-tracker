@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import TextEllipsis from "../Common/TextEllipsis";
-import CustomTextInput from "../Common/CustomTextInput";
+import TextEllipsis from "../../Common/TextEllipsis";
+import CustomTextInput from "../../Common/CustomTextInput";
 import { Ionicons } from "@expo/vector-icons";
-import { INote } from "../../models/interfaces";
+import { INote } from "../../../models/interfaces";
 
 interface Props {
 	notes: INote[];

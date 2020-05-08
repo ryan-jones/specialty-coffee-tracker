@@ -3,8 +3,8 @@ import { View, StyleSheet } from "react-native";
 import BasicInfo from "./BasicInfo";
 import FormView from "../../Common/FormView";
 import CustomText from "../../Common/CustomText";
-import SelectBrewMethod from "../../BrewMethods/AddBrewMethod/SelectBrewMethod";
-import SelectCoffeeNotes from "../../CoffeeDetails/SelectCoffeeNotes";
+import SelectBrewMethod from "../../Coffee/BrewMethods/AddBrewMethod/SelectBrewMethod";
+import SelectCoffeeNotes from "../../Coffee/CoffeeDetails/SelectCoffeeNotes";
 import { INote } from "../../../models/interfaces";
 import { COLORS } from "../../../styles/colors";
 

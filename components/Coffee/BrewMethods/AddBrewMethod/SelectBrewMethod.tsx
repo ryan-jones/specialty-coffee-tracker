@@ -1,38 +1,38 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Image, Modal } from "react-native";
-import { METHODS } from "../../../data";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import CustomText from "../../Common/CustomText";
-import { IMethod } from "../../../models/interfaces";
+import CustomText from "../../../Common/CustomText";
+import { IMethod } from "../../../../models/interfaces";
 import AddBrewMethod from "./AddBrewMethod";
-import TextEllipsis from "../../Common/TextEllipsis";
+import TextEllipsis from "../../../Common/TextEllipsis";
 import { useDispatch } from "react-redux";
-import useFormVars from "../../../hooks/useFormVars";
+import useFormVars from "../../../../hooks/useFormVars";
+import { METHODS } from "../../../../data";
 
 const icons: any = {
 	chemex: {
-		selected: require("../../../assets/images/chemex-select.png"),
-		unselected: require("../../../assets/images/chemex.png"),
+		selected: require("../../../../assets/images/chemex-select.png"),
+		unselected: require("../../../../assets/images/chemex.png"),
 	},
 	v60: {
-		selected: require("../../../assets/images/v60-select.png"),
-		unselected: require("../../../assets/images/v60.png"),
+		selected: require("../../../../assets/images/v60-select.png"),
+		unselected: require("../../../../assets/images/v60.png"),
 	},
 	espresso: {
-		selected: require("../../../assets/images/espresso-select.png"),
-		unselected: require("../../../assets/images/espresso.png"),
+		selected: require("../../../../assets/images/espresso-select.png"),
+		unselected: require("../../../../assets/images/espresso.png"),
 	},
 	frenchpress: {
-		selected: require("../../../assets/images/frenchpress-select.png"),
-		unselected: require("../../../assets/images/frenchpress.png"),
+		selected: require("../../../../assets/images/frenchpress-select.png"),
+		unselected: require("../../../../assets/images/frenchpress.png"),
 	},
 	syphon: {
-		selected: require("../../../assets/images/syphon-select.png"),
-		unselected: require("../../../assets/images/syphon.png"),
+		selected: require("../../../../assets/images/syphon-select.png"),
+		unselected: require("../../../../assets/images/syphon.png"),
 	},
 	aeropress: {
-		selected: require("../../../assets/images/aeropress-select.png"),
-		unselected: require("../../../assets/images/aeropress.png"),
+		selected: require("../../../../assets/images/aeropress-select.png"),
+		unselected: require("../../../../assets/images/aeropress.png"),
 	},
 };
 
@@ -42,7 +42,6 @@ export default function SelectBrewMethod() {
 	const dispatch = useDispatch();
 
 	const { coffee, brewMethodActionCreator } = useFormVars();
-	console.log("coffee in select brew method", coffee);
 	const { methods } = coffee;
 
 	const setIcon = (method: string) => {
