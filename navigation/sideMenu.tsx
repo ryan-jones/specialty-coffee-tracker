@@ -8,7 +8,7 @@ const DrawerNavigator = createDrawerNavigator(
 		Profile: {
 			screen: TabsNavigator,
 			navigationOptions: {
-				drawerLabel: "Home",
+				drawerLabel: "Profile",
 			},
 		},
 		Settings: SettingsNavigator,

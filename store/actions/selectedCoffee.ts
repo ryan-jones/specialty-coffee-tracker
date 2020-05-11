@@ -1,6 +1,7 @@
 import { ICoffee } from "../../models/interfaces";
-import { put, get } from "../../utils/http";
+import { put, get, patch } from "../../utils/http";
 import { REACT_APP_API_URL } from "react-native-dotenv";
+import { Dispatch } from "redux";
 
 const url = REACT_APP_API_URL;
 
@@ -42,25 +43,40 @@ export const resetSelectedCoffee = () => {
 };
 
 export const setSelectedCoffee = (coffee: ICoffee) => {
-	return async (dispatch: any) => {
-		const response = await get(`${url}/coffeeDetails/${coffee.id}.json`);
+	return async (dispatch: Dispatch, getState: any) => {
+		const { token, userId } = getState().auth;
+		const methods = await get(
+			`${url}/brewMethods/${userId}/${coffee.id}.json?auth=${token}`
+		);
 		dispatch({
 			type: SET_SELECTED_COFFEE,
-			payload: { ...response, id: coffee.id },
+			payload: { ...coffee, methods, id: coffee.id },
 		});
 	};
 };
 
 export const editSelectedCoffee = (coffee: ICoffee) => {
-	console.log("the coffee being edited", coffee);
-	return async (dispatch: any) => {
+	return async (dispatch: Dispatch, getState: any) => {
 		try {
-			await put(`${url}/coffeeDetails/${coffee.id}.json`, coffee);
-			console.log("success!");
+			const { token, userId } = getState().auth;
+			await patch(`${url}/coffees/${userId}/${coffee.id}.json?auth=${token}`, {
+				name: coffee.name,
+				description: coffee.description,
+				coordinates: coffee.coordinates,
+				process: coffee.process,
+				roaster: coffee.roaster,
+				location: coffee.location,
+				notes: coffee.notes,
+				rating: coffee.rating,
+			});
+			await put(
+				`${url}/brewMethods/${userId}/${coffee.id}.json?auth=${token}`,
+				coffee.methods
+			);
 			dispatch({
 				type: COFFEE_UPDATE_SUCCESS,
 			});
-			dispatch(setSelectedCoffee(coffee));
+			setSelectedCoffee(coffee);
 		} catch (err) {
 			dispatch({ type: COFFEE_UPDATE_ERROR });
 		}

@@ -1,6 +1,5 @@
 import { createStackNavigator } from "react-navigation-stack";
 import { COLORS } from "../styles/colors";
-import HomeScreen from "../screens/Home";
 import CoffeeDetailsScreen from "../screens/CoffeeDetails";
 import CoffeesScreen from "../screens/Coffees";
 import ProfileScreen from "../screens/Profile";
@@ -9,6 +8,7 @@ import RoasterDetailsScreen from "../screens/RoasterDetails";
 import SettingsScreen from "../screens/Settings";
 import AddCoffeeScreen from "../screens/AddCoffee";
 import EditCoffeeScreen from "../screens/EditCoffee";
+import AuthScreen from "../screens/Auth";
 
 const defaultNavigationOptions = {
 	headerStyle: {
@@ -19,7 +19,6 @@ const defaultNavigationOptions = {
 
 export const ProfileNavigator = createStackNavigator(
 	{
-		Home: HomeScreen,
 		Profile: ProfileScreen,
 	},
 	{
@@ -52,6 +51,15 @@ export const CoffeeNavigator = createStackNavigator(
 export const SettingsNavigator = createStackNavigator(
 	{
 		Settings: SettingsScreen,
+	},
+	{
+		defaultNavigationOptions,
+	}
+);
+
+export const AuthNavigator = createStackNavigator(
+	{
+		Auth: AuthScreen,
 	},
 	{
 		defaultNavigationOptions,

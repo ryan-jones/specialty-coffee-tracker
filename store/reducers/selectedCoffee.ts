@@ -46,28 +46,28 @@ const selectedCoffeeReducer = (state = initialState, action: any) => {
 			};
 		case UPDATE_SELECTED_COFFEE_BREW_METHOD:
 			const { name, brewCase } = action.payload;
-			const method = state.methods[name];
+			const method = state.edited.methods[name];
 			// firebase does not store empty array values
 			const updatedMethod: IMethod = {
 				...method,
 				cases: method.cases ? [...method.cases, brewCase] : [brewCase],
 			};
-
 			updatedMethod.rating = setBrewMethodRatings(updatedMethod);
 
 			const updatedMethods: IMethods = {
-				...state.methods,
+				...state.edited.methods,
 				[name]: {
 					...updatedMethod,
 				},
 			};
 			const newAverageRating: number = setCoffeeAverageRating(updatedMethods);
+
 			return {
 				...state,
 				edited: {
 					...state.edited,
 					rating: newAverageRating,
-					notes: [...state.notes, ...brewCase.notes],
+					notes: [...state.edited.notes, ...brewCase.notes],
 					methods: updatedMethods,
 				},
 			};

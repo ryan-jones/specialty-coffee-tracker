@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 import TextEllipsis from "../../Common/TextEllipsis";
-import CustomTextInput from "../../Common/CustomTextInput";
 import { Ionicons } from "@expo/vector-icons";
 import { INote } from "../../../models/interfaces";
+import CustomText from "../../Common/CustomText";
 
 interface Props {
 	notes: INote[];
@@ -48,13 +48,14 @@ export default function SelectCoffeeNotes({ notes, update }: Props) {
 	return (
 		<View style={styles.container}>
 			<View style={styles.input}>
-				<CustomTextInput
-					label="add note"
-					styles={{ width: "100%" }}
+				{/* <CustomText> add note</CustomText> */}
+				<TextInput
+					style={{ width: "100%" }}
 					value={textValue}
 					placeholder="chocolate"
 					onChangeText={setTextValue}
 				/>
+
 				<View style={styles.button}>
 					<TouchableOpacity onPress={addNote}>
 						<Ionicons name="md-add-circle-outline" size={22} />
@@ -83,10 +84,13 @@ const styles = StyleSheet.create({
 		padding: 15,
 	},
 	input: {
-		width: "100%",
+		// width: "100%",
 		marginVertical: 15,
 		flexDirection: "row",
 		justifyContent: "center",
+	},
+	label: {
+		margin: 15,
 	},
 	button: {
 		justifyContent: "center",

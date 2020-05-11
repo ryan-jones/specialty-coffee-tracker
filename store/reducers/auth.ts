@@ -1,7 +1,6 @@
 import {
 	LOGGING_IN,
 	SIGNING_UP,
-	SIGNUP_SUCCESS,
 	LOGIN_SUCCESS,
 	SIGNUP_ERROR,
 	LOGIN_ERROR,
@@ -10,6 +9,9 @@ import {
 const initialState = {
 	loading: false,
 	error: null,
+	token: null,
+	userId: null,
+	refreshToken: null,
 };
 
 const authReducer = (state = initialState, action: any) => {
@@ -20,10 +22,10 @@ const authReducer = (state = initialState, action: any) => {
 				...state,
 				loading: true,
 			};
-		case SIGNUP_SUCCESS:
 		case LOGIN_SUCCESS:
 			return {
 				...state,
+				...action.payload,
 				loading: false,
 			};
 		case SIGNUP_ERROR:

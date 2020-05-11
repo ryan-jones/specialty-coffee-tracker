@@ -32,16 +32,26 @@ export const clearNewCoffee = () => {
 };
 
 export const addNewCoffee = (coffee: ICoffee) => {
-	return async (dispatch: Dispatch) => {
+	return async (dispatch: Dispatch, getState: any) => {
 		try {
-			const response = await post(`${url}/coffeeDetails.json`, coffee);
-			await post(`${url}/coffees.json`, {
-				id: response.name,
-				name: coffee.name,
-				location: coffee.location,
-				notes: coffee.notes,
-				rating: coffee.rating,
-			});
+			const { token, userId } = getState().auth;
+			const response = await post(
+				`${url}/coffees/${userId}.json?auth=${token}`,
+				{
+					name: coffee.name,
+					description: coffee.description,
+					coordinates: coffee.coordinates,
+					process: coffee.process,
+					roaster: coffee.roaster,
+					location: coffee.location,
+					notes: coffee.notes,
+					rating: coffee.rating,
+				}
+			);
+			await post(
+				`${url}/brewMethods/${userId}/${response.name}.json?auth=${token}`,
+				coffee.methods
+			);
 			dispatch({ type: ADD_NEW_COFFEE_SUCCESS });
 		} catch (err) {
 			throw Error(err);

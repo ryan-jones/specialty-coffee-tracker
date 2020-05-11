@@ -1,15 +1,12 @@
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import DrawerNavigator from "./sideMenu";
-import AuthScreen from "../screens/Auth";
-import { createStackNavigator } from "react-navigation-stack";
-
-const AuthNavigator = createStackNavigator({
-	Auth: AuthScreen,
-});
+import { AuthNavigator } from "./stacks";
+import OnInitScreen from "../screens/OnInit";
 
 const MainNavigator = createSwitchNavigator({
+	Startup: OnInitScreen,
 	Auth: AuthNavigator,
-	Profile: DrawerNavigator,
+	Home: DrawerNavigator,
 });
 
 export default createAppContainer(MainNavigator);

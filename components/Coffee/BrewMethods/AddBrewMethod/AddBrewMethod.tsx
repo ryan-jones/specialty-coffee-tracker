@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import { View, StyleSheet, ImageSourcePropType, Image } from "react-native";
+import {
+	View,
+	StyleSheet,
+	ImageSourcePropType,
+	Image,
+	TextInput,
+} from "react-native";
 import { INote } from "../../../../models/interfaces";
-import CustomTextInput from "../../../Common/CustomTextInput";
+import CustomText from "../../../Common/CustomText";
 import FormButtons from "../../../Common/FormButtons";
 import SelectCoffeeNotes from "../../CoffeeDetails/SelectCoffeeNotes";
 import { setSelectedNotes } from "../../../../utils";
+import WarningMessage from "../../../Common/WarningMessage";
 
 interface Props {
 	method: string;
@@ -40,31 +47,32 @@ export default function AddBrewMethod({
 	return (
 		<View style={styles.container}>
 			<Image style={styles.image} source={icon} />
-			<CustomTextInput
-				label="# of grams"
+			<CustomText># of grams</CustomText>
+			<TextInput
 				value={grams}
 				onChangeText={setGrams}
 				keyboardType="numeric"
 				placeholder="0"
 			/>
-			<CustomTextInput
-				label="ml of water"
+			<CustomText>ml of water</CustomText>
+			<TextInput
 				value={water}
 				onChangeText={setWater}
 				keyboardType="numeric"
 				placeholder="0"
 			/>
-			<CustomTextInput
-				label="rating"
+			<CustomText>rating</CustomText>
+			<TextInput
 				value={rating}
-				invalidWarning="Ratings are between 0-5"
-				isValid={brewCase.rating <= 5}
 				keyboardType="numeric"
 				onChangeText={setRating}
 				placeholder="0"
 			/>
-			<CustomTextInput
-				label="anything else you'd like to add"
+			{brewCase.rating > 5 && (
+				<WarningMessage>Ratings are between 0-5</WarningMessage>
+			)}
+			<CustomText>anything else you'd like to add</CustomText>
+			<TextInput
 				value={description}
 				keyboardType="default"
 				onChangeText={setDescription}

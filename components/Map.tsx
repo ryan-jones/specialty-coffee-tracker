@@ -7,13 +7,16 @@ interface Props {
 	coffees: ICoffee[];
 }
 export default function Map({ coffees }: Props) {
+	const coords = {
+		latitude: coffees.length > 0 ? coffees[0].coordinates.latitude : 10,
+		longitude: coffees.length > 0 ? coffees[0].coordinates.longitude : 10,
+	};
 	return (
 		<MapView
 			style={styles.map}
 			mapType={Platform.OS === "ios" ? "satellite" : "standard"}
 			initialRegion={{
-				latitude: coffees[0].coordinates.latitude,
-				longitude: coffees[0].coordinates.longitude,
+				...coords,
 				latitudeDelta: 0,
 				longitudeDelta: 0,
 			}}

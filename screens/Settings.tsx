@@ -1,11 +1,34 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 import MenuButton from "../components/Common/MenuButton";
+import CustomText from "../components/Common/CustomText";
+import { useSelector, useDispatch } from "react-redux";
+import { updateProfileData, fetchProfileData } from "../store/actions/profile";
 
 export default function SettingsScreen() {
+	const profile = useSelector((state: any) => state.profile);
+	const dispatch = useDispatch();
+	const [name, setName] = useState(profile.name);
 	return (
 		<View style={styles.screen}>
 			<Text>Settings Screen</Text>
+			<View>
+				<CustomText>Change User Name</CustomText>
+				<TextInput
+					placeholder="John Doe"
+					keyboardType="default"
+					style={styles.input}
+					value={name}
+					onChangeText={setName}
+				/>
+				<Button
+					title="Save Name"
+					onPress={async () => {
+						await dispatch(updateProfileData({ name }));
+						dispatch(fetchProfileData());
+					}}
+				/>
+			</View>
 		</View>
 	);
 }
@@ -22,5 +45,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
+	},
+	input: {
+		marginVertical: 15,
 	},
 });

@@ -1,6 +1,7 @@
 import {
 	COFFEES_LOADED_SUCCESS,
 	COFFEES_LOADED_ERROR,
+	COFFEES_LOADING,
 } from "../actions/coffees";
 
 const initialState = {
@@ -23,6 +24,11 @@ const coffeeReducer = (state = initialState, action: any) => {
 				...state,
 				error: true,
 				loaded: true,
+			};
+		case COFFEES_LOADING:
+			return {
+				...state,
+				loaded: false,
 			};
 		default:
 			return state;

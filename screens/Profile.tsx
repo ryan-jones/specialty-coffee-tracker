@@ -1,53 +1,76 @@
-import React from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import React, { useEffect } from "react";
+import {
+	View,
+	StyleSheet,
+	ScrollView,
+	ActivityIndicator,
+	Dimensions,
+} from "react-native";
 import FavoriteCoffeeList from "../components/Favorites/Coffees/FavoriteCoffeeList";
 import Map from "../components/Map";
 import ContentSection from "../components/Common/ContentSection";
 import FavoriteRoasterList from "../components/Favorites/Roasters/FavoriteRoasterList";
 import Statistic from "../components/Common/Statistic";
 import MenuButton from "../components/Common/MenuButton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Navigation } from "../models/interfaces";
+import { fetchProfileData } from "../store/actions/profile";
+import CustomText from "../components/Common/CustomText";
 
 interface Props {
 	navigation: Navigation;
 }
 
 export default function ProfileScreen(props: Props) {
-	const { favCoffees, favRoasters, stats } = useSelector(
-		(state: any) => state.profile
-	);
+	const dispatch = useDispatch();
+	const { profile, auth, coffees } = useSelector((state: any) => state);
 
+	useEffect(() => {
+		if (auth.token) {
+			dispatch(fetchProfileData());
+		}
+	}, [auth.token]);
 	return (
 		<ScrollView>
-			<View style={styles.screen}>
-				<View style={styles.imageContainer}>
-					<View style={styles.mapContainer}>
-						{/* <Map coffees={COFFEES} /> */}
+			{profile.userId ? (
+				<View style={styles.screen}>
+					<View style={styles.imageContainer}>
+						<View style={styles.mapContainer}>
+							<Map coffees={coffees.allCoffees} />
+						</View>
 					</View>
-				</View>
-				<ContentSection>
-					<View style={styles.statistics}>
-						{stats.map((stat: any) => (
-							<Statistic key={stat.text} text={stat.text} value={stat.value} />
-						))}
-					</View>
-					<View style={styles.favorites}>
-						<FavoriteCoffeeList
-							coffees={favCoffees}
-							textStyles={styles.text}
-							navigation={props.navigation}
-						/>
-					</View>
-					<View style={styles.favorites}>
-						<FavoriteRoasterList
+					<ContentSection>
+						<CustomText>{profile.name}</CustomText>
+						<View style={styles.statistics}>
+							{profile.stats.map((stat: any) => (
+								<Statistic
+									key={stat.text}
+									text={stat.text}
+									value={stat.value}
+								/>
+							))}
+						</View>
+						<View style={styles.favorites}>
+							<FavoriteCoffeeList
+								coffees={profile.favoriteCoffees}
+								textStyles={styles.text}
+								navigation={props.navigation}
+							/>
+						</View>
+						<View style={styles.favorites}>
+							{/* <FavoriteRoasterList
 							roasters={favRoasters}
 							textStyles={styles.text}
 							navigation={props.navigation}
-						/>
-					</View>
-				</ContentSection>
-			</View>
+						/> */}
+						</View>
+					</ContentSection>
+				</View>
+			) : (
+				<View style={styles.loading}>
+					<ActivityIndicator size="large" />
+				</View>
+			)}
 		</ScrollView>
 	);
 }
@@ -86,5 +109,9 @@ const styles = StyleSheet.create({
 	mapContainer: {
 		width: "100%",
 		height: 300,
+	},
+	loading: {
+		height: Dimensions.get("window").height - 75,
+		justifyContent: "center",
 	},
 });

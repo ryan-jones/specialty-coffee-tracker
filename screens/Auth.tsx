@@ -7,25 +7,29 @@ import { signup, login } from "../store/actions/auth";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { GRADIENTS, COLORS } from "../styles/colors";
+import WarningMessage from "../components/Common/WarningMessage";
+import { fetchProfileData } from "../store/actions/profile";
 
 interface Props {
 	navigation: any;
 }
+const FORM_UPDATE = "FORM_UPDATE";
 const initialState = {
 	inputValues: {
+		name: "",
 		email: "",
 		password: "",
 	},
 	inputValidities: {
+		name: false,
 		email: false,
 		password: false,
 	},
-	formIsValid: false,
 };
 
 const formReducer = (state = initialState, action: any) => {
 	switch (action.type) {
-		case "FORM_UPDATE":
+		case FORM_UPDATE:
 			const updatedValues = {
 				...state.inputValues,
 				[action.input]: action.value,
@@ -37,8 +41,6 @@ const formReducer = (state = initialState, action: any) => {
 			return {
 				inputValidities: updatedValidities,
 				inputValues: updatedValues,
-				formIsValid:
-					state.inputValidities.email && state.inputValidities.password,
 			};
 		default:
 			return state;
@@ -53,12 +55,12 @@ export default function AuthScreen(props: Props) {
 	const [formState, dispatchFormState] = useReducer(formReducer, initialState);
 
 	const inputChangeHandler = useCallback(
-		(inputIdentifier, inputValue, inputValidity) => {
+		(input, inputValue, inputValidity) => {
 			dispatchFormState({
-				type: "FORM_UPDATE",
+				type: FORM_UPDATE,
+				input,
 				value: inputValue,
 				isValid: inputValidity,
-				input: inputIdentifier,
 			});
 		},
 		[dispatchFormState]
@@ -70,6 +72,11 @@ export default function AuthScreen(props: Props) {
 
 	const authText = isSignup ? "Sign up" : "Login";
 
+	const formIsValid = () => {
+		const { email, password, name } = formState.inputValidities;
+		return isSignup ? email && password && name : email && password;
+	};
+
 	return (
 		<LinearGradient colors={GRADIENTS.baseColor} style={styles.gradient}>
 			<CustomText
@@ -77,6 +84,21 @@ export default function AuthScreen(props: Props) {
 			>{`${authText} to get started`}</CustomText>
 			<View style={styles.form}>
 				<View style={styles.formInputs}>
+					{authState.error && (
+						<WarningMessage>Oops. Email or password was invalid</WarningMessage>
+					)}
+					{isSignup && (
+						<CustomTextInput
+							id="name"
+							label="User name"
+							placeholder="John Doe"
+							keyboardType="default"
+							invalidWarning="Please enter a name!"
+							styles={styles.input}
+							required
+							onChangeText={inputChangeHandler}
+						/>
+					)}
 					<CustomTextInput
 						id="email"
 						label="User email"
@@ -102,19 +124,15 @@ export default function AuthScreen(props: Props) {
 				</View>
 				<View style={styles.formButtons}>
 					{authState.loading ? (
-						<ActivityIndicator />
+						<ActivityIndicator size="large" />
 					) : (
 						<Button
-							disabled={!formState.formIsValid}
+							disabled={!formIsValid() || authState.error}
 							title={authText}
-							onPress={() => {
+							onPress={async () => {
 								const action = isSignup ? signup : login;
-								dispatch(
-									action(
-										formState.inputValues.email,
-										formState.inputValues.password
-									)
-								);
+								await dispatch(action(formState.inputValues));
+								props.navigation.navigate("Home");
 							}}
 						/>
 					)}
@@ -133,7 +151,7 @@ export default function AuthScreen(props: Props) {
 }
 
 AuthScreen.navigationOptions = {
-	title: "Login",
+	title: "Specialty Coffee",
 };
 
 const styles = StyleSheet.create({
@@ -150,7 +168,6 @@ const styles = StyleSheet.create({
 	},
 	form: {
 		width: "100%",
-		minHeight: "50%",
 		backgroundColor: "white",
 		borderRadius: 5,
 		padding: 15,

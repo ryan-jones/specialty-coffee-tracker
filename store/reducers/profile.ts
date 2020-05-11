@@ -1,8 +1,11 @@
-const LOGGED_IN = "LOGGED_IN";
+import { PROFILE_LOAD_SUCCESS, UPDATE_PREFERENCES } from "../actions/profile";
 
 const initialState = {
-	favCoffees: [],
-	favRoasters: [],
+	name: "",
+	userId: "",
+	favoriteCoffees: [],
+	favoriteRoasters: [],
+	preferences: {},
 	stats: [
 		{
 			text: "Coffees",
@@ -21,8 +24,14 @@ const initialState = {
 
 const profileReducer = (state = initialState, action: any) => {
 	switch (action.type) {
-		case LOGGED_IN:
-			return state;
+		case PROFILE_LOAD_SUCCESS:
+			const newState = { ...action.payload };
+			return newState;
+		case UPDATE_PREFERENCES:
+			return {
+				...state,
+				preferences: action.payload,
+			};
 		default:
 			return state;
 	}

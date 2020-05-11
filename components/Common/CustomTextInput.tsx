@@ -65,15 +65,10 @@ export default function CustomTextInput(props: Props) {
 		) {
 			isValid = false;
 		}
-		// if (props.min != null && +text < props.min) {
-		//   isValid = false;
-		// }
-		// if (props.max != null && +text > props.max) {
-		//   isValid = false;
-		// }
-		// if (props.minLength != null && text.length < props.minLength) {
-		//   isValid = false;
-		// }
+
+		if (props.minLength && text.length < props.minLength) {
+			isValid = false;
+		}
 		dispatch({ type: INPUT_CHANGE, value: text, isValid });
 	};
 

@@ -21,12 +21,11 @@ export default function BasicInfo({
 	btnLabel,
 	onSave,
 }: Props) {
-	const [isValidName, setIsValidName] = useState(true);
 	const { coffee, basicActionCreator } = useFormVars();
 	const dispatch = useDispatch();
 
 	const inputChangeHandler = useCallback(
-		(inputIdentifier, inputValue, inputValidity) => {
+		(inputIdentifier, inputValue) => {
 			dispatch(basicActionCreator(inputIdentifier, inputValue));
 		},
 		[dispatch]
@@ -40,11 +39,12 @@ export default function BasicInfo({
 			<CustomTextInput
 				id="name"
 				label="name*"
-				required
+				placeholder="name"
+				keyboardType="default"
 				initialValue={coffee.name}
 				invalidWarning="A name must be provided"
+				required
 				onChangeText={inputChangeHandler}
-				placeholder="name"
 			/>
 			<AutoCompleteInput location={coffee.location} />
 
