@@ -6,6 +6,7 @@ interface Props {
 	onForward: () => void;
 	btnTitle: string;
 	disabled?: any;
+	onDelete?: () => void;
 }
 
 export default function FormButtons(props: Props) {
@@ -17,6 +18,9 @@ export default function FormButtons(props: Props) {
 				onPress={props.onForward}
 				disabled={props.disabled}
 			/>
+			{props.onDelete && (
+				<Button title="Delete Coffee" color="red" onPress={props.onDelete} />
+			)}
 		</View>
 	);
 }

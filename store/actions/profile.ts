@@ -2,12 +2,18 @@ import { Dispatch } from "redux";
 import { REACT_APP_API_URL } from "react-native-dotenv";
 import { patch, post, getAll } from "../../utils/http";
 import { ICoffee } from "../../models/interfaces";
-import { COFFEES_LOADED_SUCCESS } from "./coffees";
+import {
+	COFFEES_LOADED_SUCCESS,
+	COFFEES_LOADING,
+	COFFEES_LOADED_ERROR,
+} from "./coffees";
 
 export const PROFILE_LOAD_SUCCESS = "PROFILE_LOAD_SUCCESS";
 export const UPDATE_PREFERENCES = "UPDATE_PREFERENCES";
 export const PROFILE_CREATE_SUCCESS = "PROFILE_CREATE_SUCCESS";
+export const PROFILE_CREATE_ERROR = "PROFILE_CREATE_ERROR";
 export const PROFILE_UPDATE_SUCCESS = "PROFILE_UPDATE_SUCCESS";
+export const PROFILE_UPDATE_ERROR = "PROFILE_UPDATE_ERROR";
 
 const url = REACT_APP_API_URL;
 
@@ -38,16 +44,21 @@ export const fetchProfileData = () => {
 	return async (dispatch: Dispatch, getState: any) => {
 		const { userId, token } = getState().auth;
 		try {
+			dispatch({ type: COFFEES_LOADING });
+
 			const response: any[] = await getAll([
 				`${url}/users.json?auth=${token}&orderBy="userId"&isEqualTo="${userId}"`,
 				`${url}/coffees/${userId}.json?auth=${token}`,
 			]);
 			const profileResponse: IProfileResponse = response[0];
 			const profile: IProfileData = Object.values(profileResponse)[0];
+
 			const coffeeResponse: ICoffeeResponse = response[1];
 			const coffees: ICoffee[] = coffeeResponse
 				? Object.keys(coffeeResponse).map((key: string) => coffeeResponse[key])
 				: [];
+			const coffeeList = [...coffees];
+			const coffeeLength = coffees.length;
 			const regions = coffees.reduce((regions: string[], coffee: ICoffee) => {
 				return regions.find((region) => region === coffee.location)
 					? regions
@@ -56,18 +67,17 @@ export const fetchProfileData = () => {
 
 			const payload: any = {
 				...profile,
-				coffees,
 				favoriteCoffees: coffees
 					.sort((a: ICoffee, b: ICoffee) => Number(a.rating) - Number(b.rating))
 					.splice(0, 3),
 				stats: [
 					{
-						text: "Coffees",
-						value: coffees.length,
-					},
-					{
 						text: "Roasters",
 						value: 0,
+					},
+					{
+						text: "Coffees",
+						value: coffeeLength,
 					},
 					{
 						text: "Regions",
@@ -82,10 +92,12 @@ export const fetchProfileData = () => {
 			});
 			dispatch({
 				type: COFFEES_LOADED_SUCCESS,
-				payload: coffees,
+				payload: coffeeList,
 			});
 		} catch (err) {
-			console.log("err in fetch profile data", err.message);
+			dispatch({
+				type: COFFEES_LOADED_ERROR,
+			});
 		}
 	};
 };
@@ -99,7 +111,7 @@ export const setProfileData = (profileData: InsertProfileData) => {
 			);
 			dispatch({ type: PROFILE_CREATE_SUCCESS });
 		} catch (err) {
-			console.log("err in setProfileData", err);
+			dispatch({ type: PROFILE_CREATE_ERROR });
 		}
 	};
 };
@@ -111,7 +123,7 @@ export const updateProfileData = (profileData: IProfileData) => {
 			await patch(`${url}/users/${userId}.json?auth=${token}`, profileData);
 			dispatch({ type: PROFILE_UPDATE_SUCCESS });
 		} catch (err) {
-			console.log("err in updateProfileData", err.json());
+			dispatch({ type: PROFILE_UPDATE_ERROR });
 		}
 	};
 };

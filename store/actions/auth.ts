@@ -55,7 +55,6 @@ export const signup = ({ email, password, name }: IAuth) => {
 				expirationDate
 			);
 		} catch (err) {
-			console.log("err in signup", err);
 			dispatch({ type: SIGNUP_ERROR, payload: err });
 		}
 	};

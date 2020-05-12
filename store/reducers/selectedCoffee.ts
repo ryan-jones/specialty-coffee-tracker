@@ -7,6 +7,7 @@ import {
 	SET_SELECTED_COFFEE,
 	UPDATE_SELECTED_COFFEE_BASIC,
 	RESET_SELECTED_COFFEE,
+	UPDATE_SELECTED_COFFEE_NOTES,
 } from "../actions/selectedCoffee";
 
 export const initialState: any = {
@@ -67,8 +68,15 @@ const selectedCoffeeReducer = (state = initialState, action: any) => {
 				edited: {
 					...state.edited,
 					rating: newAverageRating,
-					notes: [...state.edited.notes, ...brewCase.notes],
+					notes: new Set([...state.edited.notes, ...brewCase.notes]),
 					methods: updatedMethods,
+				},
+			};
+		case UPDATE_SELECTED_COFFEE_NOTES:
+			return {
+				...state,
+				edited: {
+					notes: new Set([...state.edites.notes, ...action.payload]),
 				},
 			};
 		case RESET_SELECTED_COFFEE:

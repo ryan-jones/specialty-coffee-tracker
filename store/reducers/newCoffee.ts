@@ -5,6 +5,7 @@ import {
 	UPDATE_NEW_COFFEE_BREW_METHOD,
 	CLEAR_NEW_COFFEE,
 	UPDATE_NEW_COFFEE_BASIC,
+	UPDATE_NEW_COFFEE_NOTES,
 } from "../actions/newCoffee";
 
 export const initialState: any = {
@@ -80,8 +81,13 @@ const addNewCoffeeReducer = (state = initialState, action: any) => {
 			return {
 				...state,
 				rating: newAverageRating,
-				notes: [...state.notes, ...brewCase.notes],
+				notes: Array.from(new Set([...state.notes, ...brewCase.notes])),
 				methods: updatedMethods,
+			};
+		case UPDATE_NEW_COFFEE_NOTES:
+			return {
+				...state,
+				notes: Array.from(new Set([...state.notes, ...action.payload])),
 			};
 		case CLEAR_NEW_COFFEE:
 			return initialState;

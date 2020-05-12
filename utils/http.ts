@@ -17,7 +17,7 @@ export const getAll = async (urls: string[]): Promise<any> => {
 			.then(axios.spread((...res) => res.map((r) => r.data)));
 		return response;
 	} catch (err) {
-		console.log("err in getAll", err);
+		throw Error(err);
 	}
 };
 
@@ -42,6 +42,15 @@ export const put = async (url: string, body: any): Promise<any> => {
 export const patch = async (url: string, body: any): Promise<any> => {
 	try {
 		const response: AxiosResponse = await axios.patch(url, body);
+		return response.data;
+	} catch (err) {
+		throw Error(err);
+	}
+};
+
+export const deleteValue = async (url: string): Promise<any> => {
+	try {
+		const response: AxiosResponse = await axios.delete(url);
 		return response.data;
 	} catch (err) {
 		throw Error(err);

@@ -1,5 +1,5 @@
-import { ICoffee } from "../../models/interfaces";
-import { put, get, patch } from "../../utils/http";
+import { ICoffee, INote, IMethod } from "../../models/interfaces";
+import { put, get, patch, deleteValue } from "../../utils/http";
 import { REACT_APP_API_URL } from "react-native-dotenv";
 import { Dispatch } from "redux";
 
@@ -12,9 +12,12 @@ export const UPDATE_SELECTED_COFFEE_BREW_METHOD =
 export const CLEAR_SELECTED_COFFEE = "CLEAR_SELECTED_COFFEE";
 export const SET_SELECTED_COFFEE = "SET_SELECTED_COFFEE";
 export const UPDATE_SELECTED_COFFEE_BASIC = "UPDATE_SELECTED_COFFEE_BASIC";
+export const UPDATE_SELECTED_COFFEE_NOTES = "UPDATE_SELECTED_COFFEE_NOTES";
 export const COFFEE_UPDATE_SUCCESS = "COFFEE_UPDATE_SUCCESS";
 export const COFFEE_UPDATE_ERROR = "COFFEE_UPDATE_ERROR";
 export const RESET_SELECTED_COFFEE = "RESET_SELECTED_COFFEE";
+export const COFFEE_DELETE_SUCCESS = "COFFEE_DELETE_SUCCESS";
+export const COFFEE_DELETE_ERROR = "COFFEE_DELETE_ERROR";
 
 export const updateSelectedCoffeeBasic = (key: string, value: string) => {
 	return { type: UPDATE_SELECTED_COFFEE_BASIC, payload: { key, value } };
@@ -30,7 +33,11 @@ export const updateSelectedCoffeeLocation = ({
 	};
 };
 
-export const updateSelectedCoffeeBrewMethod = (method: any) => {
+export const updateSelectedCoffeeNotes = (notes: INote[]) => {
+	return { type: UPDATE_SELECTED_COFFEE_NOTES, payload: notes };
+};
+
+export const updateSelectedCoffeeBrewMethod = (method: IMethod) => {
 	return { type: UPDATE_SELECTED_COFFEE_BREW_METHOD, payload: method };
 };
 
@@ -55,10 +62,12 @@ export const setSelectedCoffee = (coffee: ICoffee) => {
 	};
 };
 
-export const editSelectedCoffee = (coffee: ICoffee) => {
+export const editSelectedCoffee = () => {
 	return async (dispatch: Dispatch, getState: any) => {
 		try {
 			const { token, userId } = getState().auth;
+			const coffee: ICoffee = getState().selectedCoffee.edited;
+
 			await patch(`${url}/coffees/${userId}/${coffee.id}.json?auth=${token}`, {
 				name: coffee.name,
 				description: coffee.description,
@@ -79,6 +88,27 @@ export const editSelectedCoffee = (coffee: ICoffee) => {
 			setSelectedCoffee(coffee);
 		} catch (err) {
 			dispatch({ type: COFFEE_UPDATE_ERROR });
+		}
+	};
+};
+
+export const deleteSelectedCoffee = () => {
+	return async (dispatch: Dispatch, getState: any) => {
+		try {
+			const { token, userId } = getState().auth;
+			const coffee: ICoffee = getState().selectedCoffee.edited;
+
+			await deleteValue(
+				`${url}/coffees/${userId}/${coffee.id}.json?auth=${token}`
+			);
+			await deleteValue(
+				`${url}/brewMethods/${userId}/${coffee.id}.json?auth=${token}`
+			);
+			dispatch({
+				type: COFFEE_DELETE_SUCCESS,
+			});
+		} catch (err) {
+			dispatch({ type: COFFEE_DELETE_ERROR });
 		}
 	};
 };

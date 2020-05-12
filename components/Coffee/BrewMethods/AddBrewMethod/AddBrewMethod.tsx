@@ -78,7 +78,7 @@ export default function AddBrewMethod({
 				onChangeText={setDescription}
 				placeholder="bloom at 50g for 45 seconds, followed by 100ml pours"
 			/>
-			<SelectCoffeeNotes notes={notes} update={setNotes} />
+			<SelectCoffeeNotes notes={brewCase.notes} update={setNotes} />
 			<FormButtons
 				btnTitle="Add method"
 				onCancel={onCancel}

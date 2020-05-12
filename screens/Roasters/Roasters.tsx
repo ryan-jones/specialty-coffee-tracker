@@ -1,9 +1,9 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { IRoaster, Navigation } from "../models/interfaces";
-import RoasterList from "../components/RoasterList/RoasterList";
-import CustomHeaderButton from "../components/Common/HeaderButton";
-import MenuButton from "../components/Common/MenuButton";
+import { IRoaster, Navigation } from "../../models/interfaces";
+import RoasterList from "../../components/RoasterList/RoasterList";
+import CustomHeaderButton from "../../components/Common/HeaderButton";
+import MenuButton from "../../components/Common/MenuButton";
 import { useSelector } from "react-redux";
 
 interface Props {

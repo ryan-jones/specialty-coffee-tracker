@@ -32,7 +32,7 @@ export default function ProfileScreen(props: Props) {
 	}, [auth.token]);
 	return (
 		<ScrollView>
-			{profile.userId ? (
+			{profile.userId && coffees.loaded ? (
 				<View style={styles.screen}>
 					<View style={styles.imageContainer}>
 						<View style={styles.mapContainer}>

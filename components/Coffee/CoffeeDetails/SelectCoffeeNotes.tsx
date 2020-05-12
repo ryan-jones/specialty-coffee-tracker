@@ -3,11 +3,10 @@ import { View, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 import TextEllipsis from "../../Common/TextEllipsis";
 import { Ionicons } from "@expo/vector-icons";
 import { INote } from "../../../models/interfaces";
-import CustomText from "../../Common/CustomText";
 
 interface Props {
-	notes: INote[];
-	update: (notes: INote[]) => void;
+	notes: string[];
+	update: (notes: INote[]) => any;
 }
 
 const DEFAULT_NOTES: INote[] = [
@@ -19,8 +18,13 @@ const DEFAULT_NOTES: INote[] = [
 ];
 
 export default function SelectCoffeeNotes({ notes, update }: Props) {
+	const selectableNotes = notes.map((note: string) => ({
+		name: note,
+		isSelected: true,
+	}));
+
 	const [textValue, setTextValue] = useState("");
-	const selectedNotes = [...notes, ...DEFAULT_NOTES].reduce(
+	const selectedNotes: INote[] = [...DEFAULT_NOTES, ...selectableNotes].reduce(
 		(list: INote[], current: INote) => {
 			if (list.find((item: INote) => item.name === current.name)) return list;
 			return list.concat(current);
@@ -29,8 +33,8 @@ export default function SelectCoffeeNotes({ notes, update }: Props) {
 	);
 
 	const updateNotes = (note: INote) => {
-		const updatedNotes = selectedNotes.map((selectedNote) =>
-			selectedNote === note
+		const updatedNotes = selectedNotes.map((selectedNote: INote) =>
+			selectedNote.name === note.name
 				? { name: note.name, isSelected: !selectedNote.isSelected }
 				: selectedNote
 		);
@@ -38,7 +42,7 @@ export default function SelectCoffeeNotes({ notes, update }: Props) {
 	};
 	const addNote = () => {
 		const exists = selectedNotes.find(
-			({ name }) => name === textValue.toLowerCase()
+			({ name }: INote) => name === textValue.toLowerCase()
 		);
 		if (textValue && !exists) {
 			const value = { name: textValue.toLowerCase(), isSelected: true };
@@ -48,7 +52,6 @@ export default function SelectCoffeeNotes({ notes, update }: Props) {
 	return (
 		<View style={styles.container}>
 			<View style={styles.input}>
-				{/* <CustomText> add note</CustomText> */}
 				<TextInput
 					style={{ width: "100%" }}
 					value={textValue}
@@ -63,7 +66,7 @@ export default function SelectCoffeeNotes({ notes, update }: Props) {
 				</View>
 			</View>
 			<View style={styles.notes}>
-				{selectedNotes.map((note) => (
+				{selectedNotes.map((note: INote) => (
 					<TouchableOpacity key={note.name} onPress={() => updateNotes(note)}>
 						<TextEllipsis
 							text={note.name}
@@ -84,7 +87,6 @@ const styles = StyleSheet.create({
 		padding: 15,
 	},
 	input: {
-		// width: "100%",
 		marginVertical: 15,
 		flexDirection: "row",
 		justifyContent: "center",

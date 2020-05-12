@@ -8,7 +8,6 @@ const initialState = {
 	allCoffees: [],
 	loaded: false,
 	error: false,
-	showModal: false,
 };
 
 const coffeeReducer = (state = initialState, action: any) => {

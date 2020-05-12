@@ -11,6 +11,7 @@ export default function Map({ coffees }: Props) {
 		latitude: coffees.length > 0 ? coffees[0].coordinates.latitude : 10,
 		longitude: coffees.length > 0 ? coffees[0].coordinates.longitude : 10,
 	};
+
 	return (
 		<MapView
 			style={styles.map}
@@ -21,13 +22,15 @@ export default function Map({ coffees }: Props) {
 				longitudeDelta: 0,
 			}}
 		>
-			{coffees.map((coffee: ICoffee) => (
-				<Marker
-					key={coffee.name}
-					coordinate={coffee.coordinates}
-					title={coffee.name}
-				/>
-			))}
+			{coffees.map((coffee: ICoffee) => {
+				const coords = {
+					latitude: coffee.coordinates.lat,
+					longitude: coffee.coordinates.lng,
+				};
+				return (
+					<Marker key={coffee.name} coordinate={coords} title={coffee.name} />
+				);
+			})}
 		</MapView>
 	);
 }

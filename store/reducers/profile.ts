@@ -17,7 +17,7 @@ const initialState = {
 		},
 		{
 			text: "Regions",
-			value: [],
+			value: 0,
 		},
 	],
 };

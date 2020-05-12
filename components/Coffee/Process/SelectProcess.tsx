@@ -3,16 +3,16 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import CustomText from "../../Common/CustomText";
 import Process from ".";
 import { useDispatch } from "react-redux";
-import useFormVars from "../../../hooks/useFormVars";
+import { Action } from "redux";
 
 interface Props {
 	process: string;
+	basicActionCreator: (type: string, icon: string) => Action;
 }
 
 const icons = ["washed", "natural", "honey"];
 
-export default function SelectProcess({ process }: Props) {
-	const { basicActionCreator } = useFormVars();
+export default function SelectProcess({ process, basicActionCreator }: Props) {
 	const dispatch = useDispatch();
 	return (
 		<View style={styles.process}>

@@ -4,14 +4,9 @@ import { REACT_APP_API_URL } from "react-native-dotenv";
 
 const url = REACT_APP_API_URL;
 
-export const UPDATE_COFFEE_NOTES = "UPDATE_COFFEE_NOTES";
 export const COFFEES_LOADED_SUCCESS = "COFFEES_LOADED_SUCCESS";
 export const COFFEES_LOADED_ERROR = "COFFEES_LOADED_ERROR";
 export const COFFEES_LOADING = "COFFEES_LOADING";
-
-export const updateCoffeeNotes = (notes: string[]) => {
-	return { type: UPDATE_COFFEE_NOTES, payload: notes };
-};
 
 export const fetchCoffees = () => {
 	return async (dispatch: Dispatch, getState: any) => {

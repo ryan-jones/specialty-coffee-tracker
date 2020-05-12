@@ -1,13 +1,13 @@
 import React from "react";
 import { View, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
-import { COLORS } from "../styles/colors";
-import CustomText from "../components/Common/CustomText";
-import Process from "../components/Coffee/Process/ShowProcess";
-import Circle from "../components/Common/Circle";
-import CoffeeNotes from "../components/Coffee/CoffeeDetails/CoffeeNotes";
-import BrewMethods from "../components/Coffee/BrewMethods/ShowBrewMethods/BrewMethods";
-import ContentSection from "../components/Common/ContentSection";
-import CustomHeaderButton from "../components/Common/HeaderButton";
+import { COLORS } from "../../styles/colors";
+import CustomText from "../../components/Common/CustomText";
+import Process from "../../components/Coffee/Process/ShowProcess";
+import Circle from "../../components/Common/Circle";
+import CoffeeNotes from "../../components/Coffee/CoffeeDetails/CoffeeNotes";
+import BrewMethods from "../../components/Coffee/BrewMethods/ShowBrewMethods/BrewMethods";
+import ContentSection from "../../components/Common/ContentSection";
+import CustomHeaderButton from "../../components/Common/HeaderButton";
 import { useSelector } from "react-redux";
 
 export default function CoffeeDetailsScreen() {

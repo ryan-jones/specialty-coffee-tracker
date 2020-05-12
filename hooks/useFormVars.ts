@@ -1,18 +1,18 @@
-import useFormContext from "./useFormContext";
 import {
 	updateNewCoffeeLocation,
 	updateNewCoffeeBrewMethod,
 	updateNewCoffeeBasic,
+	updateCoffeeNotes,
 } from "../store/actions/newCoffee";
 import {
 	updateSelectedCoffeeLocation,
 	updateSelectedCoffeeBrewMethod,
 	updateSelectedCoffeeBasic,
+	updateSelectedCoffeeNotes,
 } from "../store/actions/selectedCoffee";
 import { useSelector } from "react-redux";
 
-export default function useFormVars() {
-	const { type } = useFormContext();
+export default function useFormVars(type: string) {
 	const { newCoffee, selectedCoffee }: any = useSelector((state) => state);
 
 	return type === "add"
@@ -22,6 +22,7 @@ export default function useFormVars() {
 				basicActionCreator: updateNewCoffeeBasic,
 				locationActionCreator: updateNewCoffeeLocation,
 				brewMethodActionCreator: updateNewCoffeeBrewMethod,
+				notesActionCreator: updateCoffeeNotes,
 		  }
 		: {
 				type,
@@ -29,5 +30,6 @@ export default function useFormVars() {
 				basicActionCreator: updateSelectedCoffeeBasic,
 				locationActionCreator: updateSelectedCoffeeLocation,
 				brewMethodActionCreator: updateSelectedCoffeeBrewMethod,
+				notesActionCreator: updateSelectedCoffeeNotes,
 		  };
 }

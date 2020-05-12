@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { View, StyleSheet, Image, Modal } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import CustomText from "../../../Common/CustomText";
-import { IMethod } from "../../../../models/interfaces";
+import { IMethod, ICoffee } from "../../../../models/interfaces";
 import AddBrewMethod from "./AddBrewMethod";
 import TextEllipsis from "../../../Common/TextEllipsis";
 import { useDispatch } from "react-redux";
-import useFormVars from "../../../../hooks/useFormVars";
 import { METHODS } from "../../../../data";
+import { Action } from "redux";
 
 const icons: any = {
 	chemex: {
@@ -36,12 +36,19 @@ const icons: any = {
 	},
 };
 
-export default function SelectBrewMethod() {
+interface Props {
+	coffee: ICoffee;
+	brewMethodActionCreator: (method: IMethod) => Action;
+}
+
+export default function SelectBrewMethod({
+	coffee,
+	brewMethodActionCreator,
+}: Props) {
 	const [showModal, setShowModal] = useState(false);
 	const [selectedBrewMethod, setSelectedBrewMethod] = useState("");
 	const dispatch = useDispatch();
 
-	const { coffee, brewMethodActionCreator } = useFormVars();
 	const { methods } = coffee;
 
 	const setIcon = (method: string) => {
