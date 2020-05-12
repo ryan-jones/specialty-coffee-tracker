@@ -9,21 +9,21 @@ import {
 import FavoriteCoffeeList from "../components/Favorites/Coffees/FavoriteCoffeeList";
 import Map from "../components/Map";
 import ContentSection from "../components/Common/ContentSection";
-import FavoriteRoasterList from "../components/Favorites/Roasters/FavoriteRoasterList";
 import Statistic from "../components/Common/Statistic";
 import MenuButton from "../components/Common/MenuButton";
 import { useSelector, useDispatch } from "react-redux";
-import { Navigation } from "../models/interfaces";
 import { fetchProfileData } from "../store/actions/profile";
 import CustomText from "../components/Common/CustomText";
+import { NavigationParams } from "react-navigation";
+import { IState } from "../models/interfaces";
 
 interface Props {
-	navigation: Navigation;
+	navigation: NavigationParams;
 }
 
 export default function ProfileScreen(props: Props) {
 	const dispatch = useDispatch();
-	const { profile, auth, coffees } = useSelector((state: any) => state);
+	const { profile, auth, coffees } = useSelector((state: IState) => state);
 
 	useEffect(() => {
 		if (auth.token) {

@@ -1,8 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Alert, TouchableOpacity } from "react-native";
-import { Navigation } from "../../models/interfaces";
 import { useDispatch } from "react-redux";
-import FormContext from "../../contexts/formContext";
 import {
 	editSelectedCoffee,
 	resetSelectedCoffee,
@@ -13,9 +11,10 @@ import CustomHeaderButton from "../../components/Common/HeaderButton";
 import ListItem from "../../components/Common/ListItem";
 import CustomText from "../../components/Common/CustomText";
 import FormButtons from "../../components/Common/FormButtons";
+import { NavigationParams } from "react-navigation";
 
 interface Props {
-	navigation: Navigation;
+	navigation: NavigationParams;
 }
 
 export default function EditCoffeeScreen(props: Props) {

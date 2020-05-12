@@ -29,7 +29,7 @@ export default function AddBrewMethod({
 	const [grams, setGrams] = useState("");
 	const [water, setWater] = useState("");
 	const [notes, setNotes] = useState<INote[]>([]);
-	const [rating, setRating] = useState("0");
+	const [rating, setRating] = useState("");
 	const [description, setDescription] = useState("");
 
 	const brewCase = {
@@ -43,7 +43,6 @@ export default function AddBrewMethod({
 	const isValid = (): boolean => {
 		return Boolean(brewCase.grams && brewCase.water && brewCase.rating <= 5);
 	};
-
 	return (
 		<View style={styles.container}>
 			<Image style={styles.image} source={icon} />

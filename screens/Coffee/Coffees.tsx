@@ -1,21 +1,22 @@
 import React, { useEffect } from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 import CoffeeList from "../../components/Coffee/CoffeeList";
-import { ICoffee } from "../../models/interfaces";
+import { ICoffee, IState } from "../../models/interfaces";
 import CustomHeaderButton from "../../components/Common/HeaderButton";
 import MenuButton from "../../components/Common/MenuButton";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedCoffee } from "../../store/actions/selectedCoffee";
 import { fetchCoffees } from "../../store/actions/coffees";
 import WarningMessage from "../../components/Common/WarningMessage";
+import { NavigationParams } from "react-navigation";
 
 interface Props {
-	navigation: any;
+	navigation: NavigationParams;
 }
 
 const CoffeesScreen = (props: Props) => {
 	const dispatch = useDispatch();
-	const coffees = useSelector((state: any) => state.coffees);
+	const coffees = useSelector((state: IState) => state.coffees);
 
 	const fetchCoffeeList = () => {
 		dispatch(fetchCoffees());

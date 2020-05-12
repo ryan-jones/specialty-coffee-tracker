@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { clearNewCoffee } from "../../../store/actions/newCoffee";
 import { NavigationParams } from "react-navigation";
 import { INote } from "../../../models/interfaces";
+import { COLORS } from "../../../styles/colors";
 
 interface Props {
 	navigation: NavigationParams;
@@ -21,7 +22,7 @@ export function CoffeeNotesScreen(props: Props) {
 	return (
 		<View style={styles.container}>
 			<FormView
-				text="Continue "
+				text="Save coffee notes"
 				onForward={() => props.navigation.goBack()}
 				onCancel={() => {
 					dispatch(clearNewCoffee());
@@ -54,6 +55,8 @@ const styles = StyleSheet.create({
 		justifyContent: "space-evenly",
 		width: "100%",
 		height: "100%",
+		backgroundColor: COLORS.white,
+		padding: 15,
 	},
 	text: {
 		textAlign: "center",

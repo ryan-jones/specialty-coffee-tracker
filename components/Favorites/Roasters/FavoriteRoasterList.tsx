@@ -2,10 +2,11 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { IRoaster } from "../../../models/interfaces";
 import FavoriteRoasterListItem from "./FavoriteRoasterListItem";
+import { NavigationParams } from "react-navigation";
 
 interface Props {
 	roasters: IRoaster[];
-	navigation: any;
+	navigation: NavigationParams;
 	textStyles?: object;
 	listStyles?: object;
 }

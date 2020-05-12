@@ -9,6 +9,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { GRADIENTS, COLORS } from "../styles/colors";
 import WarningMessage from "../components/Common/WarningMessage";
 import { fetchProfileData } from "../store/actions/profile";
+import { IState, IAuth } from "../models/interfaces";
 
 interface Props {
 	navigation: any;
@@ -48,7 +49,7 @@ const formReducer = (state = initialState, action: any) => {
 };
 
 export default function AuthScreen(props: Props) {
-	const authState = useSelector((state: any) => state.auth);
+	const authState: IAuth = useSelector((state: IState) => state.auth);
 	const [isSignup, setIsSignup] = useState(false);
 	const dispatch = useDispatch();
 

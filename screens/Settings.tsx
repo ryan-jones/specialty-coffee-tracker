@@ -4,9 +4,10 @@ import MenuButton from "../components/Common/MenuButton";
 import CustomText from "../components/Common/CustomText";
 import { useSelector, useDispatch } from "react-redux";
 import { updateProfileData, fetchProfileData } from "../store/actions/profile";
+import { IState, IProfile } from "../models/interfaces";
 
 export default function SettingsScreen() {
-	const profile = useSelector((state: any) => state.profile);
+	const profile: IProfile = useSelector((state: IState) => state.profile);
 	const dispatch = useDispatch();
 	const [name, setName] = useState(profile.name);
 	return (

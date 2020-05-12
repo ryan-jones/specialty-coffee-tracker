@@ -5,8 +5,9 @@ import {
 	SIGNUP_ERROR,
 	LOGIN_ERROR,
 } from "../actions/auth";
+import { IAuth } from "../../models/interfaces";
 
-const initialState = {
+const initialState: IAuth = {
 	loading: false,
 	error: null,
 	token: null,

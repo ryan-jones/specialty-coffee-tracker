@@ -40,9 +40,49 @@ export interface IBrewCase {
 	notes: string[];
 }
 
-export type Navigation = NavigationScreenProp<NavigationState, any>;
-
 export interface INote {
 	name: string;
 	isSelected: boolean;
+}
+
+export interface IPreferences {
+	colorScheme: string;
+}
+
+export interface IStat {
+	text: string;
+	value: number;
+}
+
+export interface IProfile {
+	name: string;
+	userId: string;
+	favoriteCoffees: ICoffee[];
+	favoriteRoasters: any[];
+	preferences: IPreferences;
+	stats: IStat[];
+}
+
+export interface IAuth {
+	loading: boolean;
+	error: any;
+	token: string | null;
+	userId: string | null;
+	refreshToken: string | null;
+}
+
+export interface IState {
+	profile: IProfile;
+	selectedCoffee: {
+		original: ICoffee;
+		edited: ICoffee;
+	};
+	newCoffee: ICoffee;
+	coffees: {
+		allCoffees: ICoffee[];
+		loaded: boolean;
+		error: boolean;
+	};
+	auth: IAuth;
+	roasters: any;
 }

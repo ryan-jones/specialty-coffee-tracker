@@ -9,9 +9,10 @@ import BrewMethods from "../../components/Coffee/BrewMethods/ShowBrewMethods/Bre
 import ContentSection from "../../components/Common/ContentSection";
 import CustomHeaderButton from "../../components/Common/HeaderButton";
 import { useSelector } from "react-redux";
+import { IState } from "../../models/interfaces";
 
 export default function CoffeeDetailsScreen() {
-	const coffee = useSelector((state: any) => state.selectedCoffee.edited);
+	const coffee = useSelector((state: IState) => state.selectedCoffee.edited);
 
 	if (!coffee) {
 		return (

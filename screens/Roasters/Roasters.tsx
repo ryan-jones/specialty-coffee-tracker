@@ -1,13 +1,14 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { IRoaster, Navigation } from "../../models/interfaces";
+import { IRoaster } from "../../models/interfaces";
 import RoasterList from "../../components/RoasterList/RoasterList";
 import CustomHeaderButton from "../../components/Common/HeaderButton";
 import MenuButton from "../../components/Common/MenuButton";
 import { useSelector } from "react-redux";
+import { NavigationParams } from "react-navigation";
 
 interface Props {
-	navigation: Navigation;
+	navigation: NavigationParams;
 }
 
 export default function RoastersScreen(props: Props) {

@@ -1,11 +1,14 @@
 import { PROFILE_LOAD_SUCCESS, UPDATE_PREFERENCES } from "../actions/profile";
+import { IProfile } from "../../models/interfaces";
 
-const initialState = {
+const initialState: IProfile = {
 	name: "",
 	userId: "",
 	favoriteCoffees: [],
 	favoriteRoasters: [],
-	preferences: {},
+	preferences: {
+		colorScheme: "",
+	},
 	stats: [
 		{
 			text: "Coffees",

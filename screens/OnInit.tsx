@@ -6,7 +6,7 @@ import {
 	AsyncStorage,
 } from "react-native";
 import { useDispatch } from "react-redux";
-import { authenticate, loggingIn } from "../store/actions/auth";
+import { authenticate } from "../store/actions/auth";
 import { validateDataFromStorage } from "../utils/storage";
 
 export default function OnInitScreen(props: any) {

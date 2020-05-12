@@ -1,8 +1,9 @@
 import React from "react";
 import CustomHeaderButton from "./HeaderButton";
+import { NavigationParams } from "react-navigation";
 
 interface Props {
-	navigation: any;
+	navigation: NavigationParams;
 }
 
 export default function MenuButton(props: Props) {

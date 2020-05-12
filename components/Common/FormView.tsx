@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { View, StyleSheet, Button } from "react-native";
+import { View, StyleSheet } from "react-native";
 import FormButtons from "./FormButtons";
 
 interface Props {

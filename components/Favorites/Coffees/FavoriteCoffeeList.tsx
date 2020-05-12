@@ -2,10 +2,11 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import FavoriteCoffeeListItem from "./FavoriteCoffeeListItem";
 import { ICoffee } from "../../../models/interfaces";
+import { NavigationParams } from "react-navigation";
 
 interface Props {
 	coffees: ICoffee[];
-	navigation: any;
+	navigation: NavigationParams;
 	textStyles?: object;
 	listStyles?: object;
 }
